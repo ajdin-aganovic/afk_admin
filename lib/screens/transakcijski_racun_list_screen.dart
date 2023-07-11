@@ -1,49 +1,51 @@
 import 'package:afk_admin/models/search_result.dart';
+import 'package:afk_admin/providers/korisnik_provider.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/screens/plata_details_screen.dart';
+import 'package:afk_admin/screens/transakcijski_racun_details.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
 import '../models/platum.dart';
+import '../models/transakcijski_racun.dart';
 import '../providers/transakcijski_racun_provider.dart';
 
-class PlatumListScreen extends StatefulWidget {
-Korisnik?korisnik;
-  PlatumListScreen({this.korisnik, super.key});
+class TransakcijskiRacunListScreen extends StatefulWidget {
+  Korisnik?korisnik;
+  TransakcijskiRacunListScreen({this.korisnik, super.key});
 
   @override
-  State<PlatumListScreen> createState() => _PlatumListScreen();
+  State<TransakcijskiRacunListScreen> createState() => _TransakcijskiRacunListScreen();
 }
 
-class _PlatumListScreen extends State<PlatumListScreen> {
-  late PlatumProvider _platumProvider;
-  SearchResult<Platum>? result;
+class _TransakcijskiRacunListScreen extends State<TransakcijskiRacunListScreen> {
+  // late PlatumProvider _platumProvider;
+  // SearchResult<Platum>? resultPlatum;
+  SearchResult<TransakcijskiRacun>? resultTrans;
 
   late TransakcijskiRacunProvider _transakcijskiRacunProvider;
+  late KorisnikProvider _korisnikProvider;
 
    
-  final TextEditingController _stateMachine=TextEditingController();
-  final TextEditingController _minIznos=TextEditingController();
-  final TextEditingController _maxIznos=TextEditingController();
+  final TextEditingController _brojRacuna=TextEditingController();
 
   final ScrollController _horizontal = ScrollController(),
       _vertical = ScrollController();
 
 
   @override void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    _platumProvider=context.read<PlatumProvider>();
     _transakcijskiRacunProvider=context.read<TransakcijskiRacunProvider>();
+    // _platumProvider=context.read<PlatumProvider>();
   }
 
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Plata list"),
+      title_widget: const Text("Lista transakcijskih računa"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -59,61 +61,33 @@ class _PlatumListScreen extends State<PlatumListScreen> {
   Widget _buildSearch(){
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      child: 
-      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
             Expanded(
               child: 
               TextField(
                   decoration: 
                   const InputDecoration(labelText: "Pretraga po stanju"), 
-                  controller:_stateMachine,
+                  controller:_brojRacuna,
                 ),
             ),
             const SizedBox(width: 8,), 
-
-            Expanded(child:
-            
-                  TextField(
-                    decoration: 
-                    const InputDecoration(labelText: "Minimalna plata"), 
-                    controller:_minIznos,
-                  ),
-            
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Expanded(child:
-            
-              TextField(
-                decoration: 
-                const InputDecoration(labelText: "Maximalna plata"), 
-                controller:_maxIznos
-              ),
-            
-            ),
-            const SizedBox(
-              height: 8,
-            ),
             ElevatedButton(onPressed:() async{
                 
-            var data=await _platumProvider.get(filter: {
-              'StateMachine':_stateMachine.text,
-              'MinIznos':_minIznos.text,
-              'MaxIznos':_maxIznos.text
+            var data=await _transakcijskiRacunProvider.get(filter: {
+              'BrojRacuna':_brojRacuna.text,
             }
             );
         
             setState(() {
-              result=data;
+              resultTrans=data;
             });
         
-            print("data: ${data.result[0].plataId}");
+            // print("data: ${data.result[0].transakcijskiRacunId}");
           
           
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -121,18 +95,13 @@ class _PlatumListScreen extends State<PlatumListScreen> {
   }
 
   
-// 'plataId':widget.platum?.plataId.toString(),
-//     'transakcijskiRacunId':widget.platum?.transakcijskiRacunId.toString(),
-//     'stateMachine': widget.platum?.stateMachine, 
-//     'iznos':widget.platum?.iznos.toString(),
-//     'datumSlanja':widget.platum?.datumSlanja.toString()
+  //  int? transakcijskiRacunId;
+  // String? brojRacuna;
+  // String? adresaPrebivalista;
+  // String? nazivBanke;
 
 Widget _buildDataListView() {
   return 
-  SizedBox(
-    height: 500,
-    width: 600,
-    child: 
     Scrollbar(
       controller: _vertical,
       thumbVisibility: true,
@@ -144,11 +113,9 @@ Widget _buildDataListView() {
         notificationPredicate: (notif) => notif.depth == 1,
         child: SingleChildScrollView(
           controller: _vertical,
-          scrollDirection: Axis.vertical,
           child: SingleChildScrollView(
             controller: _horizontal,
             scrollDirection: Axis.horizontal,
-            // scrollDirection:Axis.vertical,
             child: DataTable(
                 columns: const [
                     DataColumn(label: Expanded(
@@ -159,48 +126,42 @@ Widget _buildDataListView() {
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("TransakcijskiRacunId",
+                    child: Text("Broj računa",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("StateMachine",
+                    child: Text("Adresa prebivališta",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("Iznos",
+                    child: Text("Banka",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
-                    DataColumn(label: Expanded(
-                    child: Text("Datum slanja",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    
-                    ),
-                    ),],
+                    ],
 
               rows: 
-                result?.result.map((Platum e) => DataRow(
+                resultTrans?.result.map((TransakcijskiRacun e) => DataRow(
                   onSelectChanged: (yxc)=>{
                     if(yxc==true)
                     {
-                      print('selected: ${e.plataId}'),
+                      print('selected: ${e.transakcijskiRacunId}'),
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context)=> PlatumDetailsScreen(platum: e,)
+                          MaterialPageRoute(builder: (context)=> TransakcijskiRacunDetailsScreen(transakcijskiRacun: e,)
                           )
                       ) 
                     }
                   },
                   cells: [
-                  DataCell(Text(e.plataId?.toString()??"")),
-                  DataCell(Text(e.transakcijskiRacunId.toString() ??"")),
-                  DataCell(Text(e.stateMachine ??"")),
-                  DataCell(Text(e.iznos.toString() ??"")),
-                  DataCell(Text(e.datumSlanja.toString() ??"")),
+                  DataCell(Text(e.transakcijskiRacunId?.toString()??"")),
+                  DataCell(Text(e.brojRacuna??"")),
+                  DataCell(Text(e.adresaPrebivalista ??"")),
+                  DataCell(Text(e.nazivBanke??"")),
 
                   ]
                 )).toList()??[]
@@ -209,7 +170,6 @@ Widget _buildDataListView() {
           ),
         ),
       ),
-    ),
   );
 }
 }

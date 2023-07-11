@@ -1,33 +1,34 @@
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/screens/plata_details_screen.dart';
+import 'package:afk_admin/screens/trening_details_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
 import '../models/platum.dart';
+import '../models/trening.dart';
 import '../providers/transakcijski_racun_provider.dart';
+import '../providers/trening_provider.dart';
 
-class PlatumListScreen extends StatefulWidget {
-Korisnik?korisnik;
-  PlatumListScreen({this.korisnik, super.key});
+class TreningListScreen extends StatefulWidget {
+  Korisnik?korisnik;
+   TreningListScreen({this.korisnik, super.key});
 
   @override
-  State<PlatumListScreen> createState() => _PlatumListScreen();
+  State<TreningListScreen> createState() => _TreningListScreen();
 }
 
-class _PlatumListScreen extends State<PlatumListScreen> {
-  late PlatumProvider _platumProvider;
-  SearchResult<Platum>? result;
+class _TreningListScreen extends State<TreningListScreen> {
+  late TreningProvider _treningProvider;
+  SearchResult<Trening>? result;
 
-  late TransakcijskiRacunProvider _transakcijskiRacunProvider;
+  // late TransakcijskiRacunProvider _transakcijskiRacunProvider;
 
-   
-  final TextEditingController _stateMachine=TextEditingController();
-  final TextEditingController _minIznos=TextEditingController();
-  final TextEditingController _maxIznos=TextEditingController();
+  
+  final TextEditingController _nazivTreninga=TextEditingController();
 
   final ScrollController _horizontal = ScrollController(),
       _vertical = ScrollController();
@@ -36,14 +37,13 @@ class _PlatumListScreen extends State<PlatumListScreen> {
   @override void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    _platumProvider=context.read<PlatumProvider>();
-    _transakcijskiRacunProvider=context.read<TransakcijskiRacunProvider>();
+    _treningProvider=context.read<TreningProvider>();
   }
 
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Plata list"),
+      title_widget: const Text("Lista treninga"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -66,42 +66,18 @@ class _PlatumListScreen extends State<PlatumListScreen> {
               child: 
               TextField(
                   decoration: 
-                  const InputDecoration(labelText: "Pretraga po stanju"), 
-                  controller:_stateMachine,
+                  const InputDecoration(labelText: "Pretraga po nazivu"), 
+                  controller:_nazivTreninga,
                 ),
             ),
-            const SizedBox(width: 8,), 
-
-            Expanded(child:
-            
-                  TextField(
-                    decoration: 
-                    const InputDecoration(labelText: "Minimalna plata"), 
-                    controller:_minIznos,
-                  ),
-            
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Expanded(child:
-            
-              TextField(
-                decoration: 
-                const InputDecoration(labelText: "Maximalna plata"), 
-                controller:_maxIznos
-              ),
-            
-            ),
+            const SizedBox(width: 8,),
             const SizedBox(
               height: 8,
             ),
             ElevatedButton(onPressed:() async{
                 
-            var data=await _platumProvider.get(filter: {
-              'StateMachine':_stateMachine.text,
-              'MinIznos':_minIznos.text,
-              'MaxIznos':_maxIznos.text
+            var data=await _treningProvider.get(filter: {
+              'NazivTreninga':_nazivTreninga.text,
             }
             );
         
@@ -109,7 +85,7 @@ class _PlatumListScreen extends State<PlatumListScreen> {
               result=data;
             });
         
-            print("data: ${data.result[0].plataId}");
+            print("data: ${data.result[0].treningId}");
           
           
             }, 
@@ -129,10 +105,10 @@ class _PlatumListScreen extends State<PlatumListScreen> {
 
 Widget _buildDataListView() {
   return 
-  SizedBox(
-    height: 500,
-    width: 600,
-    child: 
+  // SizedBox(
+  //   height: 500,
+  //   width: 400,
+  //   child: 
     Scrollbar(
       controller: _vertical,
       thumbVisibility: true,
@@ -144,11 +120,9 @@ Widget _buildDataListView() {
         notificationPredicate: (notif) => notif.depth == 1,
         child: SingleChildScrollView(
           controller: _vertical,
-          scrollDirection: Axis.vertical,
           child: SingleChildScrollView(
             controller: _horizontal,
             scrollDirection: Axis.horizontal,
-            // scrollDirection:Axis.vertical,
             child: DataTable(
                 columns: const [
                     DataColumn(label: Expanded(
@@ -159,48 +133,41 @@ Widget _buildDataListView() {
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("TransakcijskiRacunId",
+                    child: Text("NazivTreninga",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("StateMachine",
+                    child: Text("TipTreninga",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("Iznos",
+                    child: Text("Datum treninga",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
-
-                    DataColumn(label: Expanded(
-                    child: Text("Datum slanja",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    
-                    ),
-                    ),],
+              ],
 
               rows: 
-                result?.result.map((Platum e) => DataRow(
+                result?.result.map((Trening e) => DataRow(
                   onSelectChanged: (yxc)=>{
                     if(yxc==true)
                     {
-                      print('selected: ${e.plataId}'),
+                      print('selected: ${e.treningId}'),
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context)=> PlatumDetailsScreen(platum: e,)
+                          MaterialPageRoute(builder: (context)=> TreningDetailsScreen(trening: e,)
                           )
                       ) 
                     }
                   },
                   cells: [
-                  DataCell(Text(e.plataId?.toString()??"")),
-                  DataCell(Text(e.transakcijskiRacunId.toString() ??"")),
-                  DataCell(Text(e.stateMachine ??"")),
-                  DataCell(Text(e.iznos.toString() ??"")),
-                  DataCell(Text(e.datumSlanja.toString() ??"")),
+                  DataCell(Text(e.treningId?.toString()??"0")),
+                  DataCell(Text(e.nazivTreninga ??"---")),
+                  DataCell(Text(e.tipTreninga ??"---")),
+                  DataCell(Text(e.datumTreninga.toString() ??DateTime.now().toString())),
 
                   ]
                 )).toList()??[]
@@ -209,7 +176,7 @@ Widget _buildDataListView() {
           ),
         ),
       ),
-    ),
+    // ),
   );
 }
 }

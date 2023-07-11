@@ -2,57 +2,59 @@ import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/models/transakcijski_racun.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
+import 'package:afk_admin/providers/termin_provider.dart';
 import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
+import 'package:afk_admin/screens/termin_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/uloga_provider.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
+import '../models/termin.dart';
 import '../models/uloga.dart';
 
-class PlatumDetailsScreen extends StatefulWidget {
-Korisnik?korisnik;
-  Platum? platum;
+class TerminDetailsScreen extends StatefulWidget {
+  Korisnik?korisnik;
+  Termin? termin;
 
-  PlatumDetailsScreen({this.platum, this.korisnik, super.key});
+  TerminDetailsScreen({this.termin,this.korisnik, super.key});
 
   @override
-  State<PlatumDetailsScreen> createState() => _PlatumDetailsScreen();
+  State<TerminDetailsScreen> createState() => _TerminDetailsScreen();
 }
 
-class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
+class _TerminDetailsScreen extends State<TerminDetailsScreen> {
 
   final _formKey=GlobalKey<FormBuilderState>();
 
   Map<String,dynamic>_initialValue={};
 
-  late PlatumProvider _platumProvider;
-  late TransakcijskiRacunProvider _transakcijskiRacunProvider;
-
-  SearchResult<Platum>? _platumResult;
-  SearchResult<TransakcijskiRacun>? _transakcijskiRacunResult;
- 
+  late TerminProvider _terminProvider;
+  SearchResult<Termin>? _terminResult;
   // bool isLoading=true;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    var godina=DateTime.now().year;
+    var mjesec=DateTime.now().month;
+    var dan=DateTime.now().day;
   _initialValue= {
-    'plataId':widget.platum?.plataId.toString(),
-    'transakcijskiRacunId':widget.platum?.transakcijskiRacunId.toString(),
-    'stateMachine': widget.platum?.stateMachine, 
-    'iznos':widget.platum?.iznos.toString(),
-    'datumSlanja':widget.platum?.datumSlanja.toString()
+    'terminId':widget.termin?.terminId.toString()??"0",
+    'sifraTermina':widget.termin?.sifraTermina??"---",
+    'tipTermina': widget.termin?.tipTermina??"---", 
+    'stadionId':widget.termin?.stadionId.toString()??"0",
+    'datumTermina':widget.termin?.datumTermina.toString()??DateTime(godina, mjesec, dan).toString(),
   };
 
-  _platumProvider=context.read<PlatumProvider>(); 
-  _transakcijskiRacunProvider=context.read<TransakcijskiRacunProvider>();
+    _terminProvider=context.read<TerminProvider>(); 
 
   initForm();
   }
@@ -66,29 +68,16 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
 
 
   Future initForm()async{
-      _transakcijskiRacunResult=await _transakcijskiRacunProvider.get();
-      _platumResult=await _platumProvider.get();
-      // print(_platumResult);
-      // print(_transakcijskiRacunResult);
-
-      // setState(() {
-      //   isLoading=false;
-      // });
+    _terminResult=await _terminProvider.get();
+      
   }
 
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title: 'Plata ID: ${widget.platum?.plataId}' ?? "Platum details",
+      title: 'Termin ID: ${widget.termin?.terminId}' ?? "Termin detalji",
       child: buildForm()
-      // Column(
-      //   children: [
-      //     isLoading?Container():buildForm(),
-      //     ElevatedButton(onPressed: (){
-
-      //     }, child: Text("Save"))
-      //   ],
-      // )
+     
       );
   }
 
@@ -101,18 +90,18 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
           child: Column(children: [
             Expanded(
               child: FormBuilderTextField (
-                decoration: const InputDecoration(labelText: "Plata ID"), 
+                // readOnly: true,
+                decoration: const InputDecoration(labelText: "Termin ID"), 
 
-                name: 'plataId',
+                name: 'terminId',
                 
                     ),
             ),
           Expanded(
             child: FormBuilderTextField (
-                            decoration: const InputDecoration(labelText: "Transakcijski Racun Id"), 
+                decoration: const InputDecoration(labelText: "Šifra termina"), 
                 
-                name: 'transakcijskiRacunId',
-                
+                name: 'sifraTermina',
             ),
           ),   //od prije ID što radi
           // Expanded(
@@ -138,38 +127,41 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
           // ),
           Expanded(
             child: FormBuilderTextField (
-                            decoration: const InputDecoration(labelText: "State Machine"), 
+                            decoration: const InputDecoration(labelText: "Tip termina"), 
 
-                name: 'stateMachine',
+                name: 'tipTermina',
                 
             ),
           ),
           Expanded(
             child: FormBuilderTextField (
-                            decoration: const InputDecoration(labelText: "Iznos"), 
-
-                name: 'iznos',
-                
+                decoration: const InputDecoration(labelText: "Stadion ID"), 
+                name: 'stadionId',
             ),
           ),
           Expanded(
             child: FormBuilderTextField (
-                            decoration: const InputDecoration(labelText: "Datum Slanja"), 
-
-                name: 'datumSlanja',
-                
+                decoration: const InputDecoration(labelText: "Datum termina"), 
+                name: 'datumTermina',
             ),
           ),
+          
           ElevatedButton(onPressed: () async{
                 _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
                 print(_formKey.currentState?.value);
                 try{
-                  if(widget.platum==null) {
-                    await _platumProvider.insert(_formKey.currentState?.value);
+                  if(widget.termin==null) {
+                    await _terminProvider.insert(_formKey.currentState?.value);
                   } else {
-                    await _platumProvider.update(widget.platum!.plataId!, _formKey.currentState?.value);
+                    await _terminProvider.update(widget.termin!.terminId!, _formKey.currentState?.value);
                   }
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      // builder: (context) => HomePage(naziv: username,),
+                      builder: (context) => TerminListScreen(),
 
+                    ),
+                            );
                 } on Exception catch (err) {
                   showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(

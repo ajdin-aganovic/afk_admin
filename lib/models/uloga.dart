@@ -5,9 +5,9 @@ part 'uloga.g.dart';
 class Uloga{
   int? ulogaId;
   String? nazivUloge;
-  int? tipKorisnikaId;
+  String? podtipUloge;
 
-  Uloga(this.nazivUloge, this.tipKorisnikaId, this.ulogaId);
+  Uloga(this.ulogaId, this.nazivUloge, this.podtipUloge);
   factory Uloga.fromJson(Map<String,dynamic>json)=>_$UlogaFromJson(json);
   Map<String,dynamic>toJson()=>_$UlogaToJson(this);
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import 'package:afk_admin/models/search_result.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,15 @@ import 'package:http/http.dart';
 
 import '../utils/util.dart';
 
+import 'package:jwt_decoder/jwt_decoder.dart';
+
 abstract class BaseProvider<T> with ChangeNotifier{
   static String? _baseUrl;
   String _endpoint="";
 
   BaseProvider(String endpoint){
     _endpoint=endpoint;
-    _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "http://localhost:7048/");
+    _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "https://localhost:7181/");
 
   }
 
@@ -28,9 +31,9 @@ abstract class BaseProvider<T> with ChangeNotifier{
       fullAPI="$fullAPI?$queryString";
     }
     var uriFullApi=Uri.parse(fullAPI);
-    var headers=createHeaders();
+    var headerz=createHeaders();
 
-    var response = await http.get(uriFullApi, headers: headers);
+    var response = await http.get(uriFullApi, headers: headerz);
 
     if(IsValidResponse(response))
     {
@@ -57,6 +60,42 @@ abstract class BaseProvider<T> with ChangeNotifier{
 
   }
 
+  Future<T> insert(dynamic request)async{
+    var fullAPI="$_baseUrl$_endpoint";
+    var uriFullApi=Uri.parse(fullAPI);
+    var headerz=createHeaders();
+
+    var jsonRequest=jsonEncode(request);
+
+    var response=await http.post(uriFullApi, headers: headerz, body: jsonRequest);
+    if(IsValidResponse(response))
+        {
+          var data=jsonDecode(response.body);
+          return fromJson(data);
+        }
+        else {
+          throw Exception("Unknown error.");
+        }
+  }
+
+  Future<T> update(int id, [dynamic request])async{
+    var fullAPI="$_baseUrl$_endpoint/$id";
+    var uriFullApi=Uri.parse(fullAPI);
+    var headerz=createHeaders();
+
+    var jsonRequest=jsonEncode(request);
+
+    var response=await http.put(uriFullApi, headers: headerz, body: jsonRequest);
+    if(IsValidResponse(response)==true)
+        {
+          var data=jsonDecode(response.body);
+          return fromJson(data);
+        }
+        else {
+          throw Exception("Unknown error.");
+        }
+  }
+
   T fromJson(data)
   {
     throw Exception("Method not implemented");
@@ -69,10 +108,15 @@ bool IsValidResponse(Response response){
     {
       throw Exception("Unauthorized");
     }
+    else if(response.statusCode==403)
+    {
+      throw Exception("You do not have permissions");
+    }
     else
     {
       throw Exception("Something happened. Try again");
     }
+  // return true;
 }
 
 

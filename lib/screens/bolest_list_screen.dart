@@ -1,33 +1,37 @@
+import 'package:afk_admin/main.dart';
+import 'package:afk_admin/models/korisnik.dart';
 import 'package:afk_admin/models/search_result.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/screens/plata_details_screen.dart';
+import 'package:afk_admin/providers/bolest_provider.dart';
+import 'package:afk_admin/screens/bolest_details_screen.dart';
+import 'package:afk_admin/screens/korisnik_details_screen.dart';
+// import 'package:afk_admin/screens/plata_details_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
-import '../models/korisnik.dart';
-import '../models/platum.dart';
-import '../providers/transakcijski_racun_provider.dart';
+// import '../models/platum.dart';
+import '../models/bolest.dart';
+import '../providers/korisnik_provider.dart';
 
-class PlatumListScreen extends StatefulWidget {
-Korisnik?korisnik;
-  PlatumListScreen({this.korisnik, super.key});
+class BolestListScreen extends StatefulWidget {
+  Korisnik?korisnik;
+
+  BolestListScreen({this.korisnik,super.key});
 
   @override
-  State<PlatumListScreen> createState() => _PlatumListScreen();
+  State<BolestListScreen> createState() => _BolestListScreen();
 }
 
-class _PlatumListScreen extends State<PlatumListScreen> {
-  late PlatumProvider _platumProvider;
-  SearchResult<Platum>? result;
+class _BolestListScreen extends State<BolestListScreen> {
+  late BolestProvider _bolestProvider;
+  SearchResult<Bolest>? resultBolest;
 
-  late TransakcijskiRacunProvider _transakcijskiRacunProvider;
-
+  late KorisnikProvider _korisnikProvider;
+  SearchResult<Korisnik>? resultKorisnik;
    
-  final TextEditingController _stateMachine=TextEditingController();
-  final TextEditingController _minIznos=TextEditingController();
-  final TextEditingController _maxIznos=TextEditingController();
+  final TextEditingController _sifraPovrede=TextEditingController();
+  final TextEditingController _tipPovrede=TextEditingController();
 
   final ScrollController _horizontal = ScrollController(),
       _vertical = ScrollController();
@@ -36,14 +40,14 @@ class _PlatumListScreen extends State<PlatumListScreen> {
   @override void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    _platumProvider=context.read<PlatumProvider>();
-    _transakcijskiRacunProvider=context.read<TransakcijskiRacunProvider>();
+    _bolestProvider=context.read<BolestProvider>();
+    _korisnikProvider=context.read<KorisnikProvider>();
   }
 
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Plata list"),
+      title_widget: const Text("Bolests list"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -59,15 +63,14 @@ class _PlatumListScreen extends State<PlatumListScreen> {
   Widget _buildSearch(){
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      child: 
-      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
             Expanded(
               child: 
               TextField(
                   decoration: 
-                  const InputDecoration(labelText: "Pretraga po stanju"), 
-                  controller:_stateMachine,
+                  const InputDecoration(labelText: "Šifra bolesti"), 
+                  controller:_sifraPovrede,
                 ),
             ),
             const SizedBox(width: 8,), 
@@ -76,21 +79,9 @@ class _PlatumListScreen extends State<PlatumListScreen> {
             
                   TextField(
                     decoration: 
-                    const InputDecoration(labelText: "Minimalna plata"), 
-                    controller:_minIznos,
+                    const InputDecoration(labelText: "Tip povrede"), 
+                    controller:_tipPovrede,
                   ),
-            
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Expanded(child:
-            
-              TextField(
-                decoration: 
-                const InputDecoration(labelText: "Maximalna plata"), 
-                controller:_maxIznos
-              ),
             
             ),
             const SizedBox(
@@ -98,18 +89,17 @@ class _PlatumListScreen extends State<PlatumListScreen> {
             ),
             ElevatedButton(onPressed:() async{
                 
-            var data=await _platumProvider.get(filter: {
-              'StateMachine':_stateMachine.text,
-              'MinIznos':_minIznos.text,
-              'MaxIznos':_maxIznos.text
+            var data=await _bolestProvider.get(filter: {
+              'SifraPovrede':_sifraPovrede.text,
+              'TipPovrede':_tipPovrede.text
             }
             );
         
             setState(() {
-              result=data;
+              resultBolest=data;
             });
         
-            print("data: ${data.result[0].plataId}");
+            // print("data: ${data.result[0].bolestId}");
           
           
             }, 
@@ -129,10 +119,10 @@ class _PlatumListScreen extends State<PlatumListScreen> {
 
 Widget _buildDataListView() {
   return 
-  SizedBox(
-    height: 500,
-    width: 600,
-    child: 
+  // SizedBox(
+  //   height: 500,
+  //   width: 400,
+  //   child: 
     Scrollbar(
       controller: _vertical,
       thumbVisibility: true,
@@ -144,11 +134,9 @@ Widget _buildDataListView() {
         notificationPredicate: (notif) => notif.depth == 1,
         child: SingleChildScrollView(
           controller: _vertical,
-          scrollDirection: Axis.vertical,
           child: SingleChildScrollView(
             controller: _horizontal,
             scrollDirection: Axis.horizontal,
-            // scrollDirection:Axis.vertical,
             child: DataTable(
                 columns: const [
                     DataColumn(label: Expanded(
@@ -159,48 +147,42 @@ Widget _buildDataListView() {
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("TransakcijskiRacunId",
+                    child: Text("Šifra povrede",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("StateMachine",
+                    child: Text("Tip povrede",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("Iznos",
+                    child: Text("Trajanje povrede (dani)",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
-                    DataColumn(label: Expanded(
-                    child: Text("Datum slanja",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    
-                    ),
-                    ),],
+                    ],
 
               rows: 
-                result?.result.map((Platum e) => DataRow(
+                resultBolest?.result.map((Bolest e) => DataRow(
                   onSelectChanged: (yxc)=>{
                     if(yxc==true)
                     {
-                      print('selected: ${e.plataId}'),
+                      print('selected: ${e.bolestId}'),
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context)=> PlatumDetailsScreen(platum: e,)
+                          MaterialPageRoute(builder: (context)=> BolestDetailsScreen(bolest: e,)
                           )
                       ) 
                     }
                   },
                   cells: [
-                  DataCell(Text(e.plataId?.toString()??"")),
-                  DataCell(Text(e.transakcijskiRacunId.toString() ??"")),
-                  DataCell(Text(e.stateMachine ??"")),
-                  DataCell(Text(e.iznos.toString() ??"")),
-                  DataCell(Text(e.datumSlanja.toString() ??"")),
+                  DataCell(Text(e.bolestId?.toString()??"")),
+                  DataCell(Text(e.sifraPovrede ??"")),
+                  DataCell(Text(e.tipPovrede ??"")),
+                  DataCell(Text(e.trajanjePovredeDani.toString() ??"")),
 
                   ]
                 )).toList()??[]
@@ -208,7 +190,7 @@ Widget _buildDataListView() {
               ),
           ),
         ),
-      ),
+      // ),
     ),
   );
 }

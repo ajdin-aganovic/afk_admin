@@ -1,31 +1,28 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'korisnici.g.dart';
+part 'korisnik.g.dart';
 
 @JsonSerializable()
-class Korisnici{
+class Korisnik{
    int? korisnikId;
   String? ime;
   String? prezime;
+  String? korisnickoIme;
   String? email;
-  String? lozinka;
-  int? ulogaId;
+  String? lozinkaHash;
+  String? lozinkaSalt;
   String? strucnaSprema;
   DateTime? datumRodjenja;
-  int? bolestId;
-  int? tipKorisnikaId;
-  int? transakcijskiRacunId;
   bool? podUgovorom;
   DateTime? podUgovoromOd;
   DateTime? podUgovoromDo;
-  String? korisnickoIme;
 
 
-  Korisnici(this.bolestId, this.datumRodjenja, this.email, this.ime, this.korisnickoIme, this.korisnikId, this.lozinka, this.podUgovorom,
-  this.podUgovoromDo, this.podUgovoromOd, this.prezime, this.strucnaSprema, this.tipKorisnikaId, this.transakcijskiRacunId, this.ulogaId);
+  Korisnik(this.korisnikId, this.ime, this.prezime, this.korisnickoIme, this.email, this.lozinkaHash, this.lozinkaSalt,
+  this.strucnaSprema, this.datumRodjenja, this.podUgovorom, this.podUgovoromOd, this.podUgovoromDo);
   // factory Korisnici.fromJson(Map<String,dynamic>json)=>_$KorisniciFromJson(json);
 
-  factory Korisnici.fromJson(Map<String,dynamic>json)=>_$KorisniciFromJson(json);
-  Map<String,dynamic>toJson()=>_$KorisniciToJson(this);
+  factory Korisnik.fromJson(Map<String,dynamic>json)=>_$KorisnikFromJson(json);
+  Map<String,dynamic>toJson()=>_$KorisnikToJson(this);
 }
 
 //  public int KorisnikId { get; set; }

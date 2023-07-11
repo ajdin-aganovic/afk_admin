@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'plata.dart';
+part of 'platum.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Plata _$PlataFromJson(Map<String, dynamic> json) => Plata(
+Platum _$PlatumFromJson(Map<String, dynamic> json) => Platum(
       json['plataId'] as int?,
-      json['iznos'] as num?,
+      json['transakcijskiRacunId'] as int?,
       json['stateMachine'] as String?,
-    )
-      ..korisnikId = json['korisnikId'] as int?
-      ..datumSlanja = json['datumSlanja'] == null
+      json['iznos'] as num?,
+      json['datumSlanja'] == null
           ? null
-          : DateTime.parse(json['datumSlanja'] as String);
+          : DateTime.parse(json['datumSlanja'] as String),
+    );
 
-Map<String, dynamic> _$PlataToJson(Plata instance) => <String, dynamic>{
+Map<String, dynamic> _$PlatumToJson(Platum instance) => <String, dynamic>{
       'plataId': instance.plataId,
+      'transakcijskiRacunId': instance.transakcijskiRacunId,
       'stateMachine': instance.stateMachine,
       'iznos': instance.iznos,
-      'korisnikId': instance.korisnikId,
       'datumSlanja': instance.datumSlanja?.toIso8601String(),
     };
