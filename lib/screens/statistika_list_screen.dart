@@ -1,34 +1,29 @@
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
+import 'package:afk_admin/providers/statistika_provider.dart';
 import 'package:afk_admin/screens/plata_details_screen.dart';
+import 'package:afk_admin/screens/statistika_details_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
 import '../models/platum.dart';
+import '../models/statistika.dart';
 import '../providers/transakcijski_racun_provider.dart';
 
-class PlatumListScreen extends StatefulWidget {
-Korisnik?korisnik;
-  PlatumListScreen({this.korisnik, super.key});
+class StatistikaListScreen extends StatefulWidget {
+  Korisnik?korisnik;
+  StatistikaListScreen({this.korisnik, super.key});
 
   @override
-  State<PlatumListScreen> createState() => _PlatumListScreen();
+  State<StatistikaListScreen> createState() => _StatistikaListScreen();
 }
 
-class _PlatumListScreen extends State<PlatumListScreen> {
-  late PlatumProvider _platumProvider;
-  SearchResult<Platum>? result;
-
-  late TransakcijskiRacunProvider _transakcijskiRacunProvider;
-
-   
-  final TextEditingController _stateMachine=TextEditingController();
-  final TextEditingController _minIznos=TextEditingController();
-  final TextEditingController _maxIznos=TextEditingController();
+class _StatistikaListScreen extends State<StatistikaListScreen> {
+  late StatistikaProvider _statistikaProvider;
+  SearchResult<Statistika>? result;
 
   final ScrollController _horizontal = ScrollController(),
       _vertical = ScrollController();
@@ -37,14 +32,13 @@ class _PlatumListScreen extends State<PlatumListScreen> {
   @override void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    _platumProvider=context.read<PlatumProvider>();
-    _transakcijskiRacunProvider=context.read<TransakcijskiRacunProvider>();
+    _statistikaProvider=context.read<StatistikaProvider>();
   }
 
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Plata list"),
+      title_widget: const Text("Lista statistika"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -63,56 +57,19 @@ class _PlatumListScreen extends State<PlatumListScreen> {
       child: 
       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-            Expanded(
-              child: 
-              TextField(
-                  decoration: 
-                  const InputDecoration(labelText: "Pretraga po stanju"), 
-                  controller:_stateMachine,
-                ),
-            ),
-            const SizedBox(width: 8,), 
-
-            Expanded(child:
-            
-                  TextField(
-                    decoration: 
-                    const InputDecoration(labelText: "Minimalna plata"), 
-                    controller:_minIznos,
-                  ),
-            
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Expanded(child:
-            
-              TextField(
-                decoration: 
-                const InputDecoration(labelText: "Maximalna plata"), 
-                controller:_maxIznos
-              ),
-            
-            ),
             const SizedBox(
               height: 8,
             ),
             ElevatedButton(onPressed:() async{
                 
-            var data=await _platumProvider.get(filter: {
-              'StateMachine':_stateMachine.text,
-              'MinIznos':_minIznos.text,
-              'MaxIznos':_maxIznos.text
-            }
+            var data=await _statistikaProvider.get(
+            
             );
         
             setState(() {
               result=data;
+              
             });
-        
-            print("data: ${data.result[0].plataId}");
-          
-          
             }, 
             child: const Text("Load data")),
         ],
@@ -122,18 +79,13 @@ class _PlatumListScreen extends State<PlatumListScreen> {
   }
 
   
-// 'plataId':widget.platum?.plataId.toString(),
-//     'transakcijskiRacunId':widget.platum?.transakcijskiRacunId.toString(),
-//     'stateMachine': widget.platum?.stateMachine, 
-//     'iznos':widget.platum?.iznos.toString(),
-//     'datumSlanja':widget.platum?.datumSlanja.toString()
 
 Widget _buildDataListView() {
   return 
-  SizedBox(
-    height: 500,
-    width: 600,
-    child: 
+  // SizedBox(
+  //   height: 500,
+  //   width: 400,
+  //   child: 
     Scrollbar(
       controller: _vertical,
       thumbVisibility: true,
@@ -149,7 +101,6 @@ Widget _buildDataListView() {
           child: SingleChildScrollView(
             controller: _horizontal,
             scrollDirection: Axis.horizontal,
-            // scrollDirection:Axis.vertical,
             child: DataTable(
                 columns: const [
                     DataColumn(label: Expanded(
@@ -160,48 +111,83 @@ Widget _buildDataListView() {
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("TransakcijskiRacunId",
+                    child: Text("Korisnik ID",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("StateMachine",
+                    child: Text("Golovi",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("Iznos",
+                    child: Text("Asistencije",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("Datum slanja",
+                    child: Text("Igrač mjeseca",
                     style: TextStyle(fontStyle: FontStyle.italic),),
-                    
                     ),
-                    ),],
+                    ),
+
+                    DataColumn(label: Expanded(
+                    child: Text("Bez primljenog gola",
+                    style: TextStyle(fontStyle: FontStyle.italic),),
+                    ),
+                    ),
+
+                    DataColumn(label: Expanded(
+                    child: Text("Žuti kartoni",
+                    style: TextStyle(fontStyle: FontStyle.italic),),
+                    ),
+                    ),
+
+                    DataColumn(label: Expanded(
+                    child: Text("Crveni kartoni",
+                    style: TextStyle(fontStyle: FontStyle.italic),),
+                    ),
+                    ),
+
+                    DataColumn(label: Expanded(
+                    child: Text("Prosječna ocjena",
+                    style: TextStyle(fontStyle: FontStyle.italic),),
+                    ),
+                    ),
+
+                    DataColumn(label: Expanded(
+                    child: Text("Ocjena zadnje utakmice",
+                    style: TextStyle(fontStyle: FontStyle.italic),),
+                    ),
+                    ),
+                    ],
 
               rows: 
-                result?.result.map((Platum e) => DataRow(
+                result?.result.map((Statistika e) => DataRow(
                   onSelectChanged: (yxc)=>{
                     if(yxc==true)
                     {
-                      print('selected: ${e.plataId}'),
+                      print('selected: ${e.statistikaId}'),
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context)=> PlatumDetailsScreen(platum: e,)
+                          MaterialPageRoute(builder: (context)=> StatistikaDetailsScreen(statistika: e,)
                           )
                       ) 
                     }
                   },
                   cells: [
-                  DataCell(Text(e.plataId?.toString()??"")),
-                  DataCell(Text(e.transakcijskiRacunId.toString() ??"")),
-                  DataCell(Text(e.stateMachine ??"")),
-                  DataCell(Text(e.iznos.toString() ??"")),
-                  DataCell(Text(e.datumSlanja.toString() ??"")),
+                  DataCell(Text(e.statistikaId.toString()??"0")),
+                  DataCell(Text(e.korisnikId.toString()??"0")),
+                  DataCell(Text(e.golovi.toString()??"0")),
+                  DataCell(Text(e.asistencije.toString()??"0")),
+                  DataCell(Text(e.igracMjeseca.toString()??"0")),
+                  DataCell(Text(e.bezPrimGola.toString()??"0")),
+                  DataCell(Text(e.zutiKartoni.toString()??"0")),
+                  DataCell(Text(e.crveniKartoni.toString()??"0")),
+                  DataCell(Text(e.prosjecnaOcjena.toString()??"0")),
+                  DataCell(Text(e.ocjenaZadUtak.toString()??"0")),
 
                   ]
                 )).toList()??[]
@@ -210,7 +196,7 @@ Widget _buildDataListView() {
           ),
         ),
       ),
-    ),
+    // ),
   );
 }
 }

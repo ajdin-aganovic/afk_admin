@@ -12,9 +12,13 @@ import '../utils/util.dart';
 
 import 'package:jwt_decoder/jwt_decoder.dart';
 
+import 'korisnik_provider.dart';
+
 abstract class BaseProvider<T> with ChangeNotifier{
   static String? _baseUrl;
   String _endpoint="";
+  // late KorisnikProvider _korisniciProvider;
+
 
   BaseProvider(String endpoint){
     _endpoint=endpoint;
@@ -114,9 +118,9 @@ bool IsValidResponse(Response response){
     }
     else
     {
-      throw Exception("Something happened. Try again");
+      throw Exception("Something happened. Try again" + response.statusCode.toString());
     }
-  // return true;
+  // return true;R
 }
 
 
@@ -124,6 +128,7 @@ bool IsValidResponse(Response response){
     String username=Authorization.username??"";
     String password=Authorization.password??"";
 
+ 
     print("passed creds: $username, $password");
 
     String basicAuth="Basic ${base64Encode(utf8.encode('$username:$password'))}";
@@ -134,6 +139,8 @@ bool IsValidResponse(Response response){
     };
 
     return headers;
+    
+
   }
 
   

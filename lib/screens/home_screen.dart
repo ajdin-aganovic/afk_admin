@@ -8,11 +8,31 @@ import 'package:afk_admin/providers/statistika_provider.dart';
 import 'package:afk_admin/providers/termin_provider.dart';
 import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
 import 'package:afk_admin/providers/trening_provider.dart';
+import 'package:afk_admin/screens/bolest_details_screen.dart';
 import 'package:afk_admin/screens/bolest_list_screen.dart';
+import 'package:afk_admin/screens/clanarina_details_screen.dart';
+import 'package:afk_admin/screens/clanarina_list_screen.dart';
+import 'package:afk_admin/screens/igrac_opcije_screen.dart';
 import 'package:afk_admin/screens/korisnici_list_screen.dart';
+import 'package:afk_admin/screens/korisnik_insert_screen.dart';
+import 'package:afk_admin/screens/medicinsko_opcije_screen.dart';
+import 'package:afk_admin/screens/plata_details_screen.dart';
+import 'package:afk_admin/screens/pozicija_details_screen.dart';
+import 'package:afk_admin/screens/pozicija_list_screen.dart';
 import 'package:afk_admin/screens/reset_password_screen.dart';
+import 'package:afk_admin/screens/stadion_details_screen.dart';
+import 'package:afk_admin/screens/stadion_screen.dart';
+import 'package:afk_admin/screens/statistika_details_screen.dart';
+import 'package:afk_admin/screens/statistika_list_screen.dart';
+import 'package:afk_admin/screens/termin_details_screen.dart';
 import 'package:afk_admin/screens/termin_list_screen.dart';
+import 'package:afk_admin/screens/transakcijski_racun_details.dart';
+import 'package:afk_admin/screens/transakcijski_racun_list_screen.dart';
+import 'package:afk_admin/screens/trening_details_screen.dart';
 import 'package:afk_admin/screens/trening_list_screen.dart';
+import 'package:afk_admin/screens/uloga_details_screen.dart';
+import 'package:afk_admin/screens/uloga_list_screen.dart';
+import 'package:afk_admin/screens/uprava_opcije_screen.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:http/http.dart' as http;
@@ -30,10 +50,11 @@ import 'package:afk_admin/widgets/makePayment.dart';
 
 import '../models/korisnik.dart';
 import '../models/search_result.dart';
+import 'administracija_opcije_screen.dart';
 
 class HomePage extends StatefulWidget {
-  Korisnik? korisnik;
-  HomePage({this.korisnik, super.key});
+  final Korisnik? loggovaniUser;
+  HomePage({this.loggovaniUser, super.key});
 
   @override
   State<HomePage> createState() => _HomePage();
@@ -42,6 +63,8 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage>{
   
   final _formKey=GlobalKey<FormBuilderState>();
+   final ScrollController _horizontal = ScrollController(),
+      _vertical = ScrollController();
   
 Map<String,dynamic>_initialValue={};
 
@@ -72,81 +95,167 @@ Map<String,dynamic>_initialValue={};
 
   @override
   Widget build(BuildContext context) {
-    var izabrani=this._korisnikResult?.result.first;
+    // // var izabrani=_korisnikResult?.result.where((element) => widget.korisnik!.korisnikId==element.korisnikId);
+    var izabrani=_korisnikResult?.result.first;
+    // var izabrani=_korisnikProvider.get();
+    // _korisnikResult=_korisnikProvider.get() as SearchResult<Korisnik>?;
     // TODO: implement build
    return 
-    Scaffold(
-      appBar: AppBar(
-        title: const Text("Home"),),
-        body: Center(
-          child: 
-          Container(
-            constraints: const BoxConstraints(maxHeight: 600,maxWidth: 400),
-            child: Card(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(children: [
-                    SizedBox(height: 20,),
-                    
-                    Padding(
-                      padding: const EdgeInsets.all(9.0),
-                      child: 
-                        Column(
-                          children: [
-                            SizedBox(height: 12,),
-                            Text('Aplikacija Fudbalskog Kluba',
-                            style: TextStyle(fontSize: 30),), 
-                            SizedBox(height: 12,),
-                            Text('Dobrodošli ${izabrani?.korisnickoIme??"nazad"}',
-                            style: TextStyle(fontSize: 30),), 
-                            SizedBox(height: 12,),
-                            ElevatedButton(onPressed: (){
-                            Navigator.of(context).push(
-                            MaterialPageRoute(
-                            builder: (context) => KorisniciListScreen()
-                            ),
-                        );
-                        }, child: Text("Go to Korisnici lista")),
-                            SizedBox(height: 12,),
-                            ElevatedButton(onPressed: (){
-                            Navigator.of(context).push(
-                            MaterialPageRoute(
+    SizedBox(
+      height: 500,
+    width: 600,
+      child: 
+      Scaffold(
+        appBar: AppBar(
+          title: const Text("Home"),),
+          body: Center(
+            child: 
+            Container(
+              // constraints: const BoxConstraints(maxHeight: 600,maxWidth: 400),
+              child: 
+              Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(children: [
                       
-                            builder: (context) => BolestListScreen(),
-                                ),
-                                );
-                              }, child: Text("Go to Bolests")),
-                              SizedBox(height: 12,),
-                            ElevatedButton(onPressed: (){
-                            Navigator.of(context).push(
-                            MaterialPageRoute(
-                      
-                            builder: (context) => TerminListScreen(),
-                                ),
-                                );
-                              }, child: Text("Go to Termins")),
-                            SizedBox(height: 12,),
-                        ElevatedButton(onPressed: (){
-                        Navigator.of(context).push(
-                        MaterialPageRoute(
-                  
-                        builder: (context) => TreningListScreen(),
-                            ),
-                            );
-                          }, child: Text("Go to Trenings")),
+                      Padding(
+                        padding: const EdgeInsets.all(9.0),
+                        child: 
+                          Column(
+                            children: [
+                                SizedBox(height: 12,),
+                                Text('Aplikacija Fudbalskog Kluba',
+                                style: TextStyle(fontSize: 30),), 
+                                SizedBox(height: 12,),
+                                Text('Dobrodošli ${widget.loggovaniUser?.korisnickoIme??"nazad"}',
+                                // Text('Dobrodošli ${widget.korisnik?.korisnickoIme}',
+                                style: TextStyle(fontSize: 30),),
+                                SizedBox(height: 24,),
+                                            
+      
 
-                          ],
-                        ),
+                                
+                              Row(
+                                children: [
+                              ElevatedButton(onPressed: (){
+                              // if(izabrani?.uloga=="Administrator"||izabrani?.uloga==null)
+                              if(1==1)
+                             { 
+                              Navigator.of(context).push(
+                              MaterialPageRoute(
+                              builder: (context) => AdminScreen()
+                              ),
+                              );
+                              }
+                                else
+                                {
+                                   showDialog(context: context, builder: (BuildContext context) => 
+                              AlertDialog(
+                                title: const Text("You are not Admin."),
+                                content: Text("${izabrani?.uloga}"),
+                                actions: [
+                                  TextButton(onPressed: ()=>{
+                                    Navigator.pop(context),
+                                  }, child: const Text("OK"))
+                                ],
+                              ));
+                                }
+                              }, child: Text("Go to Admin dio")),
+
+
+                              ElevatedButton(onPressed: (){
+                              // if(izabrani?.uloga=="Glavni trener"||izabrani?.uloga=="Pomoćni trener"||izabrani?.uloga==null)
+                              if(1==1)
+                             { 
+                              Navigator.of(context).push(
+                              MaterialPageRoute(
+                              builder: (context) => UpravaScreen()
+                              ),
+                              );
+                              }
+                                else
+                                {
+                                   showDialog(context: context, builder: (BuildContext context) => 
+                              AlertDialog(
+                                title: const Text("You are not Uprava."),
+                                content: Text("${izabrani?.uloga}"),
+                                actions: [
+                                  TextButton(onPressed: ()=>{
+                                    Navigator.pop(context),
+                                  }, child: const Text("OK"))
+                                ],
+                              ));
+                                }
+                              }, child: Text("Go to Uprava dio")),
+
+
+                                   ElevatedButton(onPressed: (){
+                              // if(izabrani?.uloga=="Doktor"||izabrani?.uloga==null)
+                              if(1==1)
+                             { 
+                              Navigator.of(context).push(
+                              MaterialPageRoute(
+                              builder: (context) => MedicinskoScreen()
+                              ),
+                              );
+                              }
+                                else
+                                {
+                                   showDialog(context: context, builder: (BuildContext context) => 
+                              AlertDialog(
+                                title: const Text("You are not Medicinsko osoblje."),
+                                content: Text("${izabrani?.uloga}"),
+                                actions: [
+                                  TextButton(onPressed: ()=>{
+                                    Navigator.pop(context),
+                                  }, child: const Text("OK"))
+                                ],
+                              ));
+                                }
+                              }, child: Text("Go to Medicinski dio")),
+
+
+                             
+                            ElevatedButton(onPressed: (){
+                              // if(izabrani?.uloga=="Igrač"||izabrani?.uloga==null)
+                              if(1==1)
+                             { 
+                              Navigator.of(context).push(
+                              MaterialPageRoute(
+                              builder: (context) => IgracScreen()
+                              ),
+                              );
+                              }
+                                else
+                                {
+                                   showDialog(context: context, builder: (BuildContext context) => 
+                              AlertDialog(
+                                title: const Text("You are not Igrač."),
+                                content: Text("${izabrani?.uloga}"),
+                                actions: [
+                                  TextButton(onPressed: ()=>{
+                                    Navigator.pop(context),
+                                  }, child: const Text("OK"))
+                                ],
+                              ));
+                                }
+                              }, child: Text("Go to Igrač dio")),
+ 
+                                ],
+                              ),
+                            ],
+                          ),
+                        
+                      ),
                       
-                    ),
-                    
-                  ]),
-                ],
+                    ]),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+      ),
     );
   }
 

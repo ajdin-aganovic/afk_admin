@@ -1,14 +1,18 @@
+// import 'dart:js_interop';
+
 import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/models/transakcijski_racun.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
+import 'package:afk_admin/screens/plata_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/uloga_provider.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
@@ -32,9 +36,9 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
   Map<String,dynamic>_initialValue={};
 
   late PlatumProvider _platumProvider;
-  late TransakcijskiRacunProvider _transakcijskiRacunProvider;
-
   SearchResult<Platum>? _platumResult;
+
+  late TransakcijskiRacunProvider _transakcijskiRacunProvider;
   SearchResult<TransakcijskiRacun>? _transakcijskiRacunResult;
  
   // bool isLoading=true;
@@ -43,12 +47,20 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    DateTime dt=DateTime.now();
+    final result = '${dt.year}-${dt.month}-${dt.day}';
+    DateTime? preuzeti=widget.platum?.datumSlanja;
   _initialValue= {
-    'plataId':widget.platum?.plataId.toString(),
-    'transakcijskiRacunId':widget.platum?.transakcijskiRacunId.toString(),
+    'plataId':widget.platum?.plataId.toString()??0.toString(),
+    'transakcijskiRacunId':widget.platum?.transakcijskiRacunId.toString()??1.toString(),
     'stateMachine': widget.platum?.stateMachine, 
     'iznos':widget.platum?.iznos.toString(),
-    'datumSlanja':widget.platum?.datumSlanja.toString()
+    
+    // if(widget.platum!.datumSlanja!=null)
+    // 'datumSlanja':DateFormat('yyyy-MM-dd').format(preuzeti!)??"nije odabran datum"
+    // else
+    'datumSlanja':widget.platum?.datumSlanja!.toIso8601String()??dt.toIso8601String()
+
   };
 
   _platumProvider=context.read<PlatumProvider>(); 
@@ -81,14 +93,6 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
     return MasterScreenWidget(
       title: 'Plata ID: ${widget.platum?.plataId}' ?? "Platum details",
       child: buildForm()
-      // Column(
-      //   children: [
-      //     isLoading?Container():buildForm(),
-      //     ElevatedButton(onPressed: (){
-
-      //     }, child: Text("Save"))
-      //   ],
-      // )
       );
   }
 
@@ -102,14 +106,14 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
             Expanded(
               child: FormBuilderTextField (
                 decoration: const InputDecoration(labelText: "Plata ID"), 
-
+                readOnly: true,
                 name: 'plataId',
                 
                     ),
             ),
           Expanded(
             child: FormBuilderTextField (
-                            decoration: const InputDecoration(labelText: "Transakcijski Racun Id"), 
+                decoration: const InputDecoration(labelText: "Transakcijski Racun Id"), 
                 
                 name: 'transakcijskiRacunId',
                 
@@ -137,12 +141,20 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
           //   ),
           // ),
           Expanded(
-            child: FormBuilderTextField (
-                            decoration: const InputDecoration(labelText: "State Machine"), 
-
-                name: 'stateMachine',
-                
-            ),
+            child: FormBuilderDropdown(
+                    name: 'stateMachine',
+                    decoration: InputDecoration(labelText: 'State machine'),
+                    items: const[ 
+                      DropdownMenuItem(value: 'active', child: Text('Activate'),), 
+                      DropdownMenuItem(value: 'draft', child: Text('Hide'),), 
+                    ],
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please enter the Uloga';
+                      }
+                      return null;
+                    },
+                  ),
           ),
           Expanded(
             child: FormBuilderTextField (
@@ -153,13 +165,30 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
             ),
           ),
           Expanded(
+          //   child: FormBuilderDateTimePicker(
+          //     name: 'datumSlanja',
+          //     // format: DateFormat('yyyy-MM-dd'),
+          //     enabled: false,
+          //     inputType: InputType.date,
+          //     decoration: const InputDecoration(
+          //         labelText: 'DatumSlanja',),
+              
+          // ),
             child: FormBuilderTextField (
-                            decoration: const InputDecoration(labelText: "Datum Slanja"), 
-
+              
+                decoration: const InputDecoration(labelText: "Datum Slanja"), 
                 name: 'datumSlanja',
-                
+            
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter the DatumSlanja';
+                  }
+                  return null;
+                },
             ),
+            
           ),
+
           ElevatedButton(onPressed: () async{
                 _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
                 print(_formKey.currentState?.value);
@@ -169,7 +198,13 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                   } else {
                     await _platumProvider.update(widget.platum!.plataId!, _formKey.currentState?.value);
                   }
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      // builder: (context) => HomePage(naziv: username,),
+                      builder: (context) => PlatumListScreen(),
 
+                    ),
+                            );
                 } on Exception catch (err) {
                   showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(
@@ -182,7 +217,37 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                             ],
                           ));
                 }
-              }, child: Text("Save"))
+              }, child: Text("Save")),
+
+              FloatingActionButton(onPressed: () async{
+                // _formKey.currentState?.saveAndValidate();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => PlatumListScreen(),
+                  ),
+                );
+              }, child: Text("Sve plate")),
+              FloatingActionButton(onPressed: () async{
+                showDialog(context: context, builder: (BuildContext context) => 
+                          AlertDialog(
+                            title: const Text("Error"),
+                            content: Text("Are you sure you want to delete the Plata?"),
+                            actions: [
+                              TextButton(onPressed: ()=>{
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => PlatumListScreen(),
+                                  ),
+                                )
+                              }, child: const Text("Yes")),
+                              TextButton(onPressed: ()=>{
+                                Navigator.pop(context),
+                              }, child: const Text("No")),
+
+                            ],
+                          ));
+                
+              }, child: Text("Izbriši")),
           ],
           ),
         ),

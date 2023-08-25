@@ -141,31 +141,7 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
                 
           //   ),
           // ),   //od prije ID što radi
-          Expanded(
-            child: FormBuilderDropdown<String> (
-              name: 'korisnikId',
-              decoration: InputDecoration
-                ( labelText: "Korisnik ID",
-                  suffix: IconButton(icon: const Icon(Icons.close),
-                onPressed: (){
-                  _formKey.currentState!.fields['korisnikId']?.reset();
-                },
-                ),
-                hintText: 'Select korisnik',
-                ), 
-                items: _korisnikResult?.result
-                .map((item) => DropdownMenuItem(
-                  alignment: AlignmentDirectional.center,
-                  value: item.korisnikId.toString(),
-                  child: Text(item.korisnickoIme ?? ""),
-                  ))
-                  .toList() ?? [],
-
-                
-                
-                
-            ),
-          ),
+          
           Expanded(
             child: FormBuilderTextField (
                 decoration: const InputDecoration(labelText: "Šifra povrede"), 
@@ -201,7 +177,12 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
                   } else {
                     await _bolestProvider.update(widget.bolest!.bolestId!, _formKey.currentState?.value);
                   }
+                 Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => BolestListScreen(),
 
+                    ),
+                            );
                 } on Exception catch (err) {
                   showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(
@@ -214,6 +195,7 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
                             ],
                           ));
                 }
+                
               }, child: Text("Save")),
               FloatingActionButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
@@ -223,6 +205,27 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
                   ),
                 );
               }, child: Text("Sve bolesti")),
+              FloatingActionButton(onPressed: () async{
+                showDialog(context: context, builder: (BuildContext context) => 
+                          AlertDialog(
+                            title: const Text("Error"),
+                            content: Text("Are you sure you want to delete the Bolest?"),
+                            actions: [
+                              TextButton(onPressed: ()=>{
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => BolestListScreen(),
+                                  ),
+                                )
+                              }, child: const Text("Yes")),
+                              TextButton(onPressed: ()=>{
+                                Navigator.pop(context),
+                              }, child: const Text("No")),
+
+                            ],
+                          ));
+                
+              }, child: Text("Izbriši")),
             ],
           )
           

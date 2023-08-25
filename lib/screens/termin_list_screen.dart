@@ -144,12 +144,13 @@ Widget _buildDataListView() {
                     ),
                     ),
 
-                    DataColumn(label: Expanded(
-                    child: Text("Datum termina",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
+                    // DataColumn(label: Expanded(
+                    // child: Text("Datum termina",
+                    // style: TextStyle(fontStyle: FontStyle.italic),),
                     
-                    ),
-                    ),],
+                    // ),
+                    // ),
+                    ],
 
               rows: 
                 result?.result.map((Termin e) => DataRow(
@@ -168,7 +169,7 @@ Widget _buildDataListView() {
                   DataCell(Text(e.sifraTermina??"---")),
                   DataCell(Text(e.tipTermina??"---")),
                   DataCell(Text(e.stadionId.toString()??"0")),
-                  DataCell(Text(e.datumTermina.toString()??DateTime.now().toString())),
+                  // DataCell(Text(e.datumTermina.toString()??DateTime.now().toString())),
 
                   ]
                 )).toList()??[]

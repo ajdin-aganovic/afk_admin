@@ -11,16 +11,16 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
 
-class KorisniciListScreen extends StatefulWidget {
+class KorisniciEditableScreen extends StatefulWidget {
   // Korisnik? korisnik;
   // Authorization? noviObjekt;
-  KorisniciListScreen({super.key});
+  KorisniciEditableScreen({super.key});
 
   @override
-  State<KorisniciListScreen> createState() => _KorisniciListScreen();
+  State<KorisniciEditableScreen> createState() => _KorisniciEditableScreen();
 }
 
-class _KorisniciListScreen extends State<KorisniciListScreen> {
+class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
   late KorisnikProvider _korisniciProvider;
   SearchResult<Korisnik>? result;
   SearchResult<Korisnik>? _korisnikResult;
@@ -258,11 +258,18 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
                         {
                           print('selected: ${e.korisnikId}'),
                           Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context)=> KorisnikDetailsScreen(korisnik: e,)
+                              MaterialPageRoute(builder: (context)=> InsertScreen(korisnik: e,)
                               )
                           ) 
                         }
-                       
+                        // else if(yxc==true)
+                        // {
+                        //    print('selected: ${e.korisnikId}'),
+                        //   Navigator.of(context).push(
+                        //       MaterialPageRoute(builder: (context)=> KorisnikDetailsScreen(korisnik: e,)
+                        //       )
+                        //   ) 
+                        // }
                       },
                       cells: [
                       DataCell(Text(e.korisnikId?.toString()??"")),

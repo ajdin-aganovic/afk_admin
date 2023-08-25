@@ -2,9 +2,9 @@ import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/models/transakcijski_racun.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/termin_provider.dart';
+import 'package:afk_admin/providers/clanarina_provider.dart';
 import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
-import 'package:afk_admin/screens/termin_list_screen.dart';
+import 'package:afk_admin/screens/clanarina_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -16,27 +16,27 @@ import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
-import '../models/termin.dart';
+import '../models/clanarina.dart';
 import '../models/uloga.dart';
 
-class TerminDetailsScreen extends StatefulWidget {
+class ClanarinaDetailsScreen extends StatefulWidget {
   Korisnik?korisnik;
-  Termin? termin;
+  Clanarina? clanarina;
 
-  TerminDetailsScreen({this.termin,this.korisnik, super.key});
+  ClanarinaDetailsScreen({this.clanarina,this.korisnik, super.key});
 
   @override
-  State<TerminDetailsScreen> createState() => _TerminDetailsScreen();
+  State<ClanarinaDetailsScreen> createState() => _ClanarinaDetailsScreen();
 }
 
-class _TerminDetailsScreen extends State<TerminDetailsScreen> {
+class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
 
   final _formKey=GlobalKey<FormBuilderState>();
 
   Map<String,dynamic>_initialValue={};
 
-  late TerminProvider _terminProvider;
-  SearchResult<Termin>? _terminResult;
+  late ClanarinaProvider _clanarinaProvider;
+  SearchResult<Clanarina>? _clanarinaResult;
   // bool isLoading=true;
 
   @override
@@ -46,14 +46,13 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
     DateTime dt=DateTime.now();
     final result = '${dt.year}-${dt.month}-${dt.day} (${dt.hour}:${dt.minute}:${dt.second}})';
   _initialValue= {
-    'terminId':widget.termin?.terminId.toString()??"0",
-    'sifraTermina':widget.termin?.sifraTermina??"---",
-    'tipTermina': widget.termin?.tipTermina??"---", 
-    'stadionId':widget.termin?.stadionId.toString()??"0",
-    'datumTermina':widget.termin?.datumTermina.toString()??result.toString(),
+    'clanarinaId':widget.clanarina?.clanarinaId.toString()??"0",
+    'korisnikId':widget.clanarina?.korisnikId.toString()??"---",
+    'iznosClanarine': widget.clanarina?.iznosClanarine.toString()??"---", 
+    'dug':widget.clanarina?.dug.toString()??"0",
   };
 
-    _terminProvider=context.read<TerminProvider>(); 
+    _clanarinaProvider=context.read<ClanarinaProvider>(); 
 
   initForm();
   }
@@ -67,14 +66,14 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
 
 
   Future initForm()async{
-    _terminResult=await _terminProvider.get();
+    _clanarinaResult=await _clanarinaProvider.get();
       
   }
 
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title: 'Termin ID: ${widget.termin?.terminId}' ?? "Termin detalji",
+      title: 'Clanarina ID: ${widget.clanarina?.clanarinaId}' ?? "Clanarina detalji",
       child: buildForm()
      
       );
@@ -90,73 +89,46 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
             Expanded(
               child: FormBuilderTextField (
                 // readOnly: true,
-                decoration: const InputDecoration(labelText: "Termin ID"), 
+                decoration: const InputDecoration(labelText: "Članarina ID"), 
 
-                name: 'terminId',
+                name: 'clanarinaId',
                 
                     ),
             ),
           Expanded(
             child: FormBuilderTextField (
-                decoration: const InputDecoration(labelText: "Šifra termina"), 
+                decoration: const InputDecoration(labelText: "Korisnik ID"), 
                 
-                name: 'sifraTermina',
+                name: 'korisnikId',
             ),
-          ),   //od prije ID što radi
-          // Expanded(
-          //   child: FormBuilderDropdown<String> (
-          //     name: 'transakcijskiRacunId',
-          //     decoration: InputDecoration
-          //       ( labelText: "Transakcijski Racun Id",
-          //         suffix: IconButton(icon: const Icon(Icons.close),
-          //       onPressed: (){
-          //         _formKey.currentState!.fields['transakcijskiRacunId']?.reset();
-          //       },
-          //       ),
-          //       hintText: 'Select Račun',
-          //       ), 
-          //       items: _transakcijskiRacunResult?.result
-          //       .map((item) => DropdownMenuItem(
-          //         alignment: AlignmentDirectional.center,
-          //         value: item.transakcijskiRacunId.toString(),
-          //         child: Text(item.brojRacuna ?? ""),
-          //         ))
-          //         .toList() ?? [],
-          //   ),
-          // ),
+          ), 
           Expanded(
             child: FormBuilderTextField (
-                            decoration: const InputDecoration(labelText: "Tip termina"), 
+                            decoration: const InputDecoration(labelText: "Iznos članarine"), 
 
-                name: 'tipTermina',
+                name: 'iznosClanarine',
                 
             ),
           ),
           Expanded(
             child: FormBuilderTextField (
-                decoration: const InputDecoration(labelText: "Stadion ID"), 
-                name: 'stadionId',
+                decoration: const InputDecoration(labelText: "Dug"), 
+                name: 'dug',
             ),
           ),
-          // Expanded(
-          //   child: FormBuilderTextField (
-          //       decoration: const InputDecoration(labelText: "Datum termina"), 
-          //       name: 'datumTermina',
-          //   ),
-          // ),
           
           ElevatedButton(onPressed: () async{
                 _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
                 print(_formKey.currentState?.value);
                 try{
-                  if(widget.termin==null) {
-                    await _terminProvider.insert(_formKey.currentState?.value);
+                  if(widget.clanarina==null) {
+                    await _clanarinaProvider.insert(_formKey.currentState?.value);
                   } else {
-                    await _terminProvider.update(widget.termin!.terminId!, _formKey.currentState?.value);
+                    await _clanarinaProvider.update(widget.clanarina!.clanarinaId!, _formKey.currentState?.value);
                   }
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => TerminListScreen(),
+                      builder: (context) => ClanarinaListScreen(),
 
                     ),
                             );
@@ -177,20 +149,20 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => TerminListScreen(),
+                    builder: (context) => ClanarinaListScreen(),
                   ),
                 );
-              }, child: Text("Svi termini")),
+              }, child: Text("Sve članarine")),
               FloatingActionButton(onPressed: () async{
                 showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(
                             title: const Text("Error"),
-                            content: Text("Are you sure you want to delete the Termin?"),
+                            content: Text("Are you sure you want to delete the Clanarina?"),
                             actions: [
                               TextButton(onPressed: ()=>{
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => TerminListScreen(),
+                                    builder: (context) => ClanarinaListScreen(),
                                   ),
                                 )
                               }, child: const Text("Yes")),

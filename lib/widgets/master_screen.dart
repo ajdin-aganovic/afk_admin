@@ -22,8 +22,8 @@ class MasterScreenWidget extends StatefulWidget {
   String? title;
   Widget? title_widget;
   bool DozvoljenAppBar=false;
-
-  MasterScreenWidget({this.child, this.title, this.title_widget, super.key});
+  Korisnik? korisnik;
+  MasterScreenWidget({this.child, this.title, this.title_widget, this.korisnik, super.key});
 
   @override
   State<MasterScreenWidget> createState() => _MasterScreenWidgetState();
@@ -69,91 +69,12 @@ class _MasterScreenWidgetState extends State<MasterScreenWidget> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     
-                    builder: (context) => HomePage(korisnik: null,),
+                    builder: (context) => HomePage(loggovaniUser: widget.korisnik,),
                   ),
                 );
               },
             ),
-            ListTile(
-              title: const Text("Pogledaj platnu listu"),
-              onTap: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) =>  PlatumListScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Dodaj novu platu +"),
-              onTap: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PlatumDetailsScreen(platum: null,),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Pogledaj listu transakcijskih računa"),
-              onTap: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) =>  TransakcijskiRacunListScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Dodaj novi transakcijski račun +"),
-              onTap: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => TransakcijskiRacunDetailsScreen(transakcijskiRacun: null,),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Pogledaj listu korisnika"),
-              onTap: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) =>  KorisniciListScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Dodaj novog korisnika +"),
-              onTap: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => KorisnikDetailsScreen(korisnik: null,),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Dodaj novi trening +"),
-              onTap: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => TreningDetailsScreen(trening: null,),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Dodaj novi termin +"),
-              onTap: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => TerminDetailsScreen(termin: null,),
-                  ),
-                );
-              },
-            )
+            
           ],
         ),
        ),

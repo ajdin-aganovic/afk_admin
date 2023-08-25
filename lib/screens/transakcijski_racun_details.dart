@@ -170,7 +170,37 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                             ));
                   }
                 }, child: Text("Save")),
-          )
+                
+          ),
+          FloatingActionButton(onPressed: () async{
+                // _formKey.currentState?.saveAndValidate();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => TransakcijskiRacunListScreen(),
+                  ),
+                );
+              }, child: Text("Svi transakcijski računi")),
+              FloatingActionButton(onPressed: () async{
+                showDialog(context: context, builder: (BuildContext context) => 
+                          AlertDialog(
+                            title: const Text("Error"),
+                            content: Text("Are you sure you want to delete the Transakcijski račun?"),
+                            actions: [
+                              TextButton(onPressed: ()=>{
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => TransakcijskiRacunListScreen(),
+                                  ),
+                                )
+                              }, child: const Text("Yes")),
+                              TextButton(onPressed: ()=>{
+                                Navigator.pop(context),
+                              }, child: const Text("No")),
+
+                            ],
+                          ));
+                
+              }, child: Text("Izbriši")),
           ],
           ),
         ),

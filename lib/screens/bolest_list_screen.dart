@@ -183,7 +183,6 @@ Widget _buildDataListView() {
                   DataCell(Text(e.sifraPovrede ??"")),
                   DataCell(Text(e.tipPovrede ??"")),
                   DataCell(Text(e.trajanjePovredeDani.toString() ??"")),
-
                   ]
                 )).toList()??[]
               

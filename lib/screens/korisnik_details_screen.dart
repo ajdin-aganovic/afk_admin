@@ -2,6 +2,8 @@ import 'package:afk_admin/models/korisnik.dart';
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/screens/bolest_list_screen.dart';
+import 'package:afk_admin/screens/korisnici_list_screen.dart';
+import 'package:afk_admin/screens/korisnik_insert_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -50,11 +52,14 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
   'email':widget.korisnik?.email,
   'lozinkaHash':widget.korisnik?.lozinkaHash,
   'lozinkaSalt':widget.korisnik?.lozinkaSalt,
+  'password':widget.korisnik?.password,
+  'passwordPotvrda':widget.korisnik?.passwordPotvrda,
   'strucnaSprema':widget.korisnik?.strucnaSprema,
   'datumRodjenja':widget.korisnik?.datumRodjenja.toString(),
   'podUgovorom':widget.korisnik?.podUgovorom.toString(),
   'podUgovoromOd':widget.korisnik?.podUgovoromOd.toString(),
   'podUgovoromDo':widget.korisnik?.podUgovoromDo.toString(),
+  'uloga':widget.korisnik?.uloga,
   };
 
   _korisnikProvider=context.read<KorisnikProvider>();
@@ -90,12 +95,15 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
   }
 
   FormBuilder buildForm() {
-    return FormBuilder(
+    return 
+    FormBuilder(
       key: _formKey,
       initialValue: _initialValue,
-        child: Padding(
+        child: 
+        Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(children: [
+          child: 
+          Column(children: [
             Expanded(
             child: FormBuilderTextField (
                 decoration: const InputDecoration(labelText: "KorisnikID"), 
@@ -200,35 +208,57 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
                 
             ),
           ),
+
+          Expanded(
+            child: FormBuilderTextField (
+                            decoration: const InputDecoration(labelText: "Uloga"), 
+                readOnly: true,
+
+                name: 'uloga',
+                
+            ),
+          ),
           
-          Padding(padding: EdgeInsets.all(10),
-            child:
-             FloatingActionButton(onPressed: () async{
-              
-              _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
-              try {
-                if(widget.korisnik==null) {
-                  await _korisnikProvider.insert(_formKey.currentState?.value);
-                } else {
-                  await _korisnikProvider.update(widget.korisnik!.korisnikId!, _formKey.currentState?.value);
-                }
-              } 
-              on Exception catch (e) {
-                showDialog(context: context, builder: (BuildContext context) => 
-                          AlertDialog(
-                            title: const Text("Error"),
-                            content: Text(e.toString()),
-                            actions: [
-                              TextButton(onPressed: ()=>{
-                                Navigator.pop(context),
-                              }, child: const Text("OK"))
-                            ],
-                          ));
-              }
-           }, 
-           // ignore: prefer_const_constructors
-           child: Text("Save")
-           ))
+          // ElevatedButton(onPressed: () async{
+                  
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     // builder: (context) => HomePage(naziv: username,),
+            //     builder: (context) => InsertScreen(korisnik: widget.korisnik,),
+  
+            //   ),
+            //           );
+          
+            //     }, child: Text("Edit")),
+            FloatingActionButton(onPressed: () async{
+                // _formKey.currentState?.saveAndValidate();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => KorisniciListScreen(),
+                  ),
+                );
+              }, child: Text("Svi korisnici")),
+              // FloatingActionButton(onPressed: () async{
+              //   showDialog(context: context, builder: (BuildContext context) => 
+              //             AlertDialog(
+              //               title: const Text("Error"),
+              //               content: Text("Are you sure you want to delete the Korisnik?"),
+              //               actions: [
+              //                 TextButton(onPressed: ()=>{
+              //                   Navigator.of(context).push(
+              //                     MaterialPageRoute(
+              //                       builder: (context) => KorisniciListScreen(),
+              //                     ),
+              //                   )
+              //                 }, child: const Text("Yes")),
+              //                 TextButton(onPressed: ()=>{
+              //                   Navigator.pop(context),
+              //                 }, child: const Text("No")),
+
+              //               ],
+              //             ));
+                
+              // }, child: Text("Izbriši")),
           ],
         ),
       ),

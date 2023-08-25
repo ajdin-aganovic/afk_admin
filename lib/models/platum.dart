@@ -7,6 +7,7 @@ class Platum{
   int? transakcijskiRacunId;
   String? stateMachine;
   num? iznos;
+  // String? datumSlanja;
   DateTime? datumSlanja;
 
   Platum(this.plataId, this.transakcijskiRacunId, this.stateMachine, this.iznos, this.datumSlanja);

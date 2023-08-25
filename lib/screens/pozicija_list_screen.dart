@@ -1,7 +1,8 @@
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
+import 'package:afk_admin/providers/pozicija_provider.dart';
 import 'package:afk_admin/screens/plata_details_screen.dart';
-import 'package:afk_admin/screens/trening_details_screen.dart';
+import 'package:afk_admin/screens/pozicija_details_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,26 +10,27 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
 import '../models/platum.dart';
-import '../models/trening.dart';
+import '../models/pozicija.dart';
 import '../providers/transakcijski_racun_provider.dart';
-import '../providers/trening_provider.dart';
 
-class TreningListScreen extends StatefulWidget {
+class PozicijaListScreen extends StatefulWidget {
   Korisnik?korisnik;
-   TreningListScreen({this.korisnik, super.key});
+  PozicijaListScreen({this.korisnik, super.key});
 
   @override
-  State<TreningListScreen> createState() => _TreningListScreen();
+  State<PozicijaListScreen> createState() => _PozicijaListScreen();
 }
 
-class _TreningListScreen extends State<TreningListScreen> {
-  late TreningProvider _treningProvider;
-  SearchResult<Trening>? result;
+class _PozicijaListScreen extends State<PozicijaListScreen> {
+  late PozicijaProvider _pozicijaProvider;
+  SearchResult<Pozicija>? result;
 
   // late TransakcijskiRacunProvider _transakcijskiRacunProvider;
 
-  
-  final TextEditingController _nazivTreninga=TextEditingController();
+   
+  // final TextEditingController _stateMachine=TextEditingController();
+  // final TextEditingController _minIznos=TextEditingController();
+  // final TextEditingController _maxIznos=TextEditingController();
 
   final ScrollController _horizontal = ScrollController(),
       _vertical = ScrollController();
@@ -37,13 +39,13 @@ class _TreningListScreen extends State<TreningListScreen> {
   @override void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    _treningProvider=context.read<TreningProvider>();
+    _pozicijaProvider=context.read<PozicijaProvider>();
   }
 
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Lista treninga"),
+      title_widget: const Text("Lista pozicijaa"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -62,32 +64,18 @@ class _TreningListScreen extends State<TreningListScreen> {
       child: 
       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-            Expanded(
-              child: 
-              TextField(
-                  decoration: 
-                  const InputDecoration(labelText: "Pretraga po nazivu"), 
-                  controller:_nazivTreninga,
-                ),
-            ),
-            const SizedBox(width: 8,),
             const SizedBox(
               height: 8,
             ),
             ElevatedButton(onPressed:() async{
                 
-            var data=await _treningProvider.get(filter: {
-              'NazivTreninga':_nazivTreninga.text,
-            }
+            var data=await _pozicijaProvider.get(
             );
         
             setState(() {
               result=data;
+              
             });
-        
-            print("data: ${data.result[0].treningId}");
-          
-          
             }, 
             child: const Text("Load data")),
         ],
@@ -95,13 +83,6 @@ class _TreningListScreen extends State<TreningListScreen> {
     
     );
   }
-
-  
-// 'plataId':widget.platum?.plataId.toString(),
-//     'transakcijskiRacunId':widget.platum?.transakcijskiRacunId.toString(),
-//     'stateMachine': widget.platum?.stateMachine, 
-//     'iznos':widget.platum?.iznos.toString(),
-//     'datumSlanja':widget.platum?.datumSlanja.toString()
 
 Widget _buildDataListView() {
   return 
@@ -120,6 +101,7 @@ Widget _buildDataListView() {
         notificationPredicate: (notif) => notif.depth == 1,
         child: SingleChildScrollView(
           controller: _vertical,
+          scrollDirection: Axis.vertical,
           child: SingleChildScrollView(
             controller: _horizontal,
             scrollDirection: Axis.horizontal,
@@ -133,41 +115,34 @@ Widget _buildDataListView() {
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("NazivTreninga",
+                    child: Text("Naziv pozicije",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("TipTreninga",
+                    child: Text("Kategorija pozicije",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
-
-                    // DataColumn(label: Expanded(
-                    // child: Text("Datum treninga",
-                    // style: TextStyle(fontStyle: FontStyle.italic),),
-                    // ),
-                    // ),
-              ],
+                    ],
 
               rows: 
-                result?.result.map((Trening e) => DataRow(
+                result?.result.map((Pozicija e) => DataRow(
                   onSelectChanged: (yxc)=>{
                     if(yxc==true)
                     {
-                      print('selected: ${e.treningId}'),
+                      print('selected: ${e.pozicijaId}'),
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context)=> TreningDetailsScreen(trening: e,)
+                          MaterialPageRoute(builder: (context)=> PozicijaDetailsScreen(pozicija: e,)
                           )
                       ) 
                     }
                   },
                   cells: [
-                  DataCell(Text(e.treningId?.toString()??"0")),
-                  DataCell(Text(e.nazivTreninga ??"---")),
-                  DataCell(Text(e.tipTreninga ??"---")),
-                  // DataCell(Text(e.datumTreninga.toString() ??DateTime.now().toString())),
+                  DataCell(Text(e.pozicijaId.toString()??"0")),
+                  DataCell(Text(e.nazivPozicije??"---")),
+                  DataCell(Text(e.kategorijaPozicije??"---")),
 
                   ]
                 )).toList()??[]

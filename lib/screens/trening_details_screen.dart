@@ -110,14 +110,14 @@ class _TreningDetailsScreen extends State<TreningDetailsScreen> {
                 
             ),
           ),
-          Expanded(
-            child: FormBuilderTextField (
-                            decoration: const InputDecoration(labelText: "Datum treninga"), 
+          // Expanded(
+          //   child: FormBuilderTextField (
+          //                   decoration: const InputDecoration(labelText: "Datum treninga"), 
 
-                name: 'datumTreninga',
+          //       name: 'datumTreninga',
                 
-            ),
-          ),
+          //   ),
+          // ),
           
           ElevatedButton(onPressed: () async{
                 _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
@@ -147,7 +147,36 @@ Navigator.of(context).push(
                             ],
                           ));
                 }
-              }, child: Text("Save"))
+              }, child: Text("Save")),
+              FloatingActionButton(onPressed: () async{
+                // _formKey.currentState?.saveAndValidate();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => TreningListScreen(),
+                  ),
+                );
+              }, child: Text("Svi treninzi")),
+              FloatingActionButton(onPressed: () async{
+                showDialog(context: context, builder: (BuildContext context) => 
+                          AlertDialog(
+                            title: const Text("Error"),
+                            content: Text("Are you sure you want to delete the Trening?"),
+                            actions: [
+                              TextButton(onPressed: ()=>{
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => TreningListScreen(),
+                                  ),
+                                )
+                              }, child: const Text("Yes")),
+                              TextButton(onPressed: ()=>{
+                                Navigator.pop(context),
+                              }, child: const Text("No")),
+
+                            ],
+                          ));
+                
+              }, child: Text("Izbriši")),
           ],
           ),
         ),

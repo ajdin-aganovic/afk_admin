@@ -10,15 +10,19 @@ class Korisnik{
   String? email;
   String? lozinkaHash;
   String? lozinkaSalt;
+  String? password;
+  String? passwordPotvrda;
   String? strucnaSprema;
   DateTime? datumRodjenja;
   bool? podUgovorom;
   DateTime? podUgovoromOd;
   DateTime? podUgovoromDo;
+  String? uloga;
 
 
   Korisnik(this.korisnikId, this.ime, this.prezime, this.korisnickoIme, this.email, this.lozinkaHash, this.lozinkaSalt,
-  this.strucnaSprema, this.datumRodjenja, this.podUgovorom, this.podUgovoromOd, this.podUgovoromDo);
+  this.strucnaSprema, this.datumRodjenja, this.podUgovorom, this.podUgovoromOd, this.podUgovoromDo, this.uloga,
+  this.password, this.passwordPotvrda);
   // factory Korisnici.fromJson(Map<String,dynamic>json)=>_$KorisniciFromJson(json);
 
   factory Korisnik.fromJson(Map<String,dynamic>json)=>_$KorisnikFromJson(json);
