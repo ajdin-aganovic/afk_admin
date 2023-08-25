@@ -1,16 +1,24 @@
-import 'dart:math';
+// import 'dart:js_interop';
 import 'dart:convert';
+import 'dart:math';
+// import 'dart:convert';
+import 'package:afk_admin/providers/base_provider.dart';
 import 'package:afk_admin/providers/bolest_provider.dart';
 import 'package:afk_admin/providers/clanarina_provider.dart';
+import 'package:afk_admin/providers/korisnik_bolest_provider.dart';
+import 'package:afk_admin/providers/korisnik_pozicija_provider.dart';
+import 'package:afk_admin/providers/korisnik_transakcijski_racun_provider.dart';
+import 'package:afk_admin/providers/korisnik_uloga_provider.dart';
 import 'package:afk_admin/providers/pozicija_provider.dart';
 import 'package:afk_admin/providers/stadion_provider.dart';
 import 'package:afk_admin/providers/statistika_provider.dart';
 import 'package:afk_admin/providers/termin_provider.dart';
 import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
 import 'package:afk_admin/providers/trening_provider.dart';
-import 'package:afk_admin/screens/bolest_list_screen.dart';
+import 'package:afk_admin/providers/trening_stadion_provider.dart';
+// import 'package:afk_admin/screens/bolest_list_screen.dart';
 import 'package:afk_admin/screens/home_screen.dart';
-import 'package:afk_admin/screens/korisnici_list_screen.dart';
+// import 'package:afk_admin/screens/korisnici_list_screen.dart';
 import 'package:afk_admin/screens/reset_password_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:afk_admin/providers/korisnik_provider.dart';
@@ -43,6 +51,11 @@ void main() async {
     ChangeNotifierProvider(create: (_) => TerminProvider()),
     ChangeNotifierProvider(create: (_) => TransakcijskiRacunProvider()),
     ChangeNotifierProvider(create: (_) => TreningProvider()),
+    ChangeNotifierProvider(create: (_) => KorisnikBolestProvider()),
+    ChangeNotifierProvider(create: (_) => KorisnikPozicijaProvider()),
+    ChangeNotifierProvider(create: (_) => KorisnikTransakcijskiRacunProvider()),
+    ChangeNotifierProvider(create: (_) => KorisnikUlogaProvider()),
+    ChangeNotifierProvider(create: (_) => TreningStadionProvider()),
 
   ],
   child: const MyMaterialApp(),));
@@ -63,7 +76,7 @@ class MyMaterialApp extends StatelessWidget {
 }
 
 class LoginPage extends StatelessWidget {
- LoginPage({super.key});
+ LoginPage({this.loggovaniUser, super.key});
 
   final TextEditingController _usernamecontroller=TextEditingController();
   final TextEditingController _passwordcontroller=TextEditingController();
@@ -71,11 +84,44 @@ class LoginPage extends StatelessWidget {
   late PlatumProvider _plataProvider;
   late KorisnikProvider _korisniciProvider;
 
+  Korisnik? loggovaniUser;
+
   @override
   Widget build(BuildContext context) {
      
     _plataProvider=context.read<PlatumProvider>();
     _korisniciProvider=context.read<KorisnikProvider>();
+
+    // String GenerateSalt()
+    //     {
+    //         RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
+    //         var byteArray = new byte[16];
+    //         provider.GetBytes(byteArray);
+
+
+    //         return Convert.ToBase64String(byteArray);
+    //     }
+
+    String encodeBase64(String data) {
+      if(data!=null)
+      {
+        List<int> bytes = utf8.encode(data); // Convert string to bytes
+        return base64.encode(bytes); // Encode bytes as Base64
+      }
+      else
+      return "error";
+    }
+
+    String decodeBase64(String lozinkaGore)
+    {
+      if(lozinkaGore!=null)
+      {
+        List<int> bytes=base64.decode(lozinkaGore);
+
+      return utf8.decode(bytes);
+      }
+      return "error";
+    }
 
     return 
         Scaffold(
@@ -115,39 +161,119 @@ class LoginPage extends StatelessWidget {
                       
                     //   }),
                     const SizedBox(height: 20,),
-                    ElevatedButton(onPressed:() async {
+                    ElevatedButton(onPressed: 
+                    // _performLogin
+                    () async {
                       var username=_usernamecontroller.text;
                       var password=_passwordcontroller.text;
-                      print("login proceed u:($username) p:($password)");
 
-                      Authorization.username=username;
-                      Authorization.password=password;
-                      
-                      try {
-                          var data=await _korisniciProvider.get(filter: {
-                        'KorisnickoIme':username,
-                        }
-                      );
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                // builder: (context) => HomePage(naziv: username,),
-                                builder: (context) => KorisnikDetailsScreen(korisnik: data.result.first,),
+                      if(username.isEmpty||password.isEmpty)
+                      {
+                        showDialog(context: context, builder: (BuildContext context) => 
+                              AlertDialog(
+                                title: const Text("You must enter credentials."),
+                                content: Text(e.toString()),
+                                actions: [
+                                  TextButton(onPressed: ()=>{
+                                    Navigator.pop(context),
+                                    _usernamecontroller.text="",
+                                    _passwordcontroller.text=""
+                                  }, child: const Text("OK"))
+                                ],
+                              ));
+                      }
+                     
+                      else {
+                          
+                          Authorization.username=username;
+                          Authorization.password=password;
+                          
+                          try {
+                            var data=await _korisniciProvider.get(filter: {
+                            'KorisnickoIme':username,
+                            }
 
-                              ),
-                            );
-                        } on Exception catch (e) {
+                          );
+                        // BaseProvider bazniProvider;
+                        // bazniProvider.
+                          
+                          loggovaniUser=data.result.first;
+                          var foundFirst=data.result.first;
+                          var uloga=foundFirst.uloga;
+                          // var lozinkaHashIzUsera=foundFirst.lozinkaHash.toString();
+                          // var lozinkaSaltIzUsera=foundFirst.lozinkaSalt.toString();
+                          // var kodiranaLozinka1=encodeBase64(lozinkaHashIzUsera);
+                          // var kodiraniSaltLozinka1=encodeBase64(lozinkaSaltIzUsera);
+                          // var dekodiranaLozinka1=decodeBase64(lozinkaHashIzUsera);
+                          // var dekodiraniSalt1=decodeBase64(lozinkaSaltIzUsera);
+                          // var kodiranaLozinka2=encodeBase64(password);
+                          // var dekodiranaLozinka2=decodeBase64(kodiranaLozinka2);
+
+                          // print("login proceed u:(${username}) p:(${password}) \npassword dekodirani: ${lozinkaIzUsera}");
+                          
                           showDialog(context: context, builder: (BuildContext context) => 
-                          AlertDialog(
-                            title: const Text("Error"),
-                            content: Text(e.toString()),
-                            actions: [
-                              TextButton(onPressed: ()=>{
-                                Navigator.pop(context),
-                                _usernamecontroller.text="",
-                                _passwordcontroller.text=""
-                              }, child: const Text("OK"))
-                            ],
-                          ));
+                            AlertDialog(
+                              // title: Text("Dobro došli (${username}) (${password})"),
+                              title: Text("Dobro došli (${username})"),
+
+                              content: Text(
+                              //   "password enkodirani1: ${lozinkaHashIzUsera}"+
+                              // "\npassword salt enkodirani1: ${lozinkaSaltIzUsera}"+
+                              // "\npassword dekodirani1:${dekodiranaLozinka1}"+
+                              // "\npassword salt dekodirani1:${dekodiraniSalt1}"+
+                              // "\npassword enkodirani2: ${kodiranaLozinka2}"+
+                              // "\npassword dekodirani2:${dekodiranaLozinka2}"+
+                              "\nuloga usera: ${uloga}"
+                              ),
+                              actions: [
+                                TextButton(onPressed: ()=>{
+                                  Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => KorisnikDetailsScreen(korisnik: foundFirst,),
+                                    ),
+                                  )
+                                  }, child: const Text("OK"))
+                              ],
+                            ));
+
+                          // Navigator.of(context).push(
+                          // MaterialPageRoute(
+                          //   builder: (context) => KorisnikDetailsScreen(korisnik: foundFirst,),
+                          //   ),
+                          // );
+                          } 
+                          catch (e) {
+                            if(e is StateError)
+                            {
+                              showDialog(context: context, builder: (BuildContext context) => 
+                              AlertDialog(
+                                title: const Text("No user found with these credentials."),
+                                content: Text(e.toString()),
+                                actions: [
+                                  TextButton(onPressed: ()=>{
+                                    Navigator.pop(context),
+                                    _usernamecontroller.text="",
+                                    _passwordcontroller.text=""
+                                  }, child: const Text("OK"))
+                                ],
+                              ));
+                            }
+                            else
+                            {
+                              showDialog(context: context, builder: (BuildContext context) => 
+                              AlertDialog(
+                                title: const Text("Error"),
+                                content: Text(e.toString()),
+                                actions: [
+                                  TextButton(onPressed: ()=>{
+                                    Navigator.pop(context),
+                                    _usernamecontroller.text="",
+                                    _passwordcontroller.text=""
+                                  }, child: const Text("OK"))
+                                ],
+                              ));
+                            }
+                          }
                         }
                     }, child: const Text("Login")),
                     const SizedBox(height: 20,),
@@ -156,7 +282,6 @@ class LoginPage extends StatelessWidget {
                       
                         Navigator.of(context).push(
                         MaterialPageRoute(
-                  
                         builder: (context) => ContactPage(),
                             ),
                             );
@@ -165,6 +290,7 @@ class LoginPage extends StatelessWidget {
                       'Forgot Password',
                       style: TextStyle(color: Colors.white, fontSize: 15),
                      ),
+                     
                     ),
 
                     // const SizedBox(height: 20,),
@@ -181,6 +307,40 @@ class LoginPage extends StatelessWidget {
             ),
         );
   }
+
+  // Future<void> _performLogin() async {
+  //   final username = _usernamecontroller.text;
+  //   final password = _passwordcontroller.text;
+
+  //   // Make an HTTP request to your API to validate the credentials
+  //   final response = await http.post(
+  //     "https://localhost:7181/login" as Uri,
+  //     body: {'username': username, 'password': password},
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     // Successful login
+  //     // Navigate to the next screen
+  //   } else {
+  //     // Failed login
+  //     showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return AlertDialog(
+  //           title: Text('Login Failed'),
+  //           content: Text('Invalid username or password.'),
+  //           actions: <Widget>[
+  //             TextButton(
+  //               onPressed: () {
+  //                 Navigator.of(context).pop();
+  //               },
+  //               child: Text('OK'),
+  //             ),
+  //           ],
+  //         );
+  //       },
+  //     );
+  //   }
   
 // Future<Korisnik?> authenticateUser(String username, String password) async {
 //   final url = Uri.parse('https://localhost:7181/Korisnik');
