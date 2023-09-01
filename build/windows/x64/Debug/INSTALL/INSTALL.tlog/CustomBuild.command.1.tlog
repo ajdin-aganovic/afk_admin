@@ -1,0 +1,10 @@
+^C:\FAKULTET\FIT-III-GODINA\RS-II\SEMINARSKIRAD\BACKEND\FUDBALSKIKLUB\UI\AFK_ADMIN\BUILD\WINDOWS\CMAKEFILES\6E8ECE5AA5DEF8F0CE3F1FE5622A54A0\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
