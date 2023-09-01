@@ -66,6 +66,7 @@ class _MasterScreenWidgetState extends State<MasterScreenWidget> {
             ListTile(
               title: const Text("Početna"),
               onTap: (){
+                print('${widget.korisnik?.uloga??'nije preuzeo'}');
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     

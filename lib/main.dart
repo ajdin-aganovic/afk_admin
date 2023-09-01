@@ -16,6 +16,7 @@ import 'package:afk_admin/providers/termin_provider.dart';
 import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
 import 'package:afk_admin/providers/trening_provider.dart';
 import 'package:afk_admin/providers/trening_stadion_provider.dart';
+// import 'package:paypal_sdk/paypal_sdk.dart';
 // import 'package:afk_admin/screens/bolest_list_screen.dart';
 import 'package:afk_admin/screens/home_screen.dart';
 // import 'package:afk_admin/screens/korisnici_list_screen.dart';
@@ -38,6 +39,7 @@ import 'models/korisnik.dart';
 
 void main() async {
   // await dotenv.load(fileName: "lib/.env");
+  
   runApp(MultiProvider(providers:
   [
     ChangeNotifierProvider(create: (_) => PlatumProvider()),
@@ -192,8 +194,9 @@ class LoginPage extends StatelessWidget {
                             var data=await _korisniciProvider.get(filter: {
                             'KorisnickoIme':username,
                             }
-
                           );
+                          
+                          // if(data.result.first.lozinkaHash==Authorization.password.generateHash())
                         // BaseProvider bazniProvider;
                         // bazniProvider.
                           
