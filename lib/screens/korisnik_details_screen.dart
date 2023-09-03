@@ -1,7 +1,9 @@
 import 'package:afk_admin/models/korisnik.dart';
 import 'package:afk_admin/models/search_result.dart';
+import 'package:afk_admin/providers/korisnik_uloga_provider.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/screens/bolest_list_screen.dart';
+import 'package:afk_admin/screens/korisnici_editable_screen.dart';
 import 'package:afk_admin/screens/korisnici_list_screen.dart';
 import 'package:afk_admin/screens/korisnik_insert_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
@@ -15,13 +17,19 @@ import 'package:afk_admin/screens/korisnik_details_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../models/platum.dart';
+import '../models/korisnik_uloga.dart';
 import '../models/uloga.dart';
+import '../utils/util.dart';
 
 class KorisnikDetailsScreen extends StatefulWidget {
 
   Korisnik? korisnik;
+  KorisnikUloga? korisnikUloga;
+  String? usernameKorisnika;
+  Uloga? uloga;
+  int? korisnikId;
 
-  KorisnikDetailsScreen({this.korisnik, super.key});
+  KorisnikDetailsScreen({this.korisnik, this.korisnikId,this.usernameKorisnika, super.key});
 
   @override
   State<KorisnikDetailsScreen> createState() => _KorisnikDetailsScreen();
@@ -37,29 +45,48 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
   
 
   SearchResult<Korisnik>? _korisnikResult;
+
+   late KorisnikUlogaProvider _korisnikUlogaProvider;
+  
+
+  SearchResult<KorisnikUloga>? _korisnikUlogaResult;
+
+  late UlogaProvider _ulogaProvider;
+  
+
+  SearchResult<Uloga>? _ulogaResult;
+
+  Korisnik? pronadjeni;
  
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     
+    
+  // var pronadjeniKorisnik=_korisnikUlogaResult?.result.first;
+  // var spremljenaUloga=_ulogaResult?.result.first;
+
+
   _initialValue= {
-  'korisnikId' : widget.korisnik?.korisnikId.toString(),
-  'ime':widget.korisnik?.ime,
-  'prezime':widget.korisnik?.prezime,
-  'korisnickoIme':widget.korisnik?.korisnickoIme,
-  'email':widget.korisnik?.email,
-  'lozinkaHash':widget.korisnik?.lozinkaHash,
-  'lozinkaSalt':widget.korisnik?.lozinkaSalt,
-  'password':widget.korisnik?.password,
-  'passwordPotvrda':widget.korisnik?.passwordPotvrda,
-  'strucnaSprema':widget.korisnik?.strucnaSprema,
-  'datumRodjenja':widget.korisnik?.datumRodjenja.toString(),
-  'podUgovorom':widget.korisnik?.podUgovorom.toString(),
-  'podUgovoromOd':widget.korisnik?.podUgovoromOd.toString(),
-  'podUgovoromDo':widget.korisnik?.podUgovoromDo.toString(),
-  'uloga':widget.korisnik?.uloga,
+  'korisnikId' : widget.korisnik?.korisnikId.toString()??'nema zapisan',
+  'ime':widget.korisnik?.ime??'nema zapisan',
+  'prezime':widget.korisnik?.prezime??'nema zapisan',
+  'korisnickoIme':widget.korisnik?.korisnickoIme??'nema zapisan',
+  'email':widget.korisnik?.email??'nema zapisan',
+  'lozinkaHash':widget.korisnik?.lozinkaHash??'nema zapisan',
+  'lozinkaSalt':widget.korisnik?.lozinkaSalt??'nema zapisan',
+  'password':widget.korisnik?.password??'nema zapisan',
+  'passwordPotvrda':widget.korisnik?.passwordPotvrda??'nema zapisan',
+  'strucnaSprema':widget.korisnik?.strucnaSprema??'nema zapisan',
+  'datumRodjenja':widget.korisnik?.datumRodjenja.toString()??'nema zapisan',
+  'podUgovorom':widget.korisnik?.podUgovorom.toString()??'nema zapisan',
+  'podUgovoromOd':widget.korisnik?.podUgovoromOd.toString()??'nema zapisan',
+  'podUgovoromDo':widget.korisnik?.podUgovoromDo.toString()??'nema zapisan',
+  // 'uloga':spremljenaUloga?.nazivUloge??"Nema uloge",
+  'uloga':widget.korisnik?.uloga??"Nema uloge"
   };
 
   _korisnikProvider=context.read<KorisnikProvider>();
@@ -77,20 +104,19 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
 
   Future initForm()async{
       _korisnikResult=await _korisnikProvider.get();
-      // print(_korisnikResult);
+
+      
   }
 
   @override
   Widget build(BuildContext context) {
+
     return MasterScreenWidget(
       // ignore: sort_child_properties_last
-      title: 'Korisnički ID ${widget.korisnik?.korisnikId}' ?? "Korisnici details",
+      title: 'Korisnički ID ${widget.korisnik?.korisnikId}' ?? "Detalji korisnika",
       child: 
-        // Row(children: [
         buildForm(),
-        // zaboravljenPassword()
-
-        // ],)
+       
       );
   }
 
@@ -147,22 +173,6 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
                 
             ),
           ),
-          // Expanded(
-          //   child: FormBuilderTextField (
-          //       decoration: const InputDecoration(labelText: "Password"), 
-
-          //       name: 'password',
-                
-          //   ),
-          // ),
-          // Expanded(
-          //   child: FormBuilderTextField (
-          //       decoration: const InputDecoration(labelText: "PasswordPotvrda"), 
-                
-          //       name: 'passwordPotvrda',
-                
-          //   ),
-          // ),
           Expanded(
             child: FormBuilderTextField (
                             decoration: const InputDecoration(labelText: "Stručna sprema"), 
@@ -219,46 +229,16 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
             ),
           ),
           
-          // ElevatedButton(onPressed: () async{
-                  
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     // builder: (context) => HomePage(naziv: username,),
-            //     builder: (context) => InsertScreen(korisnik: widget.korisnik,),
-  
-            //   ),
-            //           );
           
-            //     }, child: Text("Edit")),
-            FloatingActionButton(onPressed: () async{
-                // _formKey.currentState?.saveAndValidate();
+            ElevatedButton(onPressed: () async{
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => KorisniciListScreen(),
+                    
+                    builder: (context) => KorisniciEditableScreen(),
                   ),
                 );
               }, child: Text("Svi korisnici")),
-              // FloatingActionButton(onPressed: () async{
-              //   showDialog(context: context, builder: (BuildContext context) => 
-              //             AlertDialog(
-              //               title: const Text("Error"),
-              //               content: Text("Are you sure you want to delete the Korisnik?"),
-              //               actions: [
-              //                 TextButton(onPressed: ()=>{
-              //                   Navigator.of(context).push(
-              //                     MaterialPageRoute(
-              //                       builder: (context) => KorisniciListScreen(),
-              //                     ),
-              //                   )
-              //                 }, child: const Text("Yes")),
-              //                 TextButton(onPressed: ()=>{
-              //                   Navigator.pop(context),
-              //                 }, child: const Text("No")),
-
-              //               ],
-              //             ));
-                
-              // }, child: Text("Izbriši")),
+              
           ],
         ),
       ),

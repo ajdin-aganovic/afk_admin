@@ -12,6 +12,7 @@ import '../models/korisnik.dart';
 import '../models/platum.dart';
 import '../models/statistika.dart';
 import '../providers/transakcijski_racun_provider.dart';
+import '../utils/util.dart';
 
 class StatistikaListScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -168,13 +169,26 @@ Widget _buildDataListView() {
               rows: 
                 result?.result.map((Statistika e) => DataRow(
                   onSelectChanged: (yxc)=>{
-                    if(yxc==true)
-                    {
-                      print('selected: ${e.statistikaId}'),
-                      Navigator.of(context).push(
+                    if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Analitičar")&&yxc==true)
+                      {
+                        print('selected: ${e.statistikaId}'),
+                        Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=> StatistikaDetailsScreen(statistika: e,)
                           )
                       ) 
+                      }
+                    else
+                    {
+                      showDialog(context: context, builder: (BuildContext context) => 
+                        AlertDialog(
+                          title: Text("You have chosen ${e.statistikaId}"),
+                          content: Text("KorisnikID: ${e.korisnikId}"),
+                          actions: [
+                            TextButton(onPressed: ()=>{
+                              Navigator.pop(context),
+                            }, child: const Text("OK"))
+                          ],
+                        )),
                     }
                   },
                   cells: [

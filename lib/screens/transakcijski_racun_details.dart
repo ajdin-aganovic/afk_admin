@@ -50,6 +50,7 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
     'brojRacuna':widget.transakcijskiRacun?.brojRacuna??"---",
     'adresaPrebivalista': widget.transakcijskiRacun?.adresaPrebivalista??"---", 
     'nazivBanke':widget.transakcijskiRacun?.nazivBanke??"---",
+    'korisnikId':widget.transakcijskiRacun?.korisnikId.toString()??"---",
   };
 
   _transakcijskiRacunProvider=context.read<TransakcijskiRacunProvider>();
@@ -138,10 +139,18 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                 
             ),
           ),
+          Expanded(
+            child: FormBuilderTextField (
+                            decoration: const InputDecoration(labelText: "KorisnikID"), 
+
+                name: 'korisnikId',
+                
+            ),
+          ),
 
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton(onPressed: () async{
+            child: ElevatedButton(onPressed: () async{
                   _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
                   // print(_formKey.currentState?.value);
                   try{
@@ -172,7 +181,7 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                 }, child: Text("Save")),
                 
           ),
-          FloatingActionButton(onPressed: () async{
+          ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -180,27 +189,33 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                   ),
                 );
               }, child: Text("Svi transakcijski računi")),
-              FloatingActionButton(onPressed: () async{
-                showDialog(context: context, builder: (BuildContext context) => 
-                          AlertDialog(
-                            title: const Text("Error"),
-                            content: Text("Are you sure you want to delete the Transakcijski račun?"),
-                            actions: [
-                              TextButton(onPressed: ()=>{
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => TransakcijskiRacunListScreen(),
-                                  ),
-                                )
-                              }, child: const Text("Yes")),
-                              TextButton(onPressed: ()=>{
-                                Navigator.pop(context),
-                              }, child: const Text("No")),
-
-                            ],
-                          ));
+              ElevatedButton(onPressed: () async{
+                  showDialog(context: context, builder: (BuildContext context) => 
+            AlertDialog(
+              title: const Text("Warning!!!"),
+              content: Text("Are you sure you want to delete TRačun ${widget.transakcijskiRacun!.transakcijskiRacunId}?"),
+              actions: [
                 
-              }, child: Text("Izbriši")),
+                TextButton(onPressed: () async =>{
+                  
+                  await _transakcijskiRacunProvider.delete(widget.transakcijskiRacun!.transakcijskiRacunId!),
+
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => TransakcijskiRacunListScreen(),
+                    ),
+                  )
+              
+
+                }, child: const Text("Yes")),
+                TextButton(onPressed: ()=>{
+                  Navigator.pop(context),
+                }, child: const Text("No")),
+      
+              ],
+            ));
+                        
+                      }, child: Text("Izbriši")),
           ],
           ),
         ),

@@ -138,7 +138,7 @@ class _UlogaDetailsScreen extends State<UlogaDetailsScreen> {
                           ));
                 }
               }, child: Text("Save")),
-              FloatingActionButton(onPressed: () async{
+              ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -146,27 +146,33 @@ class _UlogaDetailsScreen extends State<UlogaDetailsScreen> {
                   ),
                 );
               }, child: Text("Sve uloge")),
-              FloatingActionButton(onPressed: () async{
-                showDialog(context: context, builder: (BuildContext context) => 
-                          AlertDialog(
-                            title: const Text("Error"),
-                            content: Text("Are you sure you want to delete the Uloga?"),
-                            actions: [
-                              TextButton(onPressed: ()=>{
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => UlogaListScreen(),
-                                  ),
-                                )
-                              }, child: const Text("Yes")),
-                              TextButton(onPressed: ()=>{
-                                Navigator.pop(context),
-                              }, child: const Text("No")),
-
-                            ],
-                          ));
+              ElevatedButton(onPressed: () async{
+                  showDialog(context: context, builder: (BuildContext context) => 
+            AlertDialog(
+              title: const Text("Warning!!!"),
+              content: Text("Are you sure you want to delete uloga ${widget.uloga!.ulogaId}?"),
+              actions: [
                 
-              }, child: Text("Izbriši")),
+                TextButton(onPressed: () async =>{
+                  
+                  await _ulogaProvider.delete(widget.uloga!.ulogaId!),
+
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => UlogaListScreen(),
+                    ),
+                  )
+              
+
+                }, child: const Text("Yes")),
+                TextButton(onPressed: ()=>{
+                  Navigator.pop(context),
+                }, child: const Text("No")),
+      
+              ],
+            ));
+        
+                      }, child: Text("Izbriši")),
           ],
           ),
         ),

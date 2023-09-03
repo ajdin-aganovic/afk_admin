@@ -88,7 +88,11 @@ Map<String,dynamic>_initialValue={};
   }
 
     Future initForm()async{
-      _korisnikResult=await _korisnikProvider.get();
+      // _korisnikResult=await _korisnikProvider.get();
+      _korisnikResult=await _korisnikProvider.get(filter:{
+        'KorisnickoIme':Authorization.username
+      });
+
       // print(_korisnikResult);
   }
 
@@ -128,7 +132,10 @@ Map<String,dynamic>_initialValue={};
                                 Text('Aplikacija Fudbalskog Kluba',
                                 style: TextStyle(fontSize: 30),), 
                                 SizedBox(height: 12,),
-                                Text('Dobrodošli ${widget.loggovaniUser?.korisnickoIme??"nazad"}',
+                                // Text('Dobrodošli ${widget.loggovaniUser?.korisnickoIme??"nazad"}',
+                                Text('Dobrodošli ${Authorization.username}',
+
+                                
                                 // Text('Dobrodošli ${widget.korisnik?.korisnickoIme}',
                                 style: TextStyle(fontSize: 30),),
                                 SizedBox(height: 24,),
@@ -139,8 +146,8 @@ Map<String,dynamic>_initialValue={};
                               Row(
                                 children: [
                               ElevatedButton(onPressed: (){
-                              // if(izabrani?.uloga=="Administrator"||izabrani?.uloga==null)
-                              if(1==1)
+                              if(Authorization.ulogaKorisnika=="Administrator")
+                              // if(1==1)
                              { 
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -153,7 +160,7 @@ Map<String,dynamic>_initialValue={};
                                    showDialog(context: context, builder: (BuildContext context) => 
                               AlertDialog(
                                 title: const Text("You are not Admin."),
-                                content: Text("${izabrani?.uloga}"),
+                                content: Text("Try again"),
                                 actions: [
                                   TextButton(onPressed: ()=>{
                                     Navigator.pop(context),
@@ -165,8 +172,8 @@ Map<String,dynamic>_initialValue={};
 
 
                               ElevatedButton(onPressed: (){
-                              // if(izabrani?.uloga=="Glavni trener"||izabrani?.uloga=="Pomoćni trener"||izabrani?.uloga==null)
-                              if(1==1)
+                              if(Authorization.ulogaKorisnika=="Glavni trener"||Authorization.ulogaKorisnika=="Pomoćni trener")
+                              // if(1==1)
                              { 
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -179,7 +186,7 @@ Map<String,dynamic>_initialValue={};
                                    showDialog(context: context, builder: (BuildContext context) => 
                               AlertDialog(
                                 title: const Text("You are not Uprava."),
-                                content: Text("${izabrani?.uloga}"),
+                                content: Text("Try again"),
                                 actions: [
                                   TextButton(onPressed: ()=>{
                                     Navigator.pop(context),
@@ -191,8 +198,8 @@ Map<String,dynamic>_initialValue={};
 
 
                                    ElevatedButton(onPressed: (){
-                              // if(izabrani?.uloga=="Doktor"||izabrani?.uloga==null)
-                              if(1==1)
+                              if(Authorization.ulogaKorisnika=="Doktor")
+                              // if(1==1)
                              { 
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -205,7 +212,7 @@ Map<String,dynamic>_initialValue={};
                                    showDialog(context: context, builder: (BuildContext context) => 
                               AlertDialog(
                                 title: const Text("You are not Medicinsko osoblje."),
-                                content: Text("${izabrani?.uloga}"),
+                                content: Text("Try again"),
                                 actions: [
                                   TextButton(onPressed: ()=>{
                                     Navigator.pop(context),
@@ -218,8 +225,8 @@ Map<String,dynamic>_initialValue={};
 
                              
                             ElevatedButton(onPressed: (){
-                              // if(izabrani?.uloga=="Igrač"||izabrani?.uloga==null)
-                              if(1==1)
+                              if(Authorization.ulogaKorisnika=="Igrač")
+                              // if(1==1)
                              { 
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -230,20 +237,59 @@ Map<String,dynamic>_initialValue={};
                                 else
                                 {
                                    showDialog(context: context, builder: (BuildContext context) => 
-                              AlertDialog(
-                                title: const Text("You are not Igrač."),
-                                content: Text("${izabrani?.uloga}"),
-                                actions: [
-                                  TextButton(onPressed: ()=>{
-                                    Navigator.pop(context),
-                                  }, child: const Text("OK"))
-                                ],
-                              ));
+                                    AlertDialog(
+                                      title: const Text("You are not Igrač."),
+                                      content: Text("Try again"),
+                                      actions: [
+                                        TextButton(onPressed: ()=>{
+                                          Navigator.pop(context),
+                                        }, child: const Text("OK"))
+                                      ],
+                                    ));
                                 }
                               }, child: Text("Go to Igrač dio")),
  
                                 ],
                               ),
+                              Row(children: [
+                                  
+                            ElevatedButton(onPressed: () async {
+                              
+                              try {
+                                
+                                var data1313=_korisnikProvider.get(filter: {
+                                  'KorisnickoIme':Authorization.username
+                                });
+
+                                setState(() {
+                                  _korisnikResult!=data1313;
+                                });
+
+                                var pronadjeniKorisnik=_korisnikResult!.result.first;
+                              
+                                Navigator.of(context).push(
+                                MaterialPageRoute(
+                                builder: (context) => KorisnikDetailsScreen(korisnik: pronadjeniKorisnik,)
+                                ),
+                                );
+
+                              } on Exception catch (e) {
+                                showDialog(context: context, builder: (BuildContext context) => 
+                                    AlertDialog(
+                                      title: const Text("Error"),
+                                      content: Text("${e.toString()}"),
+                                      actions: [
+                                        TextButton(onPressed: ()=>{
+                                          Navigator.pop(context),
+                                        }, child: const Text("OK"))
+                                      ],
+                                    ));
+                              }
+
+
+                            }, child: Text("Account details"),
+                            ),
+                              ],)
                             ],
                           ),
                         

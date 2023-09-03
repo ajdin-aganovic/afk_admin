@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:afk_admin/screens/korisnici_editable_screen.dart';
 import 'package:afk_admin/screens/korisnici_list_screen.dart';
+import 'package:afk_admin/screens/password_reset_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +30,9 @@ import '../models/uloga.dart';
 class InsertScreen extends StatefulWidget {
   Korisnik? korisnik;
 
-  InsertScreen({this.korisnik, super.key});
+  InsertScreen(
+    // int? korisnikId, 
+    {this.korisnik, super.key});
   @override
   _InsertScreenState createState() => _InsertScreenState();
 }
@@ -113,12 +117,12 @@ final ScrollController _vertical = ScrollController();
     };}
     else
     {_initialValue={
-      'korisnikId':widget.korisnik?.korisnikId.toString(),
-      'ime':widget.korisnik?.ime,
-      'prezime':widget.korisnik?.prezime,
-      'email':widget.korisnik?.email.toString(),
-      'password':widget.korisnik?.lozinkaHash.toString(),
-      'passwordPotvrda':widget.korisnik?.lozinkaSalt.toString(),
+      'korisnikId':widget.korisnik?.korisnikId.toString()??'nema zapisan',
+      'ime':widget.korisnik?.ime??'nema zapisan',
+      'prezime':widget.korisnik?.prezime??'nema zapisan',
+      'email':widget.korisnik?.email.toString()??'nema zapisan',
+      'password':widget.korisnik?.lozinkaHash.toString()??'nema zapisan',
+      'passwordPotvrda':widget.korisnik?.lozinkaSalt.toString()??'nema zapisan',
       'strucnaSprema':widget.korisnik?.strucnaSprema.toString()??"No option",
       'datumRodjenja':DateFormat('yyyy-MM-dd').format(widget.korisnik!.datumRodjenja!)??defaultDate,
       // 'datumRodjenja':widget.korisnik?.datumRodjenja.toString(),
@@ -126,7 +130,7 @@ final ScrollController _vertical = ScrollController();
       'podUgovoromOd':DateFormat('yyyy-MM-dd').format(widget.korisnik!.podUgovoromOd!)??defaultDate,
       'podUgovoromDo':DateFormat('yyyy-MM-dd').format(widget.korisnik!.podUgovoromDo!)??defaultDate,
       'uloga':widget.korisnik?.uloga.toString()??"Bez uloge",
-      'korisnickoIme':widget.korisnik?.korisnickoIme.toString(),
+      'korisnickoIme':widget.korisnik?.korisnickoIme.toString()??'nema zapisan',
       
     };}
     _korisnikProvider=context.read<KorisnikProvider>();
@@ -208,29 +212,29 @@ final ScrollController _vertical = ScrollController();
                       ),
                     ),
                             
-                    Expanded(
-                      child: FormBuilderTextField (
-                        controller: _lozinkaController,
-                          decoration: const InputDecoration(labelText: "Lozinka"), 
-                          obscureText: true,
-                          name: 'password',
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: FormBuilderTextField (
+                    //     controller: _lozinkaController,
+                    //       decoration: const InputDecoration(labelText: "Lozinka"), 
+                    //       obscureText: true,
+                    //       name: 'password',
+                    //   ),
+                    // ),
                            
-                    Expanded(
-                      child: FormBuilderTextField (
-                        controller: _lozinkaProvjeraController,
-                          decoration: const InputDecoration(labelText: "Potvrdi lozinku"), 
-                          obscureText: true,
-                          name: 'passwordPotvrda',
-                          validator: (value) {
-                                if (value != _lozinkaController.text) {
-                                  return 'Passwords do not match';
-                                }
-                                return null;
-                              },
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: FormBuilderTextField (
+                    //     controller: _lozinkaProvjeraController,
+                    //       decoration: const InputDecoration(labelText: "Potvrdi lozinku"), 
+                    //       obscureText: true,
+                    //       name: 'passwordPotvrda',
+                    //       validator: (value) {
+                    //             if (value != _lozinkaController.text) {
+                    //               return 'Passwords do not match';
+                    //             }
+                    //             return null;
+                    //           },
+                    //   ),
+                    // ),
                            
                     Expanded(
                       child:
@@ -268,6 +272,7 @@ final ScrollController _vertical = ScrollController();
                     Expanded(
                       child:
                       FormBuilderDropdown(
+                        
                               name: 'podUgovorom',
                               decoration: InputDecoration(labelText: 'Pod ugovorom'),
                               items: const[ 
@@ -371,7 +376,7 @@ final ScrollController _vertical = ScrollController();
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 // builder: (context) => HomePage(naziv: username,),
-                                builder: (context) => KorisniciListScreen(),
+                                builder: (context) => KorisniciEditableScreen(),
                            
                               ),
                                       );
@@ -388,26 +393,38 @@ final ScrollController _vertical = ScrollController();
                                     ));
                           }
                         }, child: Text("Save")),
-                        FloatingActionButton(onPressed: () async{
+
+
+
+                        ElevatedButton(onPressed: () async{
                         // _formKey.currentState?.saveAndValidate();
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => KorisniciListScreen(),
+                            builder: (context) => KorisniciEditableScreen(),
                           ),
                         );
                       }, child: Text("Svi korisnici")),
-                      FloatingActionButton(onPressed: () async{
+
+
+
+                      ElevatedButton(onPressed: () async{
                         showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: const Text("Error"),
-                                    content: Text("Are you sure you want to delete the Korisnik?"),
+                                    title: const Text("Warning!!!"),
+                                    content: Text("Are you sure you want to delete ${widget.korisnik!.korisnickoIme}?"),
                                     actions: [
-                                      TextButton(onPressed: ()=>{
+                                      
+                                      TextButton(onPressed: () async =>{
+                                        
+                                        await _korisnikProvider.delete(widget.korisnik!.korisnikId!),
+
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
-                                            builder: (context) => KorisniciListScreen(),
+                                            builder: (context) => KorisniciEditableScreen(),
                                           ),
                                         )
+                                    
+
                                       }, child: const Text("Yes")),
                                       TextButton(onPressed: ()=>{
                                         Navigator.pop(context),
@@ -417,6 +434,17 @@ final ScrollController _vertical = ScrollController();
                                   ));
                         
                       }, child: Text("Izbriši")),
+
+
+
+                      ElevatedButton(onPressed: () async{
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => PasswordAdmin(korisnik: widget.korisnik,),
+                          ),
+                        );
+                        
+                      }, child: Text("Change password")),
              
              
                     ],))

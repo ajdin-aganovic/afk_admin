@@ -12,6 +12,7 @@ import '../models/korisnik.dart';
 import '../models/platum.dart';
 import '../models/stadion.dart';
 import '../providers/transakcijski_racun_provider.dart';
+import '../utils/util.dart';
 
 class StadionListScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -143,13 +144,26 @@ Widget _buildDataListView() {
               rows: 
                 result?.result.map((Stadion e) => DataRow(
                   onSelectChanged: (yxc)=>{
-                    if(yxc==true)
-                    {
-                      print('selected: ${e.stadionId}'),
-                      Navigator.of(context).push(
+                    if((Authorization.ulogaKorisnika=="Administrator")&&yxc==true)
+                      {
+                        print('selected: ${e.stadionId}'),
+                        Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=> StadionDetailsScreen(stadion: e,)
                           )
                       ) 
+                      }
+                    else
+                    {
+                      showDialog(context: context, builder: (BuildContext context) => 
+                        AlertDialog(
+                          title: Text("You have chosen ${e.stadionId}"),
+                          content: Text("Naziv stadiona: ${e.nazivStadiona}\nKapacitet stadiona: ${e.kapacitetStadiona}"),
+                          actions: [
+                            TextButton(onPressed: ()=>{
+                              Navigator.pop(context),
+                            }, child: const Text("OK"))
+                          ],
+                        )),
                     }
                   },
                   cells: [

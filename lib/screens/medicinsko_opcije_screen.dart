@@ -47,6 +47,7 @@ import 'package:afk_admin/widgets/makePayment.dart';
 
 import '../models/korisnik.dart';
 import '../models/search_result.dart';
+import 'korisnici_editable_screen.dart';
 
 class MedicinskoScreen extends StatefulWidget {
   Korisnik? korisnik;
@@ -146,7 +147,7 @@ else
                             const Text('Aplikacija Fudbalskog Kluba',
                             style: TextStyle(fontSize: 30),), 
                             SizedBox(height: 12,),
-                            Text('Dobrodošli ${izabrani?.korisnickoIme??"nazad"}',
+                            Text('Dobrodošli ${Authorization.username}',
                             // Text('Dobrodošli ${_korisnikResult?.result.first.korisnickoIme}',
 
                             style: TextStyle(fontSize: 30),),
@@ -186,7 +187,7 @@ else
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
                                       MaterialPageRoute(
-                                      builder: (context) => KorisniciListScreen()
+                                      builder: (context) => KorisniciEditableScreen()
                                       ),
                                   );
                                   }, child: Text("Go to Korisnici lista")),

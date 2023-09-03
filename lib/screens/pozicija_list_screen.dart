@@ -12,6 +12,7 @@ import '../models/korisnik.dart';
 import '../models/platum.dart';
 import '../models/pozicija.dart';
 import '../providers/transakcijski_racun_provider.dart';
+import '../utils/util.dart';
 
 class PozicijaListScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -105,7 +106,8 @@ Widget _buildDataListView() {
           child: SingleChildScrollView(
             controller: _horizontal,
             scrollDirection: Axis.horizontal,
-            child: DataTable(
+            child: 
+            DataTable(
                 columns: const [
                     DataColumn(label: Expanded(
                     child: Text("ID",
@@ -130,13 +132,26 @@ Widget _buildDataListView() {
               rows: 
                 result?.result.map((Pozicija e) => DataRow(
                   onSelectChanged: (yxc)=>{
-                    if(yxc==true)
-                    {
-                      print('selected: ${e.pozicijaId}'),
-                      Navigator.of(context).push(
+                    if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Glavni trener")&&yxc==true)
+                      {
+                        print('selected: ${e.pozicijaId}'),
+                        Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=> PozicijaDetailsScreen(pozicija: e,)
                           )
                       ) 
+                      }
+                    else
+                    {
+                      showDialog(context: context, builder: (BuildContext context) => 
+                        AlertDialog(
+                          title: Text("You have chosen ${e.pozicijaId}"),
+                          content: Text("${e.nazivPozicije}/${e.kategorijaPozicije}"),
+                          actions: [
+                            TextButton(onPressed: ()=>{
+                              Navigator.pop(context),
+                            }, child: const Text("OK"))
+                          ],
+                        )),
                     }
                   },
                   cells: [

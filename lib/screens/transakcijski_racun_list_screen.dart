@@ -12,6 +12,7 @@ import '../models/korisnik.dart';
 import '../models/platum.dart';
 import '../models/transakcijski_racun.dart';
 import '../providers/transakcijski_racun_provider.dart';
+import '../utils/util.dart';
 
 class TransakcijskiRacunListScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -143,18 +144,37 @@ Widget _buildDataListView() {
                     ),
                     ),
 
+                    DataColumn(label: Expanded(
+                    child: Text("KorisnikID",
+                    style: TextStyle(fontStyle: FontStyle.italic),),
+                    ),
+                    ),
+
                     ],
 
               rows: 
                 resultTrans?.result.map((TransakcijskiRacun e) => DataRow(
                   onSelectChanged: (yxc)=>{
-                    if(yxc==true)
-                    {
-                      print('selected: ${e.transakcijskiRacunId}'),
-                      Navigator.of(context).push(
+                   if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Računovođa")&&yxc==true)
+                      {
+                        print('selected: ${e.transakcijskiRacunId}'),
+                        Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=> TransakcijskiRacunDetailsScreen(transakcijskiRacun: e,)
                           )
                       ) 
+                      }
+                    else
+                    {
+                      showDialog(context: context, builder: (BuildContext context) => 
+                        AlertDialog(
+                          title: Text("You have chosen ${e.transakcijskiRacunId}"),
+                          content: Text("Broj računa: ${e.brojRacuna}\nAdresa prebivališa: ${e.adresaPrebivalista}\nNaziv banke: ${e.nazivBanke}"),
+                          actions: [
+                            TextButton(onPressed: ()=>{
+                              Navigator.pop(context),
+                            }, child: const Text("OK"))
+                          ],
+                        )),
                     }
                   },
                   cells: [
@@ -162,6 +182,7 @@ Widget _buildDataListView() {
                   DataCell(Text(e.brojRacuna??"")),
                   DataCell(Text(e.adresaPrebivalista ??"")),
                   DataCell(Text(e.nazivBanke??"")),
+                  DataCell(Text(e.korisnikId.toString()??"")),
 
                   ]
                 )).toList()??[]

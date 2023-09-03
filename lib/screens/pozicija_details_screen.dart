@@ -147,27 +147,33 @@ class _PozicijaDetailsScreen extends State<PozicijaDetailsScreen> {
                 );
               }, child: Text("Sve pozicije")),
 
-              ElevatedButton(onPressed: () async{
-                showDialog(context: context, builder: (BuildContext context) => 
-                          AlertDialog(
-                            title: const Text("Error"),
-                            content: Text("Are you sure you want to delete the Pozicija?"),
-                            actions: [
-                              TextButton(onPressed: ()=>{
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => PozicijaListScreen(),
-                                  ),
-                                )
-                              }, child: const Text("Yes")),
-                              TextButton(onPressed: ()=>{
-                                Navigator.pop(context),
-                              }, child: const Text("No")),
+             ElevatedButton(onPressed: () async{
+          showDialog(context: context, builder: (BuildContext context) => 
+                    AlertDialog(
+                      title: const Text("Warning!!!"),
+                      content: Text("Are you sure you want to delete pozicija ${widget.pozicija!.pozicijaId}?"),
+                      actions: [
+                        
+                        TextButton(onPressed: () async =>{
+                          
+                          await _pozicijaProvider.delete(widget.pozicija!.pozicijaId!),
 
-                            ],
-                          ));
-                
-              }, child: Text("Izbriši")),
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PozicijaListScreen(),
+                            ),
+                          )
+                      
+
+                        }, child: const Text("Yes")),
+                        TextButton(onPressed: ()=>{
+                          Navigator.pop(context),
+                        }, child: const Text("No")),
+              
+                      ],
+                    ));
+                        
+                      }, child: Text("Izbriši")),
           ],
           ),
         ),

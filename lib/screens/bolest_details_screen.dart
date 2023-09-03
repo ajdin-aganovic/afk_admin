@@ -114,7 +114,8 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
       //     )
       //   ],
       // )
-      child: buildForm(),
+      child:
+       buildForm(),
       );
   }
 
@@ -168,7 +169,7 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
           ),
           Row(
             children: [
-              FloatingActionButton(onPressed: () async{
+              ElevatedButton(onPressed: () async{
                 _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
                 print(_formKey.currentState?.value);
                 try{
@@ -197,7 +198,7 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
                 }
                 
               }, child: Text("Save")),
-              FloatingActionButton(onPressed: () async{
+              ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -205,27 +206,34 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
                   ),
                 );
               }, child: Text("Sve bolesti")),
-              FloatingActionButton(onPressed: () async{
-                showDialog(context: context, builder: (BuildContext context) => 
-                          AlertDialog(
-                            title: const Text("Error"),
-                            content: Text("Are you sure you want to delete the Bolest?"),
-                            actions: [
-                              TextButton(onPressed: ()=>{
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => BolestListScreen(),
-                                  ),
-                                )
-                              }, child: const Text("Yes")),
-                              TextButton(onPressed: ()=>{
-                                Navigator.pop(context),
-                              }, child: const Text("No")),
 
-                            ],
-                          ));
+             ElevatedButton(onPressed: () async{
+                  showDialog(context: context, builder: (BuildContext context) => 
+                    AlertDialog(
+                      title: const Text("Warning!!!"),
+                      content: Text("Are you sure you want to delete bolest ${widget.bolest!.bolestId}?"),
+                      actions: [
+                        
+                        TextButton(onPressed: () async =>{
+                          
+                          await _bolestProvider.delete(widget.bolest!.bolestId!),
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => BolestListScreen(),
+                            ),
+                          )
+                      
+
+                        }, child: const Text("Yes")),
+                        TextButton(onPressed: ()=>{
+                          Navigator.pop(context),
+                        }, child: const Text("No")),
+              
+                      ],
+                    ));
                 
-              }, child: Text("Izbriši")),
+                      }, child: Text("Izbriši")),
             ],
           )
           

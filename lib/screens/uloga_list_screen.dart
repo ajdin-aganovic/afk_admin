@@ -12,6 +12,7 @@ import '../models/korisnik.dart';
 import '../models/platum.dart';
 import '../models/uloga.dart';
 import '../providers/transakcijski_racun_provider.dart';
+import '../utils/util.dart';
 
 class UlogaListScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -125,13 +126,26 @@ Widget _buildDataListView() {
               rows: 
                 result?.result.map((Uloga e) => DataRow(
                   onSelectChanged: (yxc)=>{
-                    if(yxc==true)
-                    {
-                      print('selected: ${e.ulogaId}'),
-                      Navigator.of(context).push(
+                    if((Authorization.ulogaKorisnika=="Administrator")&&yxc==true)
+                      {
+                        print('selected: ${e.ulogaId}'),
+                        Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=> UlogaDetailsScreen(uloga: e,)
                           )
                       ) 
+                      }
+                    else
+                    {
+                      showDialog(context: context, builder: (BuildContext context) => 
+                        AlertDialog(
+                          title: Text("You have chosen ${e.ulogaId}"),
+                          content: Text("${e.nazivUloge}/${e.podtipUloge}"),
+                          actions: [
+                            TextButton(onPressed: ()=>{
+                              Navigator.pop(context),
+                            }, child: const Text("OK"))
+                          ],
+                        )),
                     }
                   },
                   cells: [

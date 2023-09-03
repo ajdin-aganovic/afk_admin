@@ -7,9 +7,10 @@ class TransakcijskiRacun{
   String? brojRacuna;
   String? adresaPrebivalista;
   String? nazivBanke;
+  int? korisnikId;
 
 
-  TransakcijskiRacun(this.transakcijskiRacunId, this.brojRacuna, this.adresaPrebivalista, this.nazivBanke);
+  TransakcijskiRacun(this.transakcijskiRacunId, this.brojRacuna, this.adresaPrebivalista, this.nazivBanke, this.korisnikId);
   // factory Korisnici.fromJson(Map<String,dynamic>json)=>_$KorisniciFromJson(json);
 
   factory TransakcijskiRacun.fromJson(Map<String,dynamic>json)=>_$TransakcijskiRacunFromJson(json);

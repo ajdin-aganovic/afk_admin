@@ -73,8 +73,8 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
                     Expanded(
                       child: 
                         TextField(
-                            decoration: const InputDecoration(labelText: "Pretraga po imenu"), 
-                            controller:_fullNameSearch,
+                            decoration: const InputDecoration(labelText: "Pretraga po korisničkom imenu"), 
+                            controller:_korisnickoIme,
                           ),
                     ),
               const SizedBox(width: 8,), 
@@ -93,8 +93,8 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
               Expanded(child:
                     
                           TextField(
-                            decoration: const InputDecoration(labelText: "Pretraga po korisničkom imenu"), 
-                            controller:_korisnickoIme
+                            decoration: const InputDecoration(labelText: "Pretraga po stručnoj spremi"), 
+                            controller:_fullNameSearch
                           ),
                     
                     ),
@@ -105,9 +105,9 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
                   // print("logout successful");
                   
                   var data=await _korisniciProvider.get(filter: {
-                    'Naziv':_fullNameSearch.text,
-                    'Ugovor':_podUgovorom.text,
-                    'Korisničko ime':_korisnickoIme.text
+                    'StrucnaSprema':_fullNameSearch.text,
+                    'PodUgovorom':_podUgovorom.text,
+                    'KorisnickoIme':_korisnickoIme.text
                   }
                   );
           
@@ -185,20 +185,6 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
                         ),
                         ),
 
-                        // DataColumn(label: Expanded(
-                        // child: Text("LozinkaHash",
-                        // style: TextStyle(fontStyle: FontStyle.italic),),
-                        
-                        // ),
-                        // ),
-
-                        // DataColumn(label: Expanded(
-                        // child: Text("LozinkaSalt",
-                        // style: TextStyle(fontStyle: FontStyle.italic),),
-                        
-                        // ),
-                        // ),
-
                         DataColumn(label: Expanded(
                         child: Text("Stručna sprema",
                         style: TextStyle(fontStyle: FontStyle.italic),),
@@ -269,8 +255,6 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
                       DataCell(Text(e.ime ??"")),
                       DataCell(Text(e.prezime ??"")),
                       DataCell(Text(e.email ??"")),
-                      // DataCell(Text(e.lozinkaHash ??"")),
-                      // DataCell(Text(e.lozinkaSalt ??"")),
                       DataCell(Text(e.strucnaSprema ??"")),
                       DataCell(Text(e.datumRodjenja.toString() ??"")),
                       DataCell(Text(e.podUgovorom.toString() ??"")),

@@ -173,7 +173,7 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                           ));
                 }
               }, child: Text("Save")),
-              FloatingActionButton(onPressed: () async{
+              ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -181,27 +181,33 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                   ),
                 );
               }, child: Text("Svi termini")),
-              FloatingActionButton(onPressed: () async{
-                showDialog(context: context, builder: (BuildContext context) => 
-                          AlertDialog(
-                            title: const Text("Error"),
-                            content: Text("Are you sure you want to delete the Termin?"),
-                            actions: [
-                              TextButton(onPressed: ()=>{
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => TerminListScreen(),
-                                  ),
-                                )
-                              }, child: const Text("Yes")),
-                              TextButton(onPressed: ()=>{
-                                Navigator.pop(context),
-                              }, child: const Text("No")),
+              ElevatedButton(onPressed: () async{
+                  showDialog(context: context, builder: (BuildContext context) => 
+                  AlertDialog(
+                    title: const Text("Warning!!!"),
+                    content: Text("Are you sure you want to delete termin ${widget.termin!.terminId}?"),
+                    actions: [
+                      
+                      TextButton(onPressed: () async =>{
+                        
+                        await _terminProvider.delete(widget.termin!.terminId!),
 
-                            ],
-                          ));
-                
-              }, child: Text("Izbriši")),
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => TerminListScreen(),
+                          ),
+                        )
+                    
+
+                      }, child: const Text("Yes")),
+                      TextButton(onPressed: ()=>{
+                        Navigator.pop(context),
+                      }, child: const Text("No")),
+            
+                    ],
+                            ));
+                        
+                      }, child: Text("Izbriši")),
           ],
           ),
         ),

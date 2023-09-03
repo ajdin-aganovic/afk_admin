@@ -12,6 +12,7 @@ import '../models/korisnik.dart';
 import '../models/platum.dart';
 import '../models/clanarina.dart';
 import '../providers/transakcijski_racun_provider.dart';
+import '../utils/util.dart';
 
 class ClanarinaListScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -130,13 +131,26 @@ Widget _buildDataListView() {
               rows: 
                 result?.result.map((Clanarina e) => DataRow(
                   onSelectChanged: (yxc)=>{
-                    if(yxc==true)
-                    {
-                      print('selected: ${e.clanarinaId}'),
-                      Navigator.of(context).push(
+                    if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Računovođa")&&yxc==true)
+                      {
+                        print('selected: ${e.clanarinaId}'),
+                        Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=> ClanarinaDetailsScreen(clanarina: e,)
                           )
                       ) 
+                      }
+                    else
+                    {
+                      showDialog(context: context, builder: (BuildContext context) => 
+                        AlertDialog(
+                          title: Text("You have chosen ${e.clanarinaId}"),
+                          content: Text("KorisnikID: ${e.korisnikId}\nIznos članarine: ${e.iznosClanarine}\nDug: ${e.dug}"),
+                          actions: [
+                            TextButton(onPressed: ()=>{
+                              Navigator.pop(context),
+                            }, child: const Text("OK"))
+                          ],
+                        )),
                     }
                   },
                   cells: [

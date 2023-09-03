@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import '../models/korisnik.dart';
 import '../models/platum.dart';
 import '../providers/transakcijski_racun_provider.dart';
+import '../utils/util.dart';
 
 class PlatumListScreen extends StatefulWidget {
 Korisnik?korisnik;
@@ -187,13 +188,26 @@ Widget _buildDataListView() {
               rows: 
                 result?.result.map((Platum e) => DataRow(
                   onSelectChanged: (yxc)=>{
-                    if(yxc==true)
-                    {
-                      print('selected: ${e.plataId}'),
-                      Navigator.of(context).push(
+                    if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Računovođa")&&yxc==true)
+                      {
+                        print('selected: ${e.plataId}'),
+                        Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=> PlatumDetailsScreen(platum: e,)
                           )
                       ) 
+                      }
+                    else
+                    {
+                      showDialog(context: context, builder: (BuildContext context) => 
+                        AlertDialog(
+                          title: Text("You have chosen ${e.plataId}"),
+                          content: Text("Transakcijski račun ID: ${e.transakcijskiRacunId}\nStanje: ${e.stateMachine}\nIznos: ${e.iznos}\nDatum slanja: ${e.datumSlanja}"),
+                          actions: [
+                            TextButton(onPressed: ()=>{
+                              Navigator.pop(context),
+                            }, child: const Text("OK"))
+                          ],
+                        )),
                     }
                   },
                   cells: [

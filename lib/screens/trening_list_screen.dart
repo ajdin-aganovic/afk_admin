@@ -12,6 +12,7 @@ import '../models/platum.dart';
 import '../models/trening.dart';
 import '../providers/transakcijski_racun_provider.dart';
 import '../providers/trening_provider.dart';
+import '../utils/util.dart';
 
 class TreningListScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -154,13 +155,26 @@ Widget _buildDataListView() {
               rows: 
                 result?.result.map((Trening e) => DataRow(
                   onSelectChanged: (yxc)=>{
-                    if(yxc==true)
-                    {
-                      print('selected: ${e.treningId}'),
-                      Navigator.of(context).push(
+                    if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Glavni trener"||Authorization.ulogaKorisnika=="Pomoćni trener")&&yxc==true)
+                      {
+                        print('selected: ${e.treningId}'),
+                        Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=> TreningDetailsScreen(trening: e,)
                           )
                       ) 
+                      }
+                    else
+                    {
+                      showDialog(context: context, builder: (BuildContext context) => 
+                        AlertDialog(
+                          title: Text("You have chosen ${e.treningId}"),
+                          content: Text("${e.tipTreninga}/${e.nazivTreninga}/${e.datumTreninga}"),
+                          actions: [
+                            TextButton(onPressed: ()=>{
+                              Navigator.pop(context),
+                            }, child: const Text("OK"))
+                          ],
+                        )),
                     }
                   },
                   cells: [

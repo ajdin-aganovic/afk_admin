@@ -42,6 +42,17 @@ class _MasterScreenWidgetState extends State<MasterScreenWidget> {
         child: ListView(
           children: [
             ListTile(
+              title: const Text("Početna"),
+              onTap: (){
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    
+                    builder: (context) => HomePage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
               title: const Text("Nazad"),
               onTap: (){
                 Navigator.pop(context);
@@ -60,18 +71,6 @@ class _MasterScreenWidgetState extends State<MasterScreenWidget> {
                   // MaterialPageRoute(
                   //   builder: (context) => LoginPage(),
                   // ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Početna"),
-              onTap: (){
-                print('${widget.korisnik?.uloga??'nije preuzeo'}');
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    
-                    builder: (context) => HomePage(loggovaniUser: widget.korisnik,),
-                  ),
                 );
               },
             ),

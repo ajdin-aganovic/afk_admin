@@ -4,6 +4,7 @@ import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/providers/bolest_provider.dart';
 import 'package:afk_admin/screens/bolest_details_screen.dart';
 import 'package:afk_admin/screens/korisnik_details_screen.dart';
+import 'package:afk_admin/utils/util.dart';
 // import 'package:afk_admin/screens/plata_details_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
@@ -168,14 +169,28 @@ Widget _buildDataListView() {
 
               rows: 
                 resultBolest?.result.map((Bolest e) => DataRow(
+
                   onSelectChanged: (yxc)=>{
-                    if(yxc==true)
-                    {
-                      print('selected: ${e.bolestId}'),
-                      Navigator.of(context).push(
+                    if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Doktor")&&yxc==true)
+                      {
+                        print('selected: ${e.bolestId}'),
+                        Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=> BolestDetailsScreen(bolest: e,)
                           )
                       ) 
+                      }
+                    else
+                    {
+                      showDialog(context: context, builder: (BuildContext context) => 
+                        AlertDialog(
+                          title: Text("You have chosen ${e.bolestId}"),
+                          content: Text("${e.tipPovrede}/${e.sifraPovrede}"),
+                          actions: [
+                            TextButton(onPressed: ()=>{
+                              Navigator.pop(context),
+                            }, child: const Text("OK"))
+                          ],
+                        )),
                     }
                   },
                   cells: [

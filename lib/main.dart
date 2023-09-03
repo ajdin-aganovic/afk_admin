@@ -78,7 +78,8 @@ class MyMaterialApp extends StatelessWidget {
 }
 
 class LoginPage extends StatelessWidget {
- LoginPage({this.loggovaniUser, super.key});
+//  LoginPage({this.loggovaniUser, super.key});
+  LoginPage({Key? key, this.loggovaniUser}) : super(key: key);
 
   final TextEditingController _usernamecontroller=TextEditingController();
   final TextEditingController _passwordcontroller=TextEditingController();
@@ -93,16 +94,6 @@ class LoginPage extends StatelessWidget {
      
     _plataProvider=context.read<PlatumProvider>();
     _korisniciProvider=context.read<KorisnikProvider>();
-
-    // String GenerateSalt()
-    //     {
-    //         RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
-    //         var byteArray = new byte[16];
-    //         provider.GetBytes(byteArray);
-
-
-    //         return Convert.ToBase64String(byteArray);
-    //     }
 
     String encodeBase64(String data) {
       if(data!=null)
@@ -156,7 +147,7 @@ class LoginPage extends StatelessWidget {
                         hintText: 'Enter your secure password',
                         prefixIcon: Icon(Icons.password_outlined),
                       ),
-                      controller: _passwordcontroller,
+                      controller: _passwordcontroller, 
                     ),
                     // const SizedBox(height: 20,),
                     // ElevatedButton(onPressed: () async{
@@ -196,13 +187,12 @@ class LoginPage extends StatelessWidget {
                             }
                           );
                           
-                          // if(data.result.first.lozinkaHash==Authorization.password.generateHash())
-                        // BaseProvider bazniProvider;
-                        // bazniProvider.
-                          
+                         
                           loggovaniUser=data.result.first;
                           var foundFirst=data.result.first;
                           var uloga=foundFirst.uloga;
+                          Authorization.ulogaKorisnika=uloga;
+
                           // var lozinkaHashIzUsera=foundFirst.lozinkaHash.toString();
                           // var lozinkaSaltIzUsera=foundFirst.lozinkaSalt.toString();
                           // var kodiranaLozinka1=encodeBase64(lozinkaHashIzUsera);
@@ -226,7 +216,7 @@ class LoginPage extends StatelessWidget {
                               // "\npassword salt dekodirani1:${dekodiraniSalt1}"+
                               // "\npassword enkodirani2: ${kodiranaLozinka2}"+
                               // "\npassword dekodirani2:${dekodiranaLozinka2}"+
-                              "\nuloga usera: ${uloga}"
+                              "\nuloga usera: ${Authorization.ulogaKorisnika}"
                               ),
                               actions: [
                                 TextButton(onPressed: ()=>{

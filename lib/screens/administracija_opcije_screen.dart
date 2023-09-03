@@ -147,7 +147,7 @@ else
                             const Text('Aplikacija Fudbalskog Kluba',
                             style: TextStyle(fontSize: 30),), 
                             SizedBox(height: 12,),
-                            Text('Dobrodošli ${izabrani?.korisnickoIme??"nazad"}',
+                            Text('Dobrodošli ${Authorization.username}',
                             // Text('Dobrodošli ${_korisnikResult?.result.first.korisnickoIme}',
 
                             style: TextStyle(fontSize: 30),),
@@ -216,6 +216,7 @@ else
                                       ),
                                   );
                                   }, child: Text("Add new Korisnik")),
+                                  
                                 ],
                               ),
                             ],

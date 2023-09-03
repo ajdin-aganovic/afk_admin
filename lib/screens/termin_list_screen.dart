@@ -12,6 +12,7 @@ import '../models/korisnik.dart';
 import '../models/platum.dart';
 import '../models/termin.dart';
 import '../providers/transakcijski_racun_provider.dart';
+import '../utils/util.dart';
 
 class TerminListScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -155,13 +156,26 @@ Widget _buildDataListView() {
               rows: 
                 result?.result.map((Termin e) => DataRow(
                   onSelectChanged: (yxc)=>{
-                    if(yxc==true)
-                    {
-                      print('selected: ${e.terminId}'),
-                      Navigator.of(context).push(
+                    if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Doktor"||Authorization.ulogaKorisnika=="Glavni trener")&&yxc==true)
+                      {
+                        print('selected: ${e.terminId}'),
+                        Navigator.of(context).push(
                           MaterialPageRoute(builder: (context)=> TerminDetailsScreen(termin: e,)
                           )
                       ) 
+                      }
+                    else
+                    {
+                      showDialog(context: context, builder: (BuildContext context) => 
+                        AlertDialog(
+                          title: Text("You have chosen ${e.terminId}"),
+                          content: Text("Šifra termina: ${e.sifraTermina}\nTip termina: ${e.tipTermina}\nStadion: ${e.stadionId}"),
+                          actions: [
+                            TextButton(onPressed: ()=>{
+                              Navigator.pop(context),
+                            }, child: const Text("OK"))
+                          ],
+                        )),
                     }
                   },
                   cells: [

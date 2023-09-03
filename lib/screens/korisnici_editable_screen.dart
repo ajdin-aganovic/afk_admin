@@ -28,6 +28,7 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
   final TextEditingController _fullNameSearch=TextEditingController();
   final TextEditingController _podUgovorom=TextEditingController();
   final TextEditingController _korisnickoIme=TextEditingController();
+  final TextEditingController _uloga=TextEditingController();
 
   final ScrollController _horizontal = ScrollController(),
       _vertical = ScrollController();
@@ -73,8 +74,8 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                     Expanded(
                       child: 
                         TextField(
-                            decoration: const InputDecoration(labelText: "Pretraga po imenu"), 
-                            controller:_fullNameSearch,
+                            decoration: const InputDecoration(labelText: "Pretraga po korisničkom imenu"), 
+                            controller:_korisnickoIme,
                           ),
                     ),
               const SizedBox(width: 8,), 
@@ -93,8 +94,19 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
               Expanded(child:
                     
                           TextField(
-                            decoration: const InputDecoration(labelText: "Pretraga po korisničkom imenu"), 
-                            controller:_korisnickoIme
+                            decoration: const InputDecoration(labelText: "Pretraga po stručnoj spremi"), 
+                            controller:_fullNameSearch
+                          ),
+                    
+                    ),
+              const SizedBox(
+                height: 8,
+              ),
+              Expanded(child:
+                    
+                          TextField(
+                            decoration: const InputDecoration(labelText: "Pretraga po ulozi"), 
+                            controller:_uloga
                           ),
                     
                     ),
@@ -105,9 +117,10 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                   // print("logout successful");
                   
                   var data=await _korisniciProvider.get(filter: {
-                    'Naziv':_fullNameSearch.text,
-                    'Ugovor':_podUgovorom.text,
-                    'Korisničko ime':_korisnickoIme.text
+                    'StrucnaSprema':_fullNameSearch.text,
+                    'PodUgovorom':_podUgovorom.text,
+                    'KorisnickoIme':_korisnickoIme.text,
+                    'Uloga':_uloga.text
                   }
                   );
           
@@ -185,6 +198,20 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                         ),
                         ),
 
+                        DataColumn(label: Expanded(
+                        child: Text("Korisničko ime",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        
+                        ),
+                        ),
+
+                        DataColumn(label: Expanded(
+                        child: Text("Uloga",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        
+                        ),
+                        ),
+
                         // DataColumn(label: Expanded(
                         // child: Text("LozinkaHash",
                         // style: TextStyle(fontStyle: FontStyle.italic),),
@@ -235,15 +262,9 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                         ),
 
                         DataColumn(label: Expanded(
-                        child: Text("Korisničko ime",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
-                        
+                        child: Text("Uredi",
+                        style: TextStyle(fontStyle: FontStyle.italic),
                         ),
-                        ),
-
-                        DataColumn(label: Expanded(
-                        child: Text("Uloga",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
                         
                         ),
                         ),
@@ -254,37 +275,65 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                   rows: 
                     result?.result.map((Korisnik e) => DataRow(
                       onSelectChanged: (yxc)=>{
-                        if(yxc==true)
-                        {
-                          print('selected: ${e.korisnikId}'),
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context)=> InsertScreen(korisnik: e,)
-                              )
-                          ) 
-                        }
-                        // else if(yxc==true)
-                        // {
-                        //    print('selected: ${e.korisnikId}'),
-                        //   Navigator.of(context).push(
-                        //       MaterialPageRoute(builder: (context)=> KorisnikDetailsScreen(korisnik: e,)
-                        //       )
-                        //   ) 
-                        // }
+                        // if((Authorization.ulogaKorisnika=="Administrator")&&yxc==true)
+                        //     {
+                        //       print('selected: ${e.korisnikId}'),
+                        //       Navigator.of(context).push(
+                        //         MaterialPageRoute(builder: (context)=> InsertScreen(korisnik: e,)
+                        //         )
+                        //     ) 
+                        //     }
+                        //   else
+                        //   {
+                            showDialog(context: context, builder: (BuildContext context) => 
+                              AlertDialog(
+                                title: Text("You have chosen KorisnikID ${e.korisnikId}"),
+                                content: Text("Ime: ${e.ime}\nPrezime: ${e.prezime}\nEmail: ${e.email}\nKorisničko ime: ${e.korisnickoIme}\nUloga: ${e.uloga}\nStručna sprema: ${e.strucnaSprema}"),
+                                actions: [
+                                  TextButton(onPressed: ()=>{
+                                    Navigator.pop(context),
+                                  }, child: const Text("OK"))
+                                ],
+                              )),
+                          // }
+
                       },
                       cells: [
-                      DataCell(Text(e.korisnikId?.toString()??"")),
-                      DataCell(Text(e.ime ??"")),
-                      DataCell(Text(e.prezime ??"")),
-                      DataCell(Text(e.email ??"")),
+                      DataCell(Text(e.korisnikId?.toString()??"not set")),
+                      DataCell(Text(e.ime ??"not set")),
+                      DataCell(Text(e.prezime ??"not set")),
+                      DataCell(Text(e.email ??"not set")),
                       // DataCell(Text(e.lozinkaHash ??"")),
                       // DataCell(Text(e.lozinkaSalt ??"")),
-                      DataCell(Text(e.strucnaSprema ??"")),
-                      DataCell(Text(e.datumRodjenja.toString() ??"")),
-                      DataCell(Text(e.podUgovorom.toString() ??"")),
-                      DataCell(Text(e.podUgovoromOd.toString() ??"")),
-                      DataCell(Text(e.podUgovoromDo.toString() ??"")),
-                      DataCell(Text(e.korisnickoIme ??"")),
-                      DataCell(Text(e.uloga ??"")),
+                      DataCell(Text(e.korisnickoIme ??"not set")),
+                      DataCell(Text(e.uloga ??"not set")),
+                      DataCell(Text(e.strucnaSprema ??"not set")),
+                      DataCell(Text(e.datumRodjenja.toString() ??"not set")),
+                      DataCell(Text(e.podUgovorom.toString() ??"not set")),
+                      DataCell(Text(e.podUgovoromOd.toString() ??"not set")),
+                      DataCell(Text(e.podUgovoromDo.toString() ??"not set")),
+                      DataCell(const Text("Edit"), onTap: () => {
+                        if(Authorization.ulogaKorisnika=="Administrator")
+                        {
+                          Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context)=> InsertScreen(korisnik: e,)
+                                )
+                            ) 
+                        }
+                        else
+                        {
+                          showDialog(context: context, builder: (BuildContext context) => 
+                              AlertDialog(
+                                title: Text("Warning!"),
+                                content: Text("Unauthorized call of a function.\nYou do not have the permission!"),
+                                actions: [
+                                  TextButton(onPressed: ()=>{
+                                    Navigator.pop(context),
+                                  }, child: const Text("OK"))
+                                ],
+                              )),
+                        }
+                      })
 
                       ]
                     )).toList()??[]
