@@ -154,160 +154,182 @@ else
 
                               Row(
                                 children: [
-
-                                    SizedBox(height: 20, width: 20,),
-                                                
-                                  ElevatedButton(onPressed: (){
-                                  Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                  builder: (context) => PlatumListScreen()
+                                  Column(
+                                    children: [
+                                      SizedBox(height: 50, width: 300, child: 
+                                                   
+                                          ElevatedButton(onPressed: (){
+                                          Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                          builder: (context) => PlatumListScreen()
+                                          ),
+                                          );
+                                          }, child: Text("Go to Platna lista")),),
+                                    ],
                                   ),
-                                  );
-                                  }, child: Text("Go to Platna lista")),
-                                ]
-                              ),
-                              Row(children: [
-                                 SizedBox(height: 20, width: 20,),
-                                                
-                                      ElevatedButton(onPressed: (){
-                                      Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                      builder: (context) => TransakcijskiRacunListScreen()
-                                      ),
-                                  );
-                                  }, child: Text("Go to Transakcijski račun")),
-                                
-                              ]
-                              ),
-                              Row(
-                                children:[
-                                  SizedBox(height: 20, width: 20,),
-                                                
-                                      ElevatedButton(onPressed: (){
-                                      Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                      // builder: (context) => KorisniciListScreen()
-                                      builder: (context) => KorisniciEditableScreen()
+                                      
+                                  Column(
+                                    children: [
+                                      SizedBox(height: 50, width: 300, child: 
+                                                     
+                                           ElevatedButton(onPressed: (){
+                                           Navigator.of(context).push(
+                                           MaterialPageRoute(
+                                           builder: (context) => TransakcijskiRacunListScreen()
+                                           ),
+                                       );
+                                       }, child: Text("Go to Transakcijski račun")),),
+                                    ],
+                                  ),
 
-                                      ),
-                                  );
-                                  }, child: Text("Go to Korisnici lista")),
-                                 
+                                  Column(
+                                    children: [
+                                      SizedBox(height: 50, width: 300, child: 
+                                                     
+                                           ElevatedButton(onPressed: (){
+                                           Navigator.of(context).push(
+                                           MaterialPageRoute(
+                                           // builder: (context) => KorisniciListScreen()
+                                           builder: (context) => KorisniciEditableScreen()
+
+                                           ),
+                                       );
+                                       }, child: Text("Go to Korisnici lista")),),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ],
                           ),
                         
                       ),
+
+
                     Row(
                       children: [
-                        SizedBox(height: 20, width: 20,),
-                                        
-                              ElevatedButton(onPressed: (){
-                              Navigator.of(context).push(
-                              MaterialPageRoute(
-                              builder: (context) => StadionListScreen()
-                              ),
-                          );
-                          }, child: Text("Go to Stadion")),
-                          
+                        Column(
+                          children: [
+                            SizedBox(height: 50, width: 300, child: 
+                                             
+                                   ElevatedButton(onPressed: (){
+                                   Navigator.of(context).push(
+                                   MaterialPageRoute(
+                                   builder: (context) => StadionListScreen()
+                                   ),
+                               );
+                               }, child: Text("Go to Stadion")),),
+                          ],
+                        ),
 
-                      ]
-                    ),
-                    Row(children: [
-                            SizedBox(height: 20, width: 20,),
-                                        
-                              ElevatedButton(onPressed: (){
-                              Navigator.of(context).push(
-                              MaterialPageRoute(
-                              builder: (context) => ClanarinaListScreen()
-                              ),
-                          );
-                          }, child: Text("Go to Članarina")),
-                          
-                        //  SizedBox(height: 20, width: 20,),
-                                        
-                        //       ElevatedButton(onPressed: (){
-                        //       Navigator.of(context).push(
-                        //       MaterialPageRoute(
-                        //       builder: (context) => makePayment()
-                        //       ),
-                        //   );
-                        //   }, child: Text("Pay Članarina")),  
-        
-                    ]
-                    ),
-                    Row(children: [
-                           SizedBox(height: 20, width: 20,),
-                                        
-                              ElevatedButton(onPressed: (){
-                              Navigator.of(context).push(
-                              MaterialPageRoute(
-                              builder: (context) => PozicijaListScreen()
-                              ),
-                          );
-                          }, child: Text("Go to Pozicija")),
-                          
-                           SizedBox(height: 12,),
-                                            
-                                  ElevatedButton(onPressed: (){
-                                  Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                  builder: (context) => BolestListScreen()
-                                  ),
-                              );
-                              }, child: Text("Go to Bolests")),
+
+                        Column(
+                          children: [
+                            SizedBox(height: 50, width: 300, child: 
+                                          
+                                ElevatedButton(onPressed: (){
+                                Navigator.of(context).push(
+                                MaterialPageRoute(
+                                builder: (context) => ClanarinaListScreen()
+                                ),
+                            );
+                            }, child: Text("Go to Članarina")),),
+                          ],
+                        ),
                       ],
                     ),
-                      
+
+
                     Row(
                       children: [
-                         SizedBox(height: 20, width: 20,),
+                        Column(
+                          children: [
+                            SizedBox(height: 50, width: 300, child: 
+                                          
+                                ElevatedButton(onPressed: (){
+                                Navigator.of(context).push(
+                                MaterialPageRoute(
+                                builder: (context) => PozicijaListScreen()
+                                ),
+                            );
+                            }, child: Text("Go to Pozicija")),),
+                          ],
+                        ),
+                        
+                        Column(
+                          children: [
+                            SizedBox(height: 50, width: 300, child: 
                                         
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
-                              builder: (context) => StatistikaListScreen()
+                              builder: (context) => BolestListScreen()
                               ),
-                          );
-                          }, child: Text("Go to Statistika")),
+                  );
+                  }, child: Text("Go to Bolests")),),
+                          ],
+                        ),
                           
-                          
-                      ]
+                        Column(
+                          children: [
+                            SizedBox(height: 50, width: 300, child: 
+                                            
+                                  ElevatedButton(onPressed: (){
+                                  Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                  builder: (context) => StatistikaListScreen()
+                                  ),
+                              );
+                              }, child: Text("Go to Statistika")),),
+                          ],
+                        ),
+                      ],
                     ),
 
-                          Row(children: [
-
-                          SizedBox(height: 20, width: 20,),
-                                        
-                              ElevatedButton(onPressed: (){
-                              Navigator.of(context).push(
-                              MaterialPageRoute(
-                              builder: (context) => UlogaListScreen()
-                              ),
-                          );
-                          }, child: Text("Go to Uloga")),
                           
-                           SizedBox(height: 12,),
-                                            
-                                  ElevatedButton(onPressed: (){
-                                  Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                  builder: (context) => TerminListScreen()
-                                  ),
-                              );
-                              
-                              }, child: Text("Go to Termin")),
+                       Row(
+                         children: [
+                          Column(
+                            children: [
+                              SizedBox(height: 50, width: 300, child: 
+                                             
+                                   ElevatedButton(onPressed: (){
+                                   Navigator.of(context).push(
+                                   MaterialPageRoute(
+                                   builder: (context) => UlogaListScreen()
+                                   ),
+                               );
+                               }, child: Text("Go to Uloga")),),
+                            ],
+                          ),
 
-                          SizedBox(height: 12,),
-                                            
-                                  ElevatedButton(onPressed: (){
-                                  Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                  builder: (context) => TreningListScreen()
-                                  ),
-                              );
-                              }, child: Text("Go to Trening")),
+                        Column(
+                          children: [
+                            SizedBox(height: 50, width: 300, child: 
+                                                  
+                                        ElevatedButton(onPressed: (){
+                                        Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                        builder: (context) => TerminListScreen()
+                                        ),
+                                    );
+                                    
+                                    }, child: Text("Go to Termin")),),
+                          ],
+                        ),
+
+                        Column(
+                          children: [
+                            SizedBox(height: 50, width: 300, child: 
+                                              
+                                    ElevatedButton(onPressed: (){
+                                    Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                    builder: (context) => TreningListScreen()
+                                    ),
+                                );
+                                }, child: Text("Go to Trening")),),
+                          ],
+                        ),
                       ],
                     )
                     ]),

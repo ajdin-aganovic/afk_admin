@@ -20,6 +20,7 @@ import '../models/platum.dart';
 import '../models/korisnik_uloga.dart';
 import '../models/uloga.dart';
 import '../utils/util.dart';
+import 'home_screen.dart';
 
 class KorisnikDetailsScreen extends StatefulWidget {
 
@@ -230,14 +231,35 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
           ),
           
           
-            ElevatedButton(onPressed: () async{
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    
-                    builder: (context) => KorisniciEditableScreen(),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    ElevatedButton(onPressed: () async{
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            
+                            builder: (context) => KorisniciEditableScreen(),
+                          ),
+                        );
+                      }, child: Text("Svi korisnici")),
+                  ],
+                ),
+
+                  Column(
+                    children: [
+                      ElevatedButton(onPressed: () async{
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            
+                            builder: (context) => HomePage(),
+                          ),
+                        );
+                      }, child: Text("Home page")),
+                    ],
                   ),
-                );
-              }, child: Text("Svi korisnici")),
+              ],
+            ),
               
           ],
         ),

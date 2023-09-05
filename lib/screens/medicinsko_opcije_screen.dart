@@ -155,7 +155,7 @@ else
                               Row(
                                 children: [
 
-                                    SizedBox(height: 20, width: 20,),
+                                  SizedBox(height: 50, width: 300, child: 
                                                 
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
@@ -163,12 +163,12 @@ else
                                   builder: (context) => PlatumListScreen()
                                   ),
                                   );
-                                  }, child: Text("Go to Platna lista")),
+                                  }, child: Text("Go to Platna lista")),),
                                  
                                 ]
                               ),
                               Row(children: [
-                                 SizedBox(height: 20, width: 20,),
+                                 SizedBox(height: 50, width: 300, child: 
                                                 
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
@@ -176,13 +176,13 @@ else
                                       builder: (context) => TransakcijskiRacunListScreen()
                                       ),
                                   );
-                                  }, child: Text("Go to Transakcijski račun")),
+                                  }, child: Text("Go to Transakcijski račun")),),
                                 
                               ]
                               ),
                               Row(
                                 children:[
-                                  SizedBox(height: 20, width: 20,),
+                                  SizedBox(height: 50, width: 300, child: 
                                                 
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
@@ -190,7 +190,7 @@ else
                                       builder: (context) => KorisniciEditableScreen()
                                       ),
                                   );
-                                  }, child: Text("Go to Korisnici lista")),
+                                  }, child: Text("Go to Korisnici lista")),),
                                   
                                 ],
                               ),
@@ -200,7 +200,7 @@ else
                       ),
                     Row(
                       children: [
-                        SizedBox(height: 12,),
+                        SizedBox(height: 50, width: 300, child: 
                                             
                           ElevatedButton(onPressed: (){
                           Navigator.of(context).push(
@@ -209,9 +209,9 @@ else
                           ),
                       );
                       
-                      }, child: Text("Go to Termin")),
+                      }, child: Text("Go to Termin")),),
                                     
-                      SizedBox(height: 12,),
+                      SizedBox(height: 50, width: 300, child: 
                                     
                           ElevatedButton(onPressed: (){
                           Navigator.of(context).push(
@@ -219,7 +219,7 @@ else
                           builder: (context) => TerminDetailsScreen()
                           ),
                       );
-                      }, child: Text("Add new Termin")),
+                      }, child: Text("Add new Termin")),),
 
                       ]
                     ),
@@ -227,7 +227,7 @@ else
                     Row(
                                 children:[
                                  
-                                 SizedBox(height: 12,),
+                                SizedBox(height: 50, width: 300, child: 
                                             
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
@@ -235,9 +235,9 @@ else
                                   builder: (context) => TreningListScreen()
                                   ),
                               );
-                              }, child: Text("Go to Trening")),
+                              }, child: Text("Go to Trening")),),
                               
-                              SizedBox(height: 12,),
+                          SizedBox(height: 50, width: 300, child: 
                                             
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
@@ -245,13 +245,13 @@ else
                                   builder: (context) => TreningDetailsScreen()
                                   ),
                               );
-                              }, child: Text("Add new Trening")),
+                              }, child: Text("Add new Trening")),),
                                   
                                 ],
                               ),
 
                     Row(children: [
-                          SizedBox(height: 12,),
+                          SizedBox(height: 50, width: 300, child: 
                                             
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
@@ -259,8 +259,8 @@ else
                                   builder: (context) => BolestListScreen()
                                   ),
                               );
-                              }, child: Text("Go to Bolests")),
-                              SizedBox(height: 12,),
+                              }, child: Text("Go to Bolests")),),
+                              SizedBox(height: 50, width: 300, child: 
                                             
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
@@ -268,7 +268,7 @@ else
                                   builder: (context) => BolestDetailsScreen()
                                   ),
                               );
-                              }, child: Text("Add new Bolest")),
+                              }, child: Text("Add new Bolest")),),
         
                     ]
                     ),

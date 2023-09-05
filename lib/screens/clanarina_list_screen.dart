@@ -11,6 +11,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import '../models/korisnik.dart';
 import '../models/platum.dart';
 import '../models/clanarina.dart';
+import '../providers/korisnik_provider.dart';
 import '../providers/transakcijski_racun_provider.dart';
 import '../utils/util.dart';
 
@@ -25,6 +26,9 @@ class ClanarinaListScreen extends StatefulWidget {
 class _ClanarinaListScreen extends State<ClanarinaListScreen> {
   late ClanarinaProvider _clanarinaProvider;
   SearchResult<Clanarina>? result;
+  
+  late KorisnikProvider _korisnikProvider;
+  SearchResult<Korisnik>? korisnikResult;
 
   final ScrollController _horizontal = ScrollController(),
       _vertical = ScrollController();
@@ -34,6 +38,7 @@ class _ClanarinaListScreen extends State<ClanarinaListScreen> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     _clanarinaProvider=context.read<ClanarinaProvider>();
+    _korisnikProvider=context.read<KorisnikProvider>();
   }
 
   @override
@@ -155,8 +160,8 @@ Widget _buildDataListView() {
                   },
                   cells: [
                   DataCell(Text(e.clanarinaId.toString()??"0")),
-                  DataCell(Text(e.korisnikId.toString()??"---")),
-                  DataCell(Text(e.iznosClanarine.toString()??"---")),
+                  DataCell(Text(e.korisnikId.toString()??"0")),
+                  DataCell(Text(e.iznosClanarine.toString()??"0")),
                   DataCell(Text(e.dug.toString()??"0")),
                   // DataCell(Text(e.datumClanarinaa.toString()??DateTime.now().toString())),
 

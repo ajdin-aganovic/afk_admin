@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/models/transakcijski_racun.dart';
@@ -18,6 +20,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import '../models/korisnik.dart';
 import '../models/clanarina.dart';
 import '../models/uloga.dart';
+import '../providers/korisnik_provider.dart';
 
 class ClanarinaDetailsScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -35,6 +38,9 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
 
   Map<String,dynamic>_initialValue={};
 
+  late KorisnikProvider _korisnikProvider;
+  SearchResult<Korisnik>? _korisnikResult;
+
   late ClanarinaProvider _clanarinaProvider;
   SearchResult<Clanarina>? _clanarinaResult;
   // bool isLoading=true;
@@ -43,18 +49,18 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    DateTime dt=DateTime.now();
-    final result = '${dt.year}-${dt.month}-${dt.day} (${dt.hour}:${dt.minute}:${dt.second}})';
+
   _initialValue= {
     'clanarinaId':widget.clanarina?.clanarinaId.toString()??"0",
-    'korisnikId':widget.clanarina?.korisnikId.toString()??"---",
+    'korisnikId':widget.clanarina?.korisnikId.toString()??"0",
     'iznosClanarine': widget.clanarina?.iznosClanarine.toString()??"---", 
     'dug':widget.clanarina?.dug.toString()??"0",
   };
 
     _clanarinaProvider=context.read<ClanarinaProvider>(); 
+    _korisnikProvider=context.read<KorisnikProvider>();
 
-  initForm();
+    initForm();
   }
 
   @override
@@ -67,6 +73,7 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
 
   Future initForm()async{
     _clanarinaResult=await _clanarinaProvider.get();
+    _korisnikResult=await _korisnikProvider.get();
       
   }
 
@@ -95,13 +102,35 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
                 
                     ),
             ),
-          Expanded(
-            child: FormBuilderTextField (
-                decoration: const InputDecoration(labelText: "Korisnik ID"), 
-                
-                name: 'korisnikId',
-            ),
-          ), 
+
+           Expanded(
+              child: 
+                FormBuilderDropdown(
+                      name: 'korisnikId',
+                      decoration: const InputDecoration(labelText: 'Korisnik'),
+                      items: 
+                      List<DropdownMenuItem>.from(
+                        _korisnikResult?.result.map(
+                          (e) => DropdownMenuItem(
+                            value: e.korisnikId.toString(),
+                            child: Text(e.korisnickoIme??"Nema imena"),
+                            )).toList()??[]),
+
+                      onChanged: (value) {
+                        setState(() {
+                          
+                          print("Odabrana ${value}");
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please enter the Uloga';
+                        }
+                        return null;
+                      },
+                    ),
+                    ),
+
           Expanded(
             child: FormBuilderTextField (
                             decoration: const InputDecoration(labelText: "Iznos članarine"), 
@@ -117,6 +146,11 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
             ),
           ),
           
+
+          ElevatedButton(onPressed: () async{
+                // _formKey.currentState?.saveAndValidate();
+                setState(() {});
+              }, child: Text("Reload podataka")),
           ElevatedButton(onPressed: () async{
                 _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
                 print(_formKey.currentState?.value);

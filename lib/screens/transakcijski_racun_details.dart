@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 
 import '../models/korisnik.dart';
 import '../models/uloga.dart';
+import '../providers/korisnik_provider.dart';
 
 class TransakcijskiRacunDetailsScreen extends StatefulWidget {
 
@@ -38,6 +39,9 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
 
   SearchResult<TransakcijskiRacun>? _transakcijskiRacunResult;
   SearchResult<Platum>? _platumResult;
+
+  late KorisnikProvider _korisnikProvider;
+  SearchResult<Korisnik>? _korisnikResult;
  
   bool isLoading=true;
 
@@ -50,11 +54,11 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
     'brojRacuna':widget.transakcijskiRacun?.brojRacuna??"---",
     'adresaPrebivalista': widget.transakcijskiRacun?.adresaPrebivalista??"---", 
     'nazivBanke':widget.transakcijskiRacun?.nazivBanke??"---",
-    'korisnikId':widget.transakcijskiRacun?.korisnikId.toString()??"---",
+    'korisnikId':widget.transakcijskiRacun?.korisnikId.toString()??"2",
   };
 
   _transakcijskiRacunProvider=context.read<TransakcijskiRacunProvider>();
-  // _platumProvider=context.read<PlatumProvider>(); 
+  _korisnikProvider=context.read<KorisnikProvider>(); 
 
   initForm();
   }
@@ -68,6 +72,8 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
 
   Future initForm()async{
       _transakcijskiRacunResult=await _transakcijskiRacunProvider.get();
+      _korisnikResult=await _korisnikProvider.get();
+
       // _platumResult=await _platumProvider.get();
   }
 
@@ -139,14 +145,42 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                 
             ),
           ),
-          Expanded(
-            child: FormBuilderTextField (
-                            decoration: const InputDecoration(labelText: "KorisnikID"), 
+          // Expanded(
+          //   child: FormBuilderTextField (
+          //                   decoration: const InputDecoration(labelText: "KorisnikID"), 
 
-                name: 'korisnikId',
+          //       name: 'korisnikId',
                 
-            ),
-          ),
+          //   ),
+          // ),
+
+          Expanded(
+              child: 
+                FormBuilderDropdown(
+                      name: 'korisnikId',
+                      decoration: const InputDecoration(labelText: 'Korisnik'),
+                      items: 
+                      List<DropdownMenuItem>.from(
+                        _korisnikResult?.result.map(
+                          (e) => DropdownMenuItem(
+                            value: e.korisnikId.toString(),
+                            child: Text("${e.ime} ${e.prezime} / ${e.korisnickoIme}"??"Nema imena"),
+                            )).toList()??[]),
+
+                      onChanged: (value) {
+                        setState(() {
+                          
+                          print("Odabrani ${value}");
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please enter the Korisnik';
+                        }
+                        return null;
+                      },
+                    ),
+                    ),
 
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -189,6 +223,11 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                   ),
                 );
               }, child: Text("Svi transakcijski računi")),
+
+              ElevatedButton(onPressed: () async{
+                        setState(() { });
+                      }, child: Text("Refresh podataka")),
+
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
             AlertDialog(

@@ -141,7 +141,7 @@ else
                               Row(
                                 children: [
 
-                                    SizedBox(height: 20, width: 20,),
+                                    SizedBox(height: 50, width: 300, child: 
                                                 
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
@@ -149,8 +149,8 @@ else
                                   builder: (context) => PlatumListScreen()
                                   ),
                                   );
-                                  }, child: Text("Go to Platna lista")),
-                                 SizedBox(height: 20, width: 20,),
+                                  }, child: Text("Go to Platna lista")),),
+                                 SizedBox(height: 50, width: 300, child: 
                                                 
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
@@ -158,11 +158,13 @@ else
                                       builder: (context) => PlatumDetailsScreen()
                                       ),
                                   );
-                                  }, child: Text("Add new Platna lista")),
+                                  }, child: Text("Add new Platna lista")),),
                                 ]
                               ),
+
+
                               Row(children: [
-                                 SizedBox(height: 20, width: 20,),
+                                SizedBox(height: 50, width: 300, child: 
                                                 
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
@@ -170,8 +172,8 @@ else
                                       builder: (context) => TransakcijskiRacunListScreen()
                                       ),
                                   );
-                                  }, child: Text("Go to Transakcijski račun")),
-                                SizedBox(height: 20, width: 20,),
+                                  }, child: Text("Go to Transakcijski račun")),),
+                                SizedBox(height: 50, width: 300, child: 
                                                 
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
@@ -179,7 +181,7 @@ else
                                       builder: (context) => TransakcijskiRacunDetailsScreen()
                                       ),
                                   );
-                                  }, child: Text("Add new Transakcijski račun")),
+                                  }, child: Text("Add new Transakcijski račun")),),
                               ]
                               ),
                              
@@ -189,7 +191,7 @@ else
                       ),
                     Row(
                       children: [
-                         SizedBox(height: 12,),
+                       SizedBox(height: 50, width: 300, child: 
                                             
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
@@ -198,9 +200,9 @@ else
                                   ),
                               );
                               
-                              }, child: Text("Go to Termin")),
+                              }, child: Text("Go to Termin")),),
                                             
-                              SizedBox(height: 12,),
+                              SizedBox(height: 50, width: 300, child: 
                                             
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
@@ -208,11 +210,11 @@ else
                                   builder: (context) => TerminDetailsScreen()
                                   ),
                               );
-                              }, child: Text("Add new Termin")),
+                              }, child: Text("Add new Termin")),),
                       ]
                     ),
                     Row(children: [
-                            SizedBox(height: 20, width: 20,),
+                            SizedBox(height: 50, width: 300, child: 
                                         
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
@@ -220,9 +222,9 @@ else
                               builder: (context) => ClanarinaListScreen()
                               ),
                           );
-                          }, child: Text("Go to Članarina")),
+                          }, child: Text("Go to Članarina")),),
                           
-                         SizedBox(height: 20, width: 20,),
+                         SizedBox(height: 50, width: 300, child: 
                                         
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
@@ -230,12 +232,12 @@ else
                               builder: (context) => ClanarinaDetailsScreen()
                               ),
                           );
-                          }, child: Text("Add new Članarina")),  
+                          }, child: Text("Add new Članarina")),  ),
         
                     ]
                     ),
                     Row(children: [
-                           SizedBox(height: 20, width: 20,),
+                           SizedBox(height: 50, width: 300, child: 
                                         
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
@@ -243,9 +245,9 @@ else
                               builder: (context) => PozicijaListScreen()
                               ),
                           );
-                          }, child: Text("Go to Pozicija")),
+                          }, child: Text("Go to Pozicija")),),
                           
-                          SizedBox(height: 20, width: 20,),
+                          SizedBox(height: 50, width: 300, child: 
                                         
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
@@ -253,12 +255,12 @@ else
                               builder: (context) => PozicijaDetailsScreen()
                               ),
                           );
-                          }, child: Text("Add new Pozicija")),  
+                          }, child: Text("Add new Pozicija")),  ),
                       ],
                     ),
 
                     Row(children: [
-                          SizedBox(height: 12,),
+                         SizedBox(height: 50, width: 300, child: 
                                             
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
@@ -266,9 +268,9 @@ else
                                   builder: (context) => TreningListScreen()
                                   ),
                               );
-                              }, child: Text("Go to Trening")),
+                              }, child: Text("Go to Trening")),),
                               
-                              SizedBox(height: 12,),
+                              SizedBox(height: 50, width: 300, child: 
                                             
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
@@ -276,13 +278,13 @@ else
                                   builder: (context) => TreningDetailsScreen()
                                   ),
                               );
-                              }, child: Text("Add new Trening")), 
+                              }, child: Text("Add new Trening")), ),
                       ],
                     ),
                       
                     Row(
                       children: [
-                         SizedBox(height: 20, width: 20,),
+                         SizedBox(height: 50, width: 300, child: 
                                         
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
@@ -290,9 +292,9 @@ else
                               builder: (context) => StatistikaListScreen()
                               ),
                           );
-                          }, child: Text("Go to Statistika")),
+                          }, child: Text("Go to Statistika")),),
                           
-                          SizedBox(height: 20, width: 20,),
+                         SizedBox(height: 50, width: 300, child: 
                                         
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
@@ -300,13 +302,13 @@ else
                               builder: (context) => StatistikaDetailsScreen()
                               ),
                           );
-                          }, child: Text("Add new Statistika")), 
+                          }, child: Text("Add new Statistika")), ),
                       ]
                     ),
 
                           Row(children: [
 
-                          SizedBox(height: 20, width: 20,),
+                          SizedBox(height: 50, width: 300, child: 
                                         
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
@@ -314,9 +316,9 @@ else
                               builder: (context) => UlogaListScreen()
                               ),
                           );
-                          }, child: Text("Go to Uloga")),
+                          }, child: Text("Go to Uloga")),),
                           
-                          SizedBox(height: 20, width: 20,),
+                          SizedBox(height: 50, width: 300, child: 
                                         
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
@@ -324,7 +326,7 @@ else
                               builder: (context) => KorisniciEditableScreen()
                               ),
                           );
-                          }, child: Text("Go to Korisnici")), 
+                          }, child: Text("Go to Korisnici")), ),
                       ],
                     )
                     ]),

@@ -25,6 +25,7 @@ import 'package:intl/intl.dart';
 import '../models/korisnik.dart';
 import '../models/termin.dart';
 import '../models/uloga.dart';
+import '../providers/uloga_provider.dart';
 
 
 class InsertScreen extends StatefulWidget {
@@ -40,53 +41,22 @@ class InsertScreen extends StatefulWidget {
 class _InsertScreenState extends State<InsertScreen> {
 
   final _formKey = GlobalKey<FormBuilderState>();
-  // final _korisnikIdController = TextEditingController();
-  // final _imeController = TextEditingController();
-  // final _prezimeController = TextEditingController();
-  // final _korisnickoImeController = TextEditingController();
-  // final _emailController = TextEditingController();
   final _lozinkaController = TextEditingController();
   final _lozinkaProvjeraController = TextEditingController();
-  // final _strucnaSpremaController = TextEditingController();
-  // final _datumRodjenjaController = TextEditingController();
-  // final _podUgovoromController = TextEditingController();
-  // final _podUgovoromOdController = TextEditingController();
-  // final _podUgovoromDoController = TextEditingController();
-  // final _ulogaController = TextEditingController();
-  // Add controllers for other properties of Korisnik
+  
   Map<String,dynamic>_initialValue={};
 final ScrollController _vertical = ScrollController();
-  late KorisnikProvider _korisnikProvider;
-  
 
+  late KorisnikProvider _korisnikProvider;
   SearchResult<Korisnik>? _korisnikResult;
 
+  late UlogaProvider _ulogaProvider;
+  SearchResult<Uloga>? _ulogaResult;
  @override
   void initState()
   {
      super.initState();
-    // if(widget.korisnik?.korisnikId!=null)
-    // {
-    //   _initialValue={
-    //     _korisnikIdController.text : widget.korisnik?.korisnikId.toString(),
-    //     _imeController.text:widget.korisnik?.ime,
-    //     _prezimeController.text:widget.korisnik?.prezime,
-    //     _korisnickoImeController.text:widget.korisnik?.korisnickoIme,
-    //     _emailController.text:widget.korisnik?.email,
-    //     _strucnaSpremaController.text:widget.korisnik?.strucnaSprema,
-    //     _datumRodjenjaController.text:widget.korisnik?.datumRodjenja.toString(),
-    //     _podUgovoromController.text:widget.korisnik?.podUgovorom.toString(),
-    //     _podUgovoromOdController.text:widget.korisnik?.podUgovoromOd.toString(),
-    //     _podUgovoromDoController.text:widget.korisnik?.podUgovoromDo.toString(),
-    //     _ulogaController.text:widget.korisnik?.uloga,
-    //   };
-    // }
-    // else
-    // {
-    //  _datumRodjenjaController.text="";
-    //  _podUgovoromOdController.text="";
-    //  _podUgovoromDoController.text="";
-    // }
+    
     String defaultDate;
     if(DateTime.now().month<10&&DateTime.now().day<10)
       defaultDate="${DateTime.now().year}-0${DateTime.now().month}-0${DateTime.now().day}";
@@ -134,6 +104,7 @@ final ScrollController _vertical = ScrollController();
       
     };}
     _korisnikProvider=context.read<KorisnikProvider>();
+    _ulogaProvider=context.read<UlogaProvider>();
     
   initForm();
 
@@ -148,6 +119,7 @@ final ScrollController _vertical = ScrollController();
 
   Future initForm()async{
       _korisnikResult=await _korisnikProvider.get();
+      _ulogaResult=await _ulogaProvider.get();
       // print(_korisnikResult);
   }
 
@@ -211,30 +183,6 @@ final ScrollController _vertical = ScrollController();
                           name: 'email',
                       ),
                     ),
-                            
-                    // Expanded(
-                    //   child: FormBuilderTextField (
-                    //     controller: _lozinkaController,
-                    //       decoration: const InputDecoration(labelText: "Lozinka"), 
-                    //       obscureText: true,
-                    //       name: 'password',
-                    //   ),
-                    // ),
-                           
-                    // Expanded(
-                    //   child: FormBuilderTextField (
-                    //     controller: _lozinkaProvjeraController,
-                    //       decoration: const InputDecoration(labelText: "Potvrdi lozinku"), 
-                    //       obscureText: true,
-                    //       name: 'passwordPotvrda',
-                    //       validator: (value) {
-                    //             if (value != _lozinkaController.text) {
-                    //               return 'Passwords do not match';
-                    //             }
-                    //             return null;
-                    //           },
-                    //   ),
-                    // ),
                            
                     Expanded(
                       child:
@@ -306,33 +254,35 @@ final ScrollController _vertical = ScrollController();
                           name: 'podUgovoromDo',
                       ),
                     ),
-                           
+
                     Expanded(
-                      child: 
-                       FormBuilderDropdown(
-                              name: 'uloga',
-                              decoration: InputDecoration(labelText: 'Uloga'),
-                              items: const[ 
-                                DropdownMenuItem(value: 'Administrator', child: Text('Administrator'),), 
-                                DropdownMenuItem(value: 'Glavni trener', child: Text('Glavni trener'),), 
-                                DropdownMenuItem(value: 'Pomoćni trener', child: Text('Pomoćni trener'),), 
-                                DropdownMenuItem(value: 'Igrač', child: Text('Igrač'),), 
-                                DropdownMenuItem(value: 'Doktor', child: Text('Doktor'),), 
-                                DropdownMenuItem(value: 'Bez uloge', child: Text('Bez uloge'),), 
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  widget.korisnik?.uloga = value!.toString();
-                                });
-                              },
-                              validator: (value) {
-                                if (value == null) {
-                                  return 'Please enter the Uloga';
-                                }
-                                return null;
-                              },
-                            ),
+              child: 
+                FormBuilderDropdown(
+                      name: 'uloga',
+                      decoration: const InputDecoration(labelText: 'Uloga'),
+                      items: 
+                      List<DropdownMenuItem>.from(
+                        _ulogaResult?.result.map(
+                          (e) => DropdownMenuItem(
+                            value: e.nazivUloge.toString(),
+                            child: Text("${e.nazivUloge} ${e.podtipUloge}"??"Nema imena"),
+                            )).toList()??[]),
+
+                      onChanged: (value) {
+                        setState(() {
+                          
+                          print("Odabrana ${value}");
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please enter the Uloga';
+                        }
+                        return null;
+                      },
                     ),
+                    ),
+
              
                     Expanded(child: 
                     Row(children: [
@@ -363,7 +313,7 @@ final ScrollController _vertical = ScrollController();
                           String novaHash=generateHash(lozinkaOdozgo, novaSalt);
                           _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
                           print(_formKey.currentState?.value);
-                          print("${novaHash}");
+                          // print("${novaHash}");
                            
                             
                             
@@ -404,7 +354,10 @@ final ScrollController _vertical = ScrollController();
                           ),
                         );
                       }, child: Text("Svi korisnici")),
-
+                    
+                      ElevatedButton(onPressed: () async{
+                        setState(() { });
+                      }, child: Text("Refresh podataka")),
 
 
                       ElevatedButton(onPressed: () async{
@@ -468,7 +421,7 @@ final ScrollController _vertical = ScrollController();
     return 
     
     MasterScreenWidget(
-      title: 'Insert new korisnik',
+      title: 'Insert data for user ${widget.korisnik?.ime} ${widget.korisnik?.prezime}'??'Insert data for user',
       child: 
        buildForm()
       

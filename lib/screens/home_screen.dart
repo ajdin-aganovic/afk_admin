@@ -121,124 +121,48 @@ Map<String,dynamic>_initialValue={};
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Column(children: [
-                      
-                      Padding(
-                        padding: const EdgeInsets.all(9.0),
-                        child: 
-                          Column(
-                            children: [
-                                SizedBox(height: 12,),
-                                Text('Aplikacija Fudbalskog Kluba',
-                                style: TextStyle(fontSize: 30),), 
-                                SizedBox(height: 12,),
-                                // Text('Dobrodošli ${widget.loggovaniUser?.korisnickoIme??"nazad"}',
-                                Text('Dobrodošli ${Authorization.username}',
+                    Padding(
+                      padding: const EdgeInsets.all(9.0),
+                      child: 
+                        Column(
+                          children: [
+                              SizedBox(height: 12,),
+                              Text('Aplikacija Fudbalskog Kluba',
+                              style: TextStyle(fontSize: 30),), 
+                              SizedBox(height: 12,),
+                              // Text('Dobrodošli ${widget.loggovaniUser?.korisnickoIme??"nazad"}',
+                              Text('Dobrodošli ${Authorization.username}',
 
-                                
-                                // Text('Dobrodošli ${widget.korisnik?.korisnickoIme}',
-                                style: TextStyle(fontSize: 30),),
-                                SizedBox(height: 24,),
-                                            
+                              
+                              // Text('Dobrodošli ${widget.korisnik?.korisnickoIme}',
+                              style: TextStyle(fontSize: 30),),
+                              SizedBox(height: 24,),
+                                          
       
 
-                                
-                              Row(
-                                children: [
-                              ElevatedButton(onPressed: (){
-                              if(Authorization.ulogaKorisnika=="Administrator")
-                              // if(1==1)
-                             { 
-                              Navigator.of(context).push(
-                              MaterialPageRoute(
-                              builder: (context) => AdminScreen()
-                              ),
-                              );
-                              }
-                                else
-                                {
-                                   showDialog(context: context, builder: (BuildContext context) => 
-                              AlertDialog(
-                                title: const Text("You are not Admin."),
-                                content: Text("Try again"),
-                                actions: [
-                                  TextButton(onPressed: ()=>{
-                                    Navigator.pop(context),
-                                  }, child: const Text("OK"))
-                                ],
-                              ));
-                                }
-                              }, child: Text("Go to Admin dio")),
-
-
-                              ElevatedButton(onPressed: (){
-                              if(Authorization.ulogaKorisnika=="Glavni trener"||Authorization.ulogaKorisnika=="Pomoćni trener")
-                              // if(1==1)
-                             { 
-                              Navigator.of(context).push(
-                              MaterialPageRoute(
-                              builder: (context) => UpravaScreen()
-                              ),
-                              );
-                              }
-                                else
-                                {
-                                   showDialog(context: context, builder: (BuildContext context) => 
-                              AlertDialog(
-                                title: const Text("You are not Uprava."),
-                                content: Text("Try again"),
-                                actions: [
-                                  TextButton(onPressed: ()=>{
-                                    Navigator.pop(context),
-                                  }, child: const Text("OK"))
-                                ],
-                              ));
-                                }
-                              }, child: Text("Go to Uprava dio")),
-
-
-                                   ElevatedButton(onPressed: (){
-                              if(Authorization.ulogaKorisnika=="Doktor")
-                              // if(1==1)
-                             { 
-                              Navigator.of(context).push(
-                              MaterialPageRoute(
-                              builder: (context) => MedicinskoScreen()
-                              ),
-                              );
-                              }
-                                else
-                                {
-                                   showDialog(context: context, builder: (BuildContext context) => 
-                              AlertDialog(
-                                title: const Text("You are not Medicinsko osoblje."),
-                                content: Text("Try again"),
-                                actions: [
-                                  TextButton(onPressed: ()=>{
-                                    Navigator.pop(context),
-                                  }, child: const Text("OK"))
-                                ],
-                              ));
-                                }
-                              }, child: Text("Go to Medicinski dio")),
-
-
-                             
-                            ElevatedButton(onPressed: (){
-                              if(Authorization.ulogaKorisnika=="Igrač")
-                              // if(1==1)
-                             { 
-                              Navigator.of(context).push(
-                              MaterialPageRoute(
-                              builder: (context) => IgracScreen()
-                              ),
-                              );
-                              }
-                                else
-                                {
-                                   showDialog(context: context, builder: (BuildContext context) => 
+                              
+                            Row(
+                              children: [
+                                Row(
+                                  
+                                  children: [
+                                    SizedBox(height: 80, width: 200, child: 
+                                    
+                                    ElevatedButton(onPressed: (){
+                                    if(Authorization.ulogaKorisnika=="Administrator")
+                                    // if(1==1)
+                                    { 
+                                    Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                    builder: (context) => AdminScreen()
+                                    ),
+                                    );
+                                    }
+                                      else
+                                      {
+                                         showDialog(context: context, builder: (BuildContext context) => 
                                     AlertDialog(
-                                      title: const Text("You are not Igrač."),
+                                      title: const Text("You are not Admin."),
                                       content: Text("Try again"),
                                       actions: [
                                         TextButton(onPressed: ()=>{
@@ -246,56 +170,166 @@ Map<String,dynamic>_initialValue={};
                                         }, child: const Text("OK"))
                                       ],
                                     ));
-                                }
-                              }, child: Text("Go to Igrač dio")),
- 
-                                ],
-                              ),
-                              Row(children: [
-                                  
-                            ElevatedButton(onPressed: () async {
-                              
-                              try {
-                                
-                                var data1313=_korisnikProvider.get(filter: {
-                                  'KorisnickoIme':Authorization.username
-                                });
-
-                                setState(() {
-                                  _korisnikResult!=data1313;
-                                });
-
-                                var pronadjeniKorisnik=_korisnikResult!.result.first;
-                              
-                                Navigator.of(context).push(
-                                MaterialPageRoute(
-                                builder: (context) => KorisnikDetailsScreen(korisnik: pronadjeniKorisnik,)
+                                      }
+                                    }, child: Text("Go to Admin dio")),
+                                    
+                                    )
+                                  ],
                                 ),
-                                );
 
-                              } on Exception catch (e) {
-                                showDialog(context: context, builder: (BuildContext context) => 
+
+                                Row(
+                                  children: [
+                                    SizedBox(height: 80, width: 200, child: 
+                                    ElevatedButton(onPressed: (){
+                                    if(Authorization.ulogaKorisnika=="Glavni trener"||Authorization.ulogaKorisnika=="Pomoćni trener")
+                                    // if(1==1)
+                           { 
+                                    Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                    builder: (context) => UpravaScreen()
+                                    ),
+                                    );
+                                    }
+                                      else
+                                      {
+                                         showDialog(context: context, builder: (BuildContext context) => 
                                     AlertDialog(
-                                      title: const Text("Error"),
-                                      content: Text("${e.toString()}"),
+                                      title: const Text("You are not Uprava."),
+                                      content: Text("Try again"),
                                       actions: [
                                         TextButton(onPressed: ()=>{
                                           Navigator.pop(context),
                                         }, child: const Text("OK"))
                                       ],
                                     ));
-                              }
-
-
-                            }, child: Text("Account details"),
+                                      }
+                                    }, child: Text("Go to Uprava dio")),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                              ],)
+                            
+                            
+                                 Row(
+                                   children: [
+                                     Row(
+                                       children: [
+                                        SizedBox(height: 80, width: 200, child: 
+                                         ElevatedButton(onPressed: (){
+                            if(Authorization.ulogaKorisnika=="Doktor")
+                            // if(1==1)
+                           { 
+                            Navigator.of(context).push(
+                            MaterialPageRoute(
+                            builder: (context) => MedicinskoScreen()
+                            ),
+                            );
+                            }
+                              else
+                              {
+                                         showDialog(context: context, builder: (BuildContext context) => 
+                            AlertDialog(
+                              title: const Text("You are not Medicinsko osoblje."),
+                              content: Text("Try again"),
+                              actions: [
+                                TextButton(onPressed: ()=>{
+                                          Navigator.pop(context),
+                                }, child: const Text("OK"))
+                              ],
+                            ));
+                              }
+                            }, child: Text("Go to Medicinski dio")),
+                                        ),
+                                       ],
+                                     ),
+
+
+                           
+                          Row(
+                            children: [
+                              SizedBox(height: 80, width: 200, child: 
+                              ElevatedButton(onPressed: (){
+                                if(Authorization.ulogaKorisnika=="Igrač")
+                                // if(1==1)
+                               { 
+                                Navigator.of(context).push(
+                                MaterialPageRoute(
+                                builder: (context) => IgracScreen()
+                                ),
+                                );
+                                }
+                                  else
+                                  {
+                                         showDialog(context: context, builder: (BuildContext context) => 
+                                          AlertDialog(
+                                            title: const Text("You are not Igrač."),
+                                            content: Text("Try again"),
+                                            actions: [
+                                              TextButton(onPressed: ()=>{
+                                                Navigator.pop(context),
+                                              }, child: const Text("OK"))
+                                            ],
+                                          ));
+                                  }
+                                }, child: Text("Go to Igrač dio")),
+                              ),
                             ],
                           ),
-                        
-                      ),
+                                   ],
+                                 ),
+
+                            
+                            
+                            Row(
+                              children: [
+                                SizedBox(height: 80, width: 200, child: 
+                                ElevatedButton(onPressed: () async {
+                                  
+                                  try {
+                                    
+                                    var data1313=_korisnikProvider.get(filter: {
+                                      'KorisnickoIme':Authorization.username
+                                    });
+
+                                    setState(() {
+                                      _korisnikResult!=data1313;
+                                    });
+
+                                    var pronadjeniKorisnik=_korisnikResult!.result.first;
+                                  
+                                    Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                    builder: (context) => KorisnikDetailsScreen(korisnik: pronadjeniKorisnik,)
+                                    ),
+                                    );
+
+                                  } on Exception catch (e) {
+                                    showDialog(context: context, builder: (BuildContext context) => 
+                                        AlertDialog(
+                                          title: const Text("Error"),
+                                          content: Text("${e.toString()}"),
+                                          actions: [
+                                            TextButton(onPressed: ()=>{
+                                              Navigator.pop(context),
+                                            }, child: const Text("OK"))
+                                          ],
+                                        ));
+                                  }
+
+
+                                }, child: Text("Account details"),
+                                ),
+                                )
+                                
+                              ],
+                            )
+                            
+                          ],
+                        ),
                       
-                    ]),
+                    ),
                   ],
                 ),
               ),

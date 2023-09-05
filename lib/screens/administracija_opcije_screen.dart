@@ -46,8 +46,10 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:afk_admin/widgets/makePayment.dart';
 // import 'package:afk_admin/api/client.dart';
 
+import '../main.dart';
 import '../models/korisnik.dart';
 import '../models/search_result.dart';
+import 'korisnik_dodaj_screen.dart';
 
 class AdminScreen extends StatefulWidget {
   Korisnik? korisnik;
@@ -142,6 +144,7 @@ else
                         padding: const EdgeInsets.all(9.0),
                         child: 
                           Column(
+                            
                             children: [
                             SizedBox(height: 12,),
                             const Text('Aplikacija Fudbalskog Kluba',
@@ -155,8 +158,8 @@ else
                               Row(
                                 children: [
 
-                                    SizedBox(height: 20, width: 20,),
-                                                
+                                    SizedBox(height: 50, width: 300, child:
+                                    
                                   ElevatedButton(onPressed: (){
                                   Navigator.of(context).push(
                                   MaterialPageRoute(
@@ -164,8 +167,12 @@ else
                                   ),
                                   );
                                   }, child: Text("Go to Platna lista")),
-                                 SizedBox(height: 20, width: 20,),
+                                    ),
                                                 
+
+
+                                 SizedBox(height: 50, width: 300, child:
+                                 
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -173,11 +180,13 @@ else
                                       ),
                                   );
                                   }, child: Text("Add new Platna lista")),
+                                 ),
+                                                
                                 ]
                               ),
                               Row(children: [
-                                 SizedBox(height: 20, width: 20,),
-                                                
+                                 SizedBox(height: 50, width: 300, child:
+                                 
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -185,8 +194,10 @@ else
                                       ),
                                   );
                                   }, child: Text("Go to Transakcijski račun")),
-                                SizedBox(height: 20, width: 20,),
+                                 ),
                                                 
+
+                                SizedBox(height: 50, width: 300, child: 
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -194,12 +205,15 @@ else
                                       ),
                                   );
                                   }, child: Text("Add new Transakcijski račun")),
+                                
+                                ),
+                                                
                               ]
                               ),
                               Row(
                                 children:[
-                                  SizedBox(height: 20, width: 20,),
-                                                
+                                  SizedBox(height: 50, width: 300, child: 
+                                  
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -207,15 +221,20 @@ else
                                       ),
                                   );
                                   }, child: Text("Go to Korisnici lista")),
-                                  SizedBox(height: 20, width: 20,),
+                                  ),
                                                 
+
+                                  SizedBox(height: 50, width: 300, child: 
+                                  
                                       ElevatedButton(onPressed: (){
                                       Navigator.of(context).push(
                                       MaterialPageRoute(
-                                      builder: (context) => InsertScreen()
+                                      builder: (context) => DodajScreen()
                                       ),
                                   );
                                   }, child: Text("Add new Korisnik")),
+                                  ),
+                                                
                                   
                                 ],
                               ),
@@ -225,8 +244,8 @@ else
                       ),
                     Row(
                       children: [
-                        SizedBox(height: 20, width: 20,),
-                                        
+                        SizedBox(height: 50, width: 300, child: 
+                        
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -234,9 +253,10 @@ else
                               ),
                           );
                           }, child: Text("Go to Stadion")),
-                          
-                          SizedBox(height: 20, width: 20,),
+                        ),
                                         
+                          
+                          SizedBox(height: 50, width: 300, child: 
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -244,12 +264,14 @@ else
                               ),
                           );
                           }, child: Text("Add new Stadion")),
+                          ),
+                                        
 
                       ]
                     ),
                     Row(children: [
-                            SizedBox(height: 20, width: 20,),
-                                        
+                            SizedBox(height: 50, width: 300, child:
+                            
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -257,9 +279,10 @@ else
                               ),
                           );
                           }, child: Text("Go to Članarina")),
-                          
-                         SizedBox(height: 20, width: 20,),
+                            ),
                                         
+                          
+                         SizedBox(height: 50, width: 300,child: 
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -267,12 +290,15 @@ else
                               ),
                           );
                           }, child: Text("Add new Članarina")),  
+                         
+                         ),
+                                        
         
                     ]
                     ),
                     Row(children: [
-                           SizedBox(height: 20, width: 20,),
-                                        
+                           SizedBox(height: 50, width: 300,child: 
+                           
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -280,9 +306,11 @@ else
                               ),
                           );
                           }, child: Text("Go to Pozicija")),
-                          
-                          SizedBox(height: 20, width: 20,),
+                           ),
                                         
+                          
+                          SizedBox(height: 50, width: 300,child: 
+                          
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -290,13 +318,16 @@ else
                               ),
                           );
                           }, child: Text("Add new Pozicija")),  
+                          
+                          ),
+                                        
                       ],
                     ),
                       
                     Row(
                       children: [
-                         SizedBox(height: 20, width: 20,),
-                                        
+                         SizedBox(height: 50, width: 300,child: 
+                         
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -304,9 +335,11 @@ else
                               ),
                           );
                           }, child: Text("Go to Statistika")),
-                          
-                          SizedBox(height: 20, width: 20,),
+                         ),
                                         
+                          
+                          SizedBox(height: 50, width: 300, child:
+                          
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -314,13 +347,16 @@ else
                               ),
                           );
                           }, child: Text("Add new Statistika")), 
+                          
+                          ),
+                                        
                       ]
                     ),
 
                           Row(children: [
 
-                          SizedBox(height: 20, width: 20,),
-                                        
+                          SizedBox(height: 50, width: 300, child:
+                          
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -329,8 +365,11 @@ else
                           );
                           }, child: Text("Go to Uloga")),
                           
-                          SizedBox(height: 20, width: 20,),
+                          ),
                                         
+                          
+                          SizedBox(height: 50, width: 300,child: 
+                          
                               ElevatedButton(onPressed: (){
                               Navigator.of(context).push(
                               MaterialPageRoute(
@@ -338,6 +377,8 @@ else
                               ),
                           );
                           }, child: Text("Add new Uloga")), 
+                          ),
+                                        
                       ],
                     )
                     ]),
