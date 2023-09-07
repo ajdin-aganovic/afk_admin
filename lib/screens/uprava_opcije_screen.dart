@@ -153,12 +153,12 @@ else
                                  SizedBox(height: 50, width: 300, child: 
                                                 
                                       ElevatedButton(onPressed: (){
-                                      Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                      builder: (context) => PlatumDetailsScreen()
-                                      ),
-                                  );
-                                  }, child: Text("Add new Platna lista")),),
+                                  //     Navigator.of(context).push(
+                                  //     MaterialPageRoute(
+                                  //     builder: (context) => PlatumDetailsScreen()
+                                  //     ),
+                                  // );
+                                  }, child: Text("Go to Best performers")),),
                                 ]
                               ),
 

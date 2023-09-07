@@ -212,20 +212,6 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                         ),
                         ),
 
-                        // DataColumn(label: Expanded(
-                        // child: Text("LozinkaHash",
-                        // style: TextStyle(fontStyle: FontStyle.italic),),
-                        
-                        // ),
-                        // ),
-
-                        // DataColumn(label: Expanded(
-                        // child: Text("LozinkaSalt",
-                        // style: TextStyle(fontStyle: FontStyle.italic),),
-                        
-                        // ),
-                        // ),
-
                         DataColumn(label: Expanded(
                         child: Text("Stručna sprema",
                         style: TextStyle(fontStyle: FontStyle.italic),),
@@ -275,16 +261,6 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                   rows: 
                     result?.result.map((Korisnik e) => DataRow(
                       onSelectChanged: (yxc)=>{
-                        // if((Authorization.ulogaKorisnika=="Administrator")&&yxc==true)
-                        //     {
-                        //       print('selected: ${e.korisnikId}'),
-                        //       Navigator.of(context).push(
-                        //         MaterialPageRoute(builder: (context)=> InsertScreen(korisnik: e,)
-                        //         )
-                        //     ) 
-                        //     }
-                        //   else
-                        //   {
                             showDialog(context: context, builder: (BuildContext context) => 
                               AlertDialog(
                                 title: Text("You have chosen KorisnikID ${e.korisnikId}"),
@@ -295,7 +271,6 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                                   }, child: const Text("OK"))
                                 ],
                               )),
-                          // }
 
                       },
                       cells: [
@@ -303,8 +278,6 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                       DataCell(Text(e.ime ??"not set")),
                       DataCell(Text(e.prezime ??"not set")),
                       DataCell(Text(e.email ??"not set")),
-                      // DataCell(Text(e.lozinkaHash ??"")),
-                      // DataCell(Text(e.lozinkaSalt ??"")),
                       DataCell(Text(e.korisnickoIme ??"not set")),
                       DataCell(Text(e.uloga ??"not set")),
                       DataCell(Text(e.strucnaSprema ??"not set")),

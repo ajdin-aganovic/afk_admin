@@ -10,6 +10,7 @@ import 'package:afk_admin/providers/korisnik_pozicija_provider.dart';
 import 'package:afk_admin/providers/korisnik_transakcijski_racun_provider.dart';
 import 'package:afk_admin/providers/korisnik_uloga_provider.dart';
 import 'package:afk_admin/providers/pozicija_provider.dart';
+import 'package:afk_admin/providers/proizvod_provider.dart';
 import 'package:afk_admin/providers/stadion_provider.dart';
 import 'package:afk_admin/providers/statistika_provider.dart';
 import 'package:afk_admin/providers/termin_provider.dart';
@@ -21,6 +22,7 @@ import 'package:afk_admin/providers/trening_stadion_provider.dart';
 import 'package:afk_admin/screens/home_screen.dart';
 // import 'package:afk_admin/screens/korisnici_list_screen.dart';
 import 'package:afk_admin/screens/reset_password_screen.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
 import 'package:afk_admin/providers/korisnik_provider.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
@@ -39,6 +41,7 @@ import 'models/korisnik.dart';
 
 void main() async {
   // await dotenv.load(fileName: "lib/.env");
+  Stripe.publishableKey="pk_test_51NnoBzESdHn89Po93TLLgZ3wTUdjypvSv1WwSQPYxEfPXp2B8veWzxeMS2pVRci6UaVbLNW8xE90ND9JixodNVNX00uDND5nc3";
   
   runApp(MultiProvider(providers:
   [
@@ -58,6 +61,7 @@ void main() async {
     ChangeNotifierProvider(create: (_) => KorisnikTransakcijskiRacunProvider()),
     ChangeNotifierProvider(create: (_) => KorisnikUlogaProvider()),
     ChangeNotifierProvider(create: (_) => TreningStadionProvider()),
+    ChangeNotifierProvider(create: (_) => ProizvodProvider()),
 
   ],
   child: const MyMaterialApp(),));
@@ -124,7 +128,7 @@ class LoginPage extends StatelessWidget {
               child: 
               Container(
                 constraints: const BoxConstraints(maxHeight: 400,maxWidth: 400),
-                child: Card(
+                // child: Card(
                   child: Column(children: [
                     //Image.network("https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/285px-Manchester_United_FC_crest.svg.png", height: 100,width: 100,),
                     // Image.asset("assets/images/manchesterunited.png", height: 100,width: 100,),
@@ -295,7 +299,7 @@ class LoginPage extends StatelessWidget {
 
 
                   ]),
-                ),
+                // ),
               ),
             ),
         );

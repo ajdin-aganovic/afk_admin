@@ -13,6 +13,7 @@ TransakcijskiRacun _$TransakcijskiRacunFromJson(Map<String, dynamic> json) =>
       json['adresaPrebivalista'] as String?,
       json['nazivBanke'] as String?,
       json['korisnikId'] as int?,
+      json['punoImeKorisnika'] as String?,
     );
 
 Map<String, dynamic> _$TransakcijskiRacunToJson(TransakcijskiRacun instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$TransakcijskiRacunToJson(TransakcijskiRacun instance) =>
       'adresaPrebivalista': instance.adresaPrebivalista,
       'nazivBanke': instance.nazivBanke,
       'korisnikId': instance.korisnikId,
+      'punoImeKorisnika': instance.punoImeKorisnika,
     };

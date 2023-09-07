@@ -12,6 +12,7 @@ import 'package:afk_admin/screens/bolest_details_screen.dart';
 import 'package:afk_admin/screens/bolest_list_screen.dart';
 import 'package:afk_admin/screens/clanarina_details_screen.dart';
 import 'package:afk_admin/screens/clanarina_list_screen.dart';
+import 'package:afk_admin/screens/igrac_clanarina_payment.dart';
 import 'package:afk_admin/screens/korisnici_list_screen.dart';
 import 'package:afk_admin/screens/korisnik_insert_screen.dart';
 import 'package:afk_admin/screens/plata_details_screen.dart';
@@ -46,7 +47,10 @@ import 'package:afk_admin/widgets/makePayment.dart';
 // import 'package:afk_admin/api/client.dart';
 
 import '../models/korisnik.dart';
+import '../models/korisnik_pozicija.dart';
 import '../models/search_result.dart';
+import '../providers/korisnik_pozicija_provider.dart';
+import 'igrac_vise_detalja_screen.dart';
 import 'korisnici_editable_screen.dart';
 
 class IgracScreen extends StatefulWidget {
@@ -66,14 +70,17 @@ class _IgracScreen extends State<IgracScreen>{
 Map<String,dynamic>_initialValue={};
 
   late KorisnikProvider _korisnikProvider;
-  
-
   SearchResult<Korisnik>? _korisnikResult;
+  
+late KorisnikPozicijaProvider _korisnikPozicijaProvider;
+  SearchResult<KorisnikPozicija>? _korisnikPozicijaResult;
+ 
 
   @override
   void initState(){
     super.initState();
     _korisnikProvider=context.read<KorisnikProvider>();
+    _korisnikPozicijaProvider=context.read<KorisnikPozicijaProvider>();
     initForm();
   }
 
@@ -86,6 +93,7 @@ Map<String,dynamic>_initialValue={};
 
     Future initForm()async{
       _korisnikResult=await _korisnikProvider.get();
+      _korisnikPozicijaResult=await _korisnikPozicijaProvider.get();
       // print(_korisnikResult);
   }
 
@@ -101,22 +109,14 @@ else
   return 'Nije pronađen';
 }
 
+KorisnikPozicija? getKorisnikPozicija(int id)
+  {
+    var getKorisnikPozicijaDetails=_korisnikPozicijaResult?.result.firstWhere((element) => element.korisnikId==id);
+    return getKorisnikPozicijaDetails;
+  }
+
   @override
   Widget build(BuildContext context) {
-    // // var izabrani=_korisnikResult?.result.where((element) => widget.korisnik!.korisnikId==element.korisnikId);
-    // var izabrani=_korisnikResult?.result.where((element) => _korisnikResult!.result.first.korisnickoIme==element.korisnickoIme)??_korisnikResult?.result.first;
-   
-    // if(izabrani==null)
-    //  { izabrani=_korisnikResult?.result.first;}
-    // var izabrani=getUser();
-    
-    // if(izabrani?.korisnickoIme!=Authorization.username)
-    //   {
-    //     izabrani;
-    //   }
-
-    // var izabrani=_korisnikProvider.get();
-    // _korisnikResult=_korisnikProvider.get() as SearchResult<Korisnik>?;
 
     var izabrani=_korisnikResult?.result.first;
     // TODO: implement build
@@ -199,6 +199,23 @@ else
                                   ),
                                 ],
                               ),
+                              Row(children: [
+                                Column(
+                                    children: [
+                                      SizedBox(height: 50, width: 300, child: 
+                                                     
+                                           ElevatedButton(onPressed: (){
+                                           Navigator.of(context).push(
+                                           MaterialPageRoute(
+                                           // builder: (context) => KorisniciListScreen()
+                                           builder: (context) => IgracClanarinaScreen(korisnik: widget.korisnik,)
+
+                                           ),
+                                       );
+                                       }, child: Text("Go to Igrač članarina")),),
+                                    ],
+                                  ),
+                              ],)
                             ],
                           ),
                         
@@ -331,8 +348,26 @@ else
                           ],
                         ),
                       ],
+                    ),
+
+                    //Ovo dolje još uvijek neće, treba popraviti
+                      
+                    Row(children: [
+                        SizedBox(height: 50, width: 300, child: 
+                          ElevatedButton(onPressed: (){
+                          Navigator.of(context).push(
+                          MaterialPageRoute(
+                          builder: (context) => ViseDetaljaScreen(korisnikPozicija: getKorisnikPozicija(widget.korisnik?.korisnikId??2),)
+                          ),
+                      );
+                      }, child: Text("Go to Više detalja")),),
+                    ],
                     )
-                    ]),
+
+
+                    ]
+                    
+                    ),
                   ],
                 ),
               ),

@@ -19,6 +19,7 @@ import 'package:afk_admin/screens/medicinsko_opcije_screen.dart';
 import 'package:afk_admin/screens/plata_details_screen.dart';
 import 'package:afk_admin/screens/pozicija_details_screen.dart';
 import 'package:afk_admin/screens/pozicija_list_screen.dart';
+import 'package:afk_admin/screens/proizvod_list_screen.dart';
 import 'package:afk_admin/screens/reset_password_screen.dart';
 import 'package:afk_admin/screens/stadion_details_screen.dart';
 import 'package:afk_admin/screens/stadion_screen.dart';
@@ -320,8 +321,25 @@ Map<String,dynamic>_initialValue={};
 
 
                                 }, child: Text("Account details"),
+
+
                                 ),
-                                )
+
+                                
+                                ),
+
+                                SizedBox(height: 80, width: 200, child: 
+                                  ElevatedButton(onPressed: (){
+                                    
+                                    Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                    builder: (context) => ProizvodListScreen()
+                                    ),
+                                    );
+                                    
+                                      
+                                    }, child: Text("Go to Fan shop")),
+                                  ),
                                 
                               ],
                             )

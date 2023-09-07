@@ -3,6 +3,7 @@
 import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/models/transakcijski_racun.dart';
+import 'package:afk_admin/providers/korisnik_provider.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
 import 'package:afk_admin/screens/plata_list_screen.dart';
@@ -40,6 +41,9 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
 
   late TransakcijskiRacunProvider _transakcijskiRacunProvider;
   SearchResult<TransakcijskiRacun>? _transakcijskiRacunResult;
+
+  late KorisnikProvider _korisnikProvider;
+  SearchResult<Korisnik>? _korisnikResult;
  
   // bool isLoading=true;
 
@@ -51,9 +55,9 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
     final result = '${dt.year}-${dt.month}-${dt.day}';
     DateTime? preuzeti=widget.platum?.datumSlanja;
   _initialValue= {
-    'plataId':widget.platum?.plataId.toString()??0.toString(),
-    'transakcijskiRacunId':widget.platum?.transakcijskiRacunId.toString()??1.toString(),
-    'stateMachine': widget.platum?.stateMachine, 
+    'plataId':widget.platum?.plataId.toString()??"0",
+    'transakcijskiRacunId':widget.platum?.transakcijskiRacunId.toString()??"1",
+    'stateMachine': widget.platum?.stateMachine??"creating", 
     'iznos':widget.platum?.iznos.toString(),
     
     // if(widget.platum!.datumSlanja!=null)
@@ -65,6 +69,7 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
 
   _platumProvider=context.read<PlatumProvider>(); 
   _transakcijskiRacunProvider=context.read<TransakcijskiRacunProvider>();
+  _korisnikProvider=context.read<KorisnikProvider>();
 
   initForm();
   }
@@ -80,12 +85,8 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
   Future initForm()async{
       _transakcijskiRacunResult=await _transakcijskiRacunProvider.get();
       _platumResult=await _platumProvider.get();
-      // print(_platumResult);
-      // print(_transakcijskiRacunResult);
-
-      // setState(() {
-      //   isLoading=false;
-      // });
+      _korisnikResult=await _korisnikProvider.get();
+      
   }
 
   @override
@@ -94,6 +95,14 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
       title: 'Plata ID: ${widget.platum?.plataId}' ?? "Platum details",
       child: buildForm()
       );
+  }
+
+  String getKorisnickoIme(int id)
+  {
+    var pronadjeniKorisnik=_korisnikResult?.result.firstWhere((element) => element.korisnikId==id);
+    // String? pronadjenoIme=_korisnikResult?.result.firstWhere((element) => element.korisnikId==id).korisnickoIme??"Nije pronađeno";
+    String? pronadjenoIme="${pronadjeniKorisnik!.ime} ${pronadjeniKorisnik.prezime} - ${pronadjeniKorisnik.korisnickoIme}"??"Nije pronađeno";
+    return pronadjenoIme;
   }
 
   FormBuilder buildForm() {
@@ -111,50 +120,51 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                 
                     ),
             ),
+          // Expanded(
+          //   child: FormBuilderTextField (
+          //       decoration: const InputDecoration(labelText: "Transakcijski Racun Id"), 
+                
+          //       name: 'transakcijskiRacunId',
+                
+          //   ),
+          // ),  
+           //od prije ID što radi
+         
+          Expanded(
+              child: 
+                FormBuilderDropdown(
+                      name: 'transakcijskiRacunId',
+                      decoration: const InputDecoration(labelText: 'Broj transakcijskog računa'),
+                      items: 
+                      List<DropdownMenuItem>.from(
+                        _transakcijskiRacunResult?.result.map(
+                          (e) => DropdownMenuItem(
+                            value: e.transakcijskiRacunId.toString(),
+                            child: Text("${getKorisnickoIme(e.korisnikId!)} - ${e.brojRacuna}"??"Nema broja"),
+                            )).toList()??[]),
+
+                      onChanged: (value) {
+                        setState(() {
+                          
+                          print("Odabrani ${value}");
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please enter the Transakcijski račun';
+                        }
+                        return null;
+                      },
+                    ),
+                    ),
+          
           Expanded(
             child: FormBuilderTextField (
-                decoration: const InputDecoration(labelText: "Transakcijski Racun Id"), 
-                
-                name: 'transakcijskiRacunId',
+                            decoration: const InputDecoration(labelText: "Status plate"), 
+                readOnly: true,
+                name: 'stateMachine',
                 
             ),
-          ),   //od prije ID što radi
-          // Expanded(
-          //   child: FormBuilderDropdown<String> (
-          //     name: 'transakcijskiRacunId',
-          //     decoration: InputDecoration
-          //       ( labelText: "Transakcijski Racun Id",
-          //         suffix: IconButton(icon: const Icon(Icons.close),
-          //       onPressed: (){
-          //         _formKey.currentState!.fields['transakcijskiRacunId']?.reset();
-          //       },
-          //       ),
-          //       hintText: 'Select Račun',
-          //       ), 
-          //       items: _transakcijskiRacunResult?.result
-          //       .map((item) => DropdownMenuItem(
-          //         alignment: AlignmentDirectional.center,
-          //         value: item.transakcijskiRacunId.toString(),
-          //         child: Text(item.brojRacuna ?? ""),
-          //         ))
-          //         .toList() ?? [],
-          //   ),
-          // ),
-          Expanded(
-            child: FormBuilderDropdown(
-                    name: 'stateMachine',
-                    decoration: InputDecoration(labelText: 'State machine'),
-                    items: const[ 
-                      DropdownMenuItem(value: 'active', child: Text('Activate'),), 
-                      DropdownMenuItem(value: 'draft', child: Text('Hide'),), 
-                    ],
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Please enter the Uloga';
-                      }
-                      return null;
-                    },
-                  ),
           ),
           Expanded(
             child: FormBuilderTextField (
@@ -165,15 +175,7 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
             ),
           ),
           Expanded(
-          //   child: FormBuilderDateTimePicker(
-          //     name: 'datumSlanja',
-          //     // format: DateFormat('yyyy-MM-dd'),
-          //     enabled: false,
-          //     inputType: InputType.date,
-          //     decoration: const InputDecoration(
-          //         labelText: 'DatumSlanja',),
-              
-          // ),
+          
             child: FormBuilderTextField (
               
                 decoration: const InputDecoration(labelText: "Datum Slanja"), 
@@ -227,6 +229,14 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                   ),
                 );
               }, child: Text("Sve plate")),
+
+              ElevatedButton(onPressed: () async{
+                // _formKey.currentState?.saveAndValidate();
+                setState(() {
+                  
+                });
+              }, child: Text("Osvježi podatke")),
+
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
                 AlertDialog(

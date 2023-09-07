@@ -11,9 +11,6 @@ Termin _$TerminFromJson(Map<String, dynamic> json) => Termin(
       json['sifraTermina'] as String?,
       json['tipTermina'] as String?,
       json['stadionId'] as int?,
-      json['datumTermina'] == null
-          ? null
-          : DateTime.parse(json['datumTermina'] as String),
     );
 
 Map<String, dynamic> _$TerminToJson(Termin instance) => <String, dynamic>{
@@ -21,5 +18,4 @@ Map<String, dynamic> _$TerminToJson(Termin instance) => <String, dynamic>{
       'sifraTermina': instance.sifraTermina,
       'tipTermina': instance.tipTermina,
       'stadionId': instance.stadionId,
-      'datumTermina': instance.datumTermina?.toIso8601String(),
     };

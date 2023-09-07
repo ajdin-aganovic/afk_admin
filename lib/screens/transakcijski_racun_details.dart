@@ -34,11 +34,12 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
 
   Map<String,dynamic>_initialValue={};
 
-  late TransakcijskiRacunProvider _transakcijskiRacunProvider;
   late PlatumProvider _platumProvider;
-
-  SearchResult<TransakcijskiRacun>? _transakcijskiRacunResult;
   SearchResult<Platum>? _platumResult;
+  
+  late TransakcijskiRacunProvider _transakcijskiRacunProvider;
+  SearchResult<TransakcijskiRacun>? _transakcijskiRacunResult;
+
 
   late KorisnikProvider _korisnikProvider;
   SearchResult<Korisnik>? _korisnikResult;
@@ -77,6 +78,14 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
       // _platumResult=await _platumProvider.get();
   }
 
+  String getKorisnickoIme(int id)
+  {
+    var pronadjeniKorisnik=_korisnikResult?.result.firstWhere((element) => element.korisnikId==id);
+    // String? pronadjenoIme=_korisnikResult?.result.firstWhere((element) => element.korisnikId==id).korisnickoIme??"Nije pronađeno";
+    String? pronadjenoIme="${pronadjeniKorisnik!.ime} ${pronadjeniKorisnik.prezime} - ${pronadjeniKorisnik.korisnickoIme}"??"Nije pronađeno";
+    return pronadjenoIme;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
@@ -105,54 +114,31 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                             decoration: const InputDecoration(labelText: "Broj računa"), 
                 
                 name: 'brojRacuna',
+                onChanged:(value) => {
+                },
                 
             ),
           ),   //od prije ID što radi
-          // Expanded(
-          //   child: FormBuilderDropdown<String> (
-          //     name: 'transakcijskiRacunId',
-          //     decoration: InputDecoration
-          //       ( labelText: "Transakcijski Racun Id",
-          //         suffix: IconButton(icon: const Icon(Icons.close),
-          //       onPressed: (){
-          //         _formKey.currentState!.fields['transakcijskiRacunId']?.reset();
-          //       },
-          //       ),
-          //       hintText: 'Select Račun',
-          //       ), 
-          //       items: _transakcijskiRacunResult?.result
-          //       .map((item) => DropdownMenuItem(
-          //         alignment: AlignmentDirectional.center,
-          //         value: item.transakcijskiRacunId.toString(),
-          //         child: Text(item.brojRacuna ?? ""),
-          //         ))
-          //         .toList() ?? [],
-          //   ),
-          // ),
+          
           Expanded(
             child: FormBuilderTextField (
                             decoration: const InputDecoration(labelText: "Adresa prebivališta"), 
 
                 name: 'adresaPrebivalista',
+                onChanged:(value) => {
+                },
                 
             ),
           ),
           Expanded(
             child: FormBuilderTextField (
                             decoration: const InputDecoration(labelText: "Naziv banke"), 
-
+                  onChanged:(value) => {
+                },
                 name: 'nazivBanke',
                 
             ),
           ),
-          // Expanded(
-          //   child: FormBuilderTextField (
-          //                   decoration: const InputDecoration(labelText: "KorisnikID"), 
-
-          //       name: 'korisnikId',
-                
-          //   ),
-          // ),
 
           Expanded(
               child: 
@@ -187,6 +173,11 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
             child: ElevatedButton(onPressed: () async{
                   _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
                   // print(_formKey.currentState?.value);
+                  //individualno pristupanje vrijednostima iz forme 
+                  print(_formKey.currentState?.value['nazivBanke']);
+                  print(_formKey.currentState?.value['brojRacuna']);
+                  print(_formKey.currentState?.value['adresaPrebivalista']);
+
                   try{
                     if(widget.transakcijskiRacun==null) {
                       await _transakcijskiRacunProvider.insert(_formKey.currentState?.value);

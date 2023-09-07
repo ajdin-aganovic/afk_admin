@@ -18,6 +18,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import '../models/korisnik.dart';
 import '../models/statistika.dart';
 import '../models/uloga.dart';
+import '../providers/korisnik_provider.dart';
 
 class StatistikaDetailsScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -37,7 +38,9 @@ class _StatistikaDetailsScreen extends State<StatistikaDetailsScreen> {
 
   late StatistikaProvider _statistikaProvider;
   SearchResult<Statistika>? _statistikaResult;
-  // bool isLoading=true;
+
+  late KorisnikProvider _korisnikProvider;
+  SearchResult<Korisnik>? _korisnikResult;
 
   @override
   void initState() {
@@ -47,7 +50,7 @@ class _StatistikaDetailsScreen extends State<StatistikaDetailsScreen> {
     final result = '${dt.year}-${dt.month}-${dt.day} (${dt.hour}:${dt.minute}:${dt.second}})';
   _initialValue= {
     'statistikaId':widget.statistika?.statistikaId.toString()??"0",
-    'korisnikId':widget.statistika?.korisnikId.toString()??"0",
+    'korisnikId':widget.statistika?.korisnikId.toString()??"2",
     'golovi':widget.statistika?.golovi.toString()??"0",
     'asistencije':widget.statistika?.asistencije.toString()??"0",
     'igracMjeseca':widget.statistika?.igracMjeseca??true,
@@ -60,6 +63,7 @@ class _StatistikaDetailsScreen extends State<StatistikaDetailsScreen> {
   };
 
     _statistikaProvider=context.read<StatistikaProvider>(); 
+_korisnikProvider=context.read<KorisnikProvider>(); 
 
   initForm();
   }
@@ -74,7 +78,16 @@ class _StatistikaDetailsScreen extends State<StatistikaDetailsScreen> {
 
   Future initForm()async{
     _statistikaResult=await _statistikaProvider.get();
+      _korisnikResult=await _korisnikProvider.get();
       
+  }
+
+   String getKorisnickoIme(int id)
+  {
+    var pronadjeniKorisnik=_korisnikResult?.result.firstWhere((element) => element.korisnikId==id);
+    // String? pronadjenoIme=_korisnikResult?.result.firstWhere((element) => element.korisnikId==id).korisnickoIme??"Nije pronađeno";
+    String? pronadjenoIme="${pronadjeniKorisnik!.ime} ${pronadjeniKorisnik.prezime} - ${pronadjeniKorisnik.korisnickoIme}"??"Nije pronađeno";
+    return pronadjenoIme;
   }
 
   @override
@@ -102,13 +115,40 @@ class _StatistikaDetailsScreen extends State<StatistikaDetailsScreen> {
                 
                     ),
             ),
-          Expanded(
-            child: FormBuilderTextField (
-                decoration: const InputDecoration(labelText: "Korisnik ID"), 
+          // Expanded(
+          //   child: FormBuilderTextField (
+          //       decoration: const InputDecoration(labelText: "Korisnik ID"), 
                 
-                name: 'korisnikId',
-            ),
-          ),
+          //       name: 'korisnikId',
+          //   ),
+          // ),
+           Expanded(
+              child: 
+                FormBuilderDropdown(
+                      name: 'korisnikId',
+                      decoration: const InputDecoration(labelText: 'Korisnik'),
+                      items: 
+                      List<DropdownMenuItem>.from(
+                        _korisnikResult?.result.map(
+                          (e) => DropdownMenuItem(
+                            value: e.korisnikId.toString(),
+                            child: Text("${e.ime} ${e.prezime} / ${e.korisnickoIme}"??"Nema imena"),
+                            )).toList()??[]),
+
+                      onChanged: (value) {
+                        setState(() {
+                          
+                          print("Odabrani ${value}");
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please enter the Korisnik';
+                        }
+                        return null;
+                      },
+                    ),
+                    ),
           Expanded(
             child: FormBuilderTextField (
                             decoration: const InputDecoration(labelText: "Golovi"), 
@@ -217,7 +257,14 @@ class _StatistikaDetailsScreen extends State<StatistikaDetailsScreen> {
                     builder: (context) => StatistikaListScreen(),
                   ),
                 );
-              }, child: Text("Svi statistikai")),
+              }, child: Text("Sve statistike")),
+
+              ElevatedButton(onPressed: () async{
+                // _formKey.currentState?.saveAndValidate();
+                setState(() {
+                  
+                });
+              }, child: Text("Refresh podataka")),
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(

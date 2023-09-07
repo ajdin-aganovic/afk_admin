@@ -118,6 +118,42 @@ abstract class BaseProvider<T> with ChangeNotifier{
         }
   }
 
+  Future<T> activatePlatum(int id)async{
+    var fullAPI="$_baseUrl$_endpoint/$id/activate";
+    var uriFullApi=Uri.parse(fullAPI);
+    var headerz=createHeaders();
+
+    var jsonRequest=jsonEncode(id);
+
+    var response=await http.put(uriFullApi, headers: headerz, body: jsonRequest);
+    if(IsValidResponse(response))
+        {
+          var data=jsonDecode(response.body);
+          return fromJson(data);
+        }
+        else {
+          throw Exception("Unknown error.");
+        }
+  }
+
+  Future<T> hidePlatum(int id)async{
+    var fullAPI="$_baseUrl$_endpoint/$id/hide";
+    var uriFullApi=Uri.parse(fullAPI);
+    var headerz=createHeaders();
+
+    var jsonRequest=jsonEncode(id);
+
+    var response=await http.put(uriFullApi, headers: headerz, body: jsonRequest);
+    if(IsValidResponse(response))
+        {
+          var data=jsonDecode(response.body);
+          return fromJson(data);
+        }
+        else {
+          throw Exception("Unknown error.");
+        }
+  }
+
   
 
   Future<T> changePassword(int id, [dynamic request])async{
@@ -208,6 +244,8 @@ bool IsValidResponse(Response response){
 //       ? query
 //       : query.substring(1, query.length);
 // }
+
+
 
 String getQueryString(Map params,
       {String prefix= '&', bool inRecursion= false}) {

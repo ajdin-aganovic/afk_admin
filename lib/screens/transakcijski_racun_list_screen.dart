@@ -25,10 +25,11 @@ class TransakcijskiRacunListScreen extends StatefulWidget {
 class _TransakcijskiRacunListScreen extends State<TransakcijskiRacunListScreen> {
   // late PlatumProvider _platumProvider;
   // SearchResult<Platum>? resultPlatum;
+  late TransakcijskiRacunProvider _transakcijskiRacunProvider;
   SearchResult<TransakcijskiRacun>? resultTrans;
 
-  late TransakcijskiRacunProvider _transakcijskiRacunProvider;
   late KorisnikProvider _korisnikProvider;
+  SearchResult<Korisnik>? _korisnikResult;
 
    
   final TextEditingController _brojRacuna=TextEditingController();
@@ -40,7 +41,20 @@ class _TransakcijskiRacunListScreen extends State<TransakcijskiRacunListScreen> 
   @override void didChangeDependencies() {
     super.didChangeDependencies();
     _transakcijskiRacunProvider=context.read<TransakcijskiRacunProvider>();
+    _korisnikProvider=context.read<KorisnikProvider>();
+    initForm();
     // _platumProvider=context.read<PlatumProvider>();
+  }
+
+  Future initForm()async{
+      _korisnikResult=await _korisnikProvider.get();
+  }
+
+   String getKorisnikDetails(int id)
+  {
+    var pronadjeniRacun=_korisnikResult?.result.firstWhere((element) => element.korisnikId==id);
+    String? pronadjeniBrojRacuna="${pronadjeniRacun?.ime} ${pronadjeniRacun?.prezime}"??"Nije pronađen";
+    return pronadjeniBrojRacuna;
   }
 
   @override
@@ -68,7 +82,7 @@ class _TransakcijskiRacunListScreen extends State<TransakcijskiRacunListScreen> 
               child: 
               TextField(
                   decoration: 
-                  const InputDecoration(labelText: "Pretraga po stanju"), 
+                  const InputDecoration(labelText: "Pretraga po broju računa"), 
                   controller:_brojRacuna,
                 ),
             ),
@@ -145,7 +159,7 @@ Widget _buildDataListView() {
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("KorisnikID",
+                    child: Text("Ime i prezime korisnika",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
@@ -182,7 +196,9 @@ Widget _buildDataListView() {
                   DataCell(Text(e.brojRacuna??"")),
                   DataCell(Text(e.adresaPrebivalista ??"")),
                   DataCell(Text(e.nazivBanke??"")),
-                  DataCell(Text(e.korisnikId.toString()??"")),
+                  // DataCell(Text(e.korisnikId.toString()??"")),
+                  DataCell(Text(getKorisnikDetails(e.korisnikId!)??"")),
+
 
                   ]
                 )).toList()??[]

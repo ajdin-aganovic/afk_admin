@@ -52,7 +52,7 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
 
   _initialValue= {
     'clanarinaId':widget.clanarina?.clanarinaId.toString()??"0",
-    'korisnikId':widget.clanarina?.korisnikId.toString()??"0",
+    'korisnikId':widget.clanarina?.korisnikId.toString()??"2",
     'iznosClanarine': widget.clanarina?.iznosClanarine.toString()??"---", 
     'dug':widget.clanarina?.dug.toString()??"0",
   };

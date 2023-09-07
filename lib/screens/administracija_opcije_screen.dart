@@ -18,6 +18,8 @@ import 'package:afk_admin/screens/korisnik_insert_screen.dart';
 import 'package:afk_admin/screens/plata_details_screen.dart';
 import 'package:afk_admin/screens/pozicija_details_screen.dart';
 import 'package:afk_admin/screens/pozicija_list_screen.dart';
+import 'package:afk_admin/screens/proizvod_details_screen.dart';
+import 'package:afk_admin/screens/proizvod_list_screen.dart';
 import 'package:afk_admin/screens/reset_password_screen.dart';
 import 'package:afk_admin/screens/stadion_details_screen.dart';
 import 'package:afk_admin/screens/stadion_screen.dart';
@@ -50,6 +52,7 @@ import '../main.dart';
 import '../models/korisnik.dart';
 import '../models/search_result.dart';
 import 'korisnik_dodaj_screen.dart';
+import 'lista_igraca_screen.dart';
 
 class AdminScreen extends StatefulWidget {
   Korisnik? korisnik;
@@ -378,6 +381,35 @@ else
                           );
                           }, child: Text("Add new Uloga")), 
                           ),
+                                        
+                      ],
+                    ),
+                    Row(children: [
+
+                          SizedBox(height: 50, width: 300, child:
+                          
+                              ElevatedButton(onPressed: (){
+                              Navigator.of(context).push(
+                              MaterialPageRoute(
+                              builder: (context) => ListaIgracaScreen()
+                              ),
+                          );
+                          }, child: Text("Go to Lista igrača po pozicijama")),
+                          
+                          ),
+
+                          SizedBox(height: 50, width: 300, child:
+                          
+                              ElevatedButton(onPressed: (){
+                              Navigator.of(context).push(
+                              MaterialPageRoute(
+                              builder: (context) => ProizvodDetailsScreen()
+                              ),
+                          );
+                          }, child: Text("Add new Proizvod")),
+                          
+                          ),
+                           
                                         
                       ],
                     )

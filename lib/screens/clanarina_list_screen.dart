@@ -39,6 +39,18 @@ class _ClanarinaListScreen extends State<ClanarinaListScreen> {
     super.didChangeDependencies();
     _clanarinaProvider=context.read<ClanarinaProvider>();
     _korisnikProvider=context.read<KorisnikProvider>();
+    initForm();
+  }
+
+  Future initForm()async{
+      korisnikResult=await _korisnikProvider.get();
+  }
+
+   String getKorisnikDetails(int id)
+  {
+    var pronadjeniRacun=korisnikResult?.result.firstWhere((element) => element.korisnikId==id);
+    String? pronadjeniBrojRacuna="${pronadjeniRacun?.ime} ${pronadjeniRacun?.prezime}"??"Nije pronađen";
+    return pronadjeniBrojRacuna;
   }
 
   @override
@@ -160,7 +172,8 @@ Widget _buildDataListView() {
                   },
                   cells: [
                   DataCell(Text(e.clanarinaId.toString()??"0")),
-                  DataCell(Text(e.korisnikId.toString()??"0")),
+                  // DataCell(Text(e.korisnikId.toString()??"0")),
+                  DataCell(Text(getKorisnikDetails(e.korisnikId!)??"2")),
                   DataCell(Text(e.iznosClanarine.toString()??"0")),
                   DataCell(Text(e.dug.toString()??"0")),
                   // DataCell(Text(e.datumClanarinaa.toString()??DateTime.now().toString())),

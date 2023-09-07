@@ -182,6 +182,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_stripe",
+      "rootUri": "file:///C:/Users/aida-/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_stripe-9.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///C:/src/Flutter/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -192,6 +198,12 @@
       "rootUri": "file:///C:/src/Flutter/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "freezed_annotation",
+      "rootUri": "file:///C:/Users/aida-/AppData/Local/Pub/Cache/hosted/pub.dev/freezed_annotation-2.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "frontend_server_client",
@@ -494,6 +506,24 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "stripe_android",
+      "rootUri": "file:///C:/Users/aida-/AppData/Local/Pub/Cache/hosted/pub.dev/stripe_android-9.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "stripe_ios",
+      "rootUri": "file:///C:/Users/aida-/AppData/Local/Pub/Cache/hosted/pub.dev/stripe_ios-9.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "stripe_platform_interface",
+      "rootUri": "file:///C:/Users/aida-/AppData/Local/Pub/Cache/hosted/pub.dev/stripe_platform_interface-9.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "term_glyph",
       "rootUri": "file:///C:/Users/aida-/AppData/Local/Pub/Cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
@@ -584,7 +614,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-09-01T21:15:16.714648Z",
+  "generated": "2023-09-07T20:29:08.946267Z",
   "generator": "pub",
   "generatorVersion": "3.0.5"
 }

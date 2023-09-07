@@ -10,7 +10,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
 import '../models/platum.dart';
+import '../models/stadion.dart';
 import '../models/termin.dart';
+import '../providers/stadion_provider.dart';
 import '../providers/transakcijski_racun_provider.dart';
 import '../utils/util.dart';
 
@@ -26,12 +28,8 @@ class _TerminListScreen extends State<TerminListScreen> {
   late TerminProvider _terminProvider;
   SearchResult<Termin>? result;
 
-  // late TransakcijskiRacunProvider _transakcijskiRacunProvider;
-
-   
-  // final TextEditingController _stateMachine=TextEditingController();
-  // final TextEditingController _minIznos=TextEditingController();
-  // final TextEditingController _maxIznos=TextEditingController();
+  late StadionProvider _stadionProvider;
+  SearchResult<Stadion>? stadionResult;
 
   final ScrollController _horizontal = ScrollController(),
       _vertical = ScrollController();
@@ -41,6 +39,19 @@ class _TerminListScreen extends State<TerminListScreen> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     _terminProvider=context.read<TerminProvider>();
+    _stadionProvider=context.read<StadionProvider>();
+    initForm();
+  }
+
+  Future initForm()async{
+      stadionResult=await _stadionProvider.get();
+  }
+
+   String getStadionDetails(int id)
+  {
+    var pronadjeniRacun=stadionResult?.result.firstWhere((element) => element.stadionId==id);
+    String? pronadjeniBrojRacuna="${pronadjeniRacun?.nazivStadiona}"??"Nije pronađen";
+    return pronadjeniBrojRacuna;
   }
 
   @override
@@ -140,7 +151,7 @@ Widget _buildDataListView() {
                     ),
 
                     DataColumn(label: Expanded(
-                    child: Text("Stadion ID",
+                    child: Text("Stadion",
                     style: TextStyle(fontStyle: FontStyle.italic),),
                     ),
                     ),
@@ -169,7 +180,7 @@ Widget _buildDataListView() {
                       showDialog(context: context, builder: (BuildContext context) => 
                         AlertDialog(
                           title: Text("You have chosen ${e.terminId}"),
-                          content: Text("Šifra termina: ${e.sifraTermina}\nTip termina: ${e.tipTermina}\nStadion: ${e.stadionId}"),
+                          content: Text("Šifra termina: ${e.sifraTermina}\nTip termina: ${e.tipTermina}\nStadion: ${getStadionDetails(e.stadionId!)}"),
                           actions: [
                             TextButton(onPressed: ()=>{
                               Navigator.pop(context),
@@ -182,8 +193,7 @@ Widget _buildDataListView() {
                   DataCell(Text(e.terminId.toString()??"0")),
                   DataCell(Text(e.sifraTermina??"---")),
                   DataCell(Text(e.tipTermina??"---")),
-                  DataCell(Text(e.stadionId.toString()??"0")),
-                  // DataCell(Text(e.datumTermina.toString()??DateTime.now().toString())),
+                  DataCell(Text(getStadionDetails(e.stadionId!)??"1")),
 
                   ]
                 )).toList()??[]

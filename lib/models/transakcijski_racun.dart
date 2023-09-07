@@ -8,14 +8,18 @@ class TransakcijskiRacun{
   String? adresaPrebivalista;
   String? nazivBanke;
   int? korisnikId;
+  String? punoImeKorisnika;
 
 
-  TransakcijskiRacun(this.transakcijskiRacunId, this.brojRacuna, this.adresaPrebivalista, this.nazivBanke, this.korisnikId);
+  TransakcijskiRacun(this.transakcijskiRacunId, this.brojRacuna, this.adresaPrebivalista, this.nazivBanke, this.korisnikId, this.punoImeKorisnika);
   // factory Korisnici.fromJson(Map<String,dynamic>json)=>_$KorisniciFromJson(json);
 
   factory TransakcijskiRacun.fromJson(Map<String,dynamic>json)=>_$TransakcijskiRacunFromJson(json);
   Map<String,dynamic>toJson()=>_$TransakcijskiRacunToJson(this);
 }
+
+
+//samo izbrisati punoImeKorisnika
 
 // public int TransakcijskiRacunId { get; set; }
 
