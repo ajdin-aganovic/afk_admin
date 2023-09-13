@@ -1,4 +1,4 @@
-# Install script for directory: C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows/flutter
+# Install script for directory: C:/sems/afk_admin/windows/flutter
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -1,9 +1,4 @@
 # CMake generation dependency list for this directory.
-C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/CMakeFiles/3.26.0-msvc3/CMakeCXXCompiler.cmake
-C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/CMakeFiles/3.26.0-msvc3/CMakeRCCompiler.cmake
-C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/CMakeFiles/3.26.0-msvc3/CMakeSystem.cmake
-C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows/CMakeLists.txt
-C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows/flutter/generated_plugins.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeCXXInformation.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeGenericSystem.cmake
@@ -19,3 +14,8 @@ C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtens
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/Platform/Windows-MSVC.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/Platform/Windows.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake
+C:/sems/afk_admin/build/windows/CMakeFiles/3.26.4-msvc4/CMakeCXXCompiler.cmake
+C:/sems/afk_admin/build/windows/CMakeFiles/3.26.4-msvc4/CMakeRCCompiler.cmake
+C:/sems/afk_admin/build/windows/CMakeFiles/3.26.4-msvc4/CMakeSystem.cmake
+C:/sems/afk_admin/windows/CMakeLists.txt
+C:/sems/afk_admin/windows/flutter/generated_plugins.cmake
