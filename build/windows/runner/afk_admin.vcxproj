@@ -18,9 +18,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9FE12B3E-7BBC-3F79-98F6-C6C79A941AA9}</ProjectGuid>
+    <ProjectGuid>{58EE1F2C-82EA-34D8-BF1B-25808C49368C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
     <ProjectName>afk_admin</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
@@ -50,19 +50,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\sems\afk_admin\build\windows\runner\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">afk_admin.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">afk_admin</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">C:\sems\afk_admin\build\windows\runner\Profile\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\Profile\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">afk_admin.dir\Profile\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">afk_admin</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\sems\afk_admin\build\windows\runner\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">afk_admin.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">afk_admin</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
@@ -71,7 +71,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\sems\afk_admin\windows;C:\sems\afk_admin\windows\flutter\ephemeral;C:\sems\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -91,10 +91,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_HAS_EXCEPTIONS=0;FLUTTER_VERSION=\"1.0.0+1\";FLUTTER_VERSION_MAJOR=1;FLUTTER_VERSION_MINOR=0;FLUTTER_VERSION_PATCH=0;FLUTTER_VERSION_BUILD=1;NOMINMAX;UNICODE;_UNICODE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\sems\afk_admin\windows;C:\sems\afk_admin\windows\flutter\ephemeral;C:\sems\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\sems\afk_admin\windows;C:\sems\afk_admin\windows\flutter\ephemeral;C:\sems\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -102,25 +102,25 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\flutter\Debug\flutter_wrapper_app.lib;dwmapi.lib;C:\sems\afk_admin\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\flutter\Debug\flutter_wrapper_app.lib;dwmapi.lib;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/sems/afk_admin/build/windows/runner/Debug/afk_admin.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/sems/afk_admin/build/windows/runner/Debug/afk_admin.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/runner/Debug/afk_admin.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/runner/Debug/afk_admin.pdb</ProgramDataBaseFile>
       <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Manifest>
-      <AdditionalManifestFiles>C:\sems\afk_admin\windows\runner\runner.exe.manifest;</AdditionalManifestFiles>
+      <AdditionalManifestFiles>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\runner.exe.manifest;</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\sems\afk_admin\windows;C:\sems\afk_admin\windows\flutter\ephemeral;C:\sems\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>"4100"</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -140,10 +140,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;FLUTTER_VERSION=\"1.0.0+1\";FLUTTER_VERSION_MAJOR=1;FLUTTER_VERSION_MINOR=0;FLUTTER_VERSION_PATCH=0;FLUTTER_VERSION_BUILD=1;NOMINMAX;UNICODE;_UNICODE;CMAKE_INTDIR=\"Profile\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\sems\afk_admin\windows;C:\sems\afk_admin\windows\flutter\ephemeral;C:\sems\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\sems\afk_admin\windows;C:\sems\afk_admin\windows\flutter\ephemeral;C:\sems\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -151,25 +151,25 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\flutter\Profile\flutter_wrapper_app.lib;dwmapi.lib;C:\sems\afk_admin\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\flutter\Profile\flutter_wrapper_app.lib;dwmapi.lib;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/sems/afk_admin/build/windows/runner/Profile/afk_admin.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/sems/afk_admin/build/windows/runner/Profile/afk_admin.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/runner/Profile/afk_admin.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/runner/Profile/afk_admin.pdb</ProgramDataBaseFile>
       <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Manifest>
-      <AdditionalManifestFiles>C:\sems\afk_admin\windows\runner\runner.exe.manifest;</AdditionalManifestFiles>
+      <AdditionalManifestFiles>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\runner.exe.manifest;</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\sems\afk_admin\windows;C:\sems\afk_admin\windows\flutter\ephemeral;C:\sems\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>"4100"</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -189,10 +189,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;FLUTTER_VERSION=\"1.0.0+1\";FLUTTER_VERSION_MAJOR=1;FLUTTER_VERSION_MINOR=0;FLUTTER_VERSION_PATCH=0;FLUTTER_VERSION_BUILD=1;NOMINMAX;UNICODE;_UNICODE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\sems\afk_admin\windows;C:\sems\afk_admin\windows\flutter\ephemeral;C:\sems\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\sems\afk_admin\windows;C:\sems\afk_admin\windows\flutter\ephemeral;C:\sems\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -200,28 +200,28 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\flutter\Release\flutter_wrapper_app.lib;dwmapi.lib;C:\sems\afk_admin\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\flutter\Release\flutter_wrapper_app.lib;dwmapi.lib;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/sems/afk_admin/build/windows/runner/Release/afk_admin.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/sems/afk_admin/build/windows/runner/Release/afk_admin.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/runner/Release/afk_admin.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/runner/Release/afk_admin.pdb</ProgramDataBaseFile>
       <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Manifest>
-      <AdditionalManifestFiles>C:\sems\afk_admin\windows\runner\runner.exe.manifest;</AdditionalManifestFiles>
+      <AdditionalManifestFiles>C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\runner.exe.manifest;</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\sems\afk_admin\windows\runner\CMakeLists.txt">
+    <CustomBuild Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/sems/afk_admin/windows/runner/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows/runner/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/sems/afk_admin/windows -BC:/sems/afk_admin/build/windows --check-stamp-file C:/sems/afk_admin/build/windows/runner/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows -BC:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows --check-stamp-file C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/runner/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -230,11 +230,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\sems\afk_admin\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">Building Custom Rule C:/sems/afk_admin/windows/runner/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">Building Custom Rule C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows/runner/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/sems/afk_admin/windows -BC:/sems/afk_admin/build/windows --check-stamp-file C:/sems/afk_admin/build/windows/runner/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows -BC:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows --check-stamp-file C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/runner/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -243,11 +243,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">C:\sems\afk_admin\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/sems/afk_admin/windows/runner/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows/runner/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/sems/afk_admin/windows -BC:/sems/afk_admin/build/windows --check-stamp-file C:/sems/afk_admin/build/windows/runner/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows -BC:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows --check-stamp-file C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/runner/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -256,33 +256,33 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\sems\afk_admin\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\sems\afk_admin\windows\runner\flutter_window.cpp" />
-    <ClCompile Include="C:\sems\afk_admin\windows\runner\main.cpp" />
-    <ClCompile Include="C:\sems\afk_admin\windows\runner\utils.cpp" />
-    <ClCompile Include="C:\sems\afk_admin\windows\runner\win32_window.cpp" />
-    <ClCompile Include="C:\sems\afk_admin\windows\flutter\generated_plugin_registrant.cc" />
-    <ResourceCompile Include="C:\sems\afk_admin\windows\runner\Runner.rc" />
+    <ClCompile Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\flutter_window.cpp" />
+    <ClCompile Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\main.cpp" />
+    <ClCompile Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\utils.cpp" />
+    <ClCompile Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\win32_window.cpp" />
+    <ClCompile Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\generated_plugin_registrant.cc" />
+    <ResourceCompile Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\Runner.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\sems\afk_admin\build\windows\ZERO_CHECK.vcxproj">
-      <Project>{EE13D594-79F8-3A14-930A-9554D18911FA}</Project>
+    <ProjectReference Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\ZERO_CHECK.vcxproj">
+      <Project>{72C7298D-731C-33F4-8B03-7E0B695C29EF}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\sems\afk_admin\build\windows\flutter\flutter_assemble.vcxproj">
-      <Project>{32019501-4ADA-3652-B562-B54842192C90}</Project>
+    <ProjectReference Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\flutter\flutter_assemble.vcxproj">
+      <Project>{04F6C7B5-1D64-32EA-AB3A-9EC893094F8F}</Project>
       <Name>flutter_assemble</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\sems\afk_admin\build\windows\flutter\flutter_wrapper_app.vcxproj">
-      <Project>{17F93EC4-CD0A-351F-8D36-9D2869597D69}</Project>
+    <ProjectReference Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\flutter\flutter_wrapper_app.vcxproj">
+      <Project>{C84DF32E-6926-3156-ADD4-90E22CE50F69}</Project>
       <Name>flutter_wrapper_app</Name>
     </ProjectReference>
   </ItemGroup>
