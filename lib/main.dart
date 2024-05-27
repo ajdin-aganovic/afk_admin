@@ -165,6 +165,7 @@ class LoginPage extends StatelessWidget {
                       var password=_passwordcontroller.text;
 
                       if(username.isEmpty||password.isEmpty)
+                      // if(username.isEmpty)
                       {
                         showDialog(context: context, builder: (BuildContext context) => 
                               AlertDialog(
