@@ -1,6 +1,6 @@
-^C:\FAKULTET\FIT-III-GODINA\RS-II\SEMINARSKIRAD\BACKEND\FUDBALSKIKLUB\UI\AFK_ADMIN\WINDOWS\CMAKELISTS.TXT
+^C:\SEMS\AFK_ADMIN\WINDOWS\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows -BC:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows --check-stamp-file C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/sems/afk_admin/windows -BC:/sems/afk_admin/build/windows --check-stamp-file C:/sems/afk_admin/build/windows/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

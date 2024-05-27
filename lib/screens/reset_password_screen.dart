@@ -104,13 +104,17 @@ class _ContactPageState extends State<ContactPage> {
               style: TextStyle(fontSize: 20),)),
               SizedBox(height: 25,),
               ElevatedButton(onPressed: (){
-                Navigator.of(context).push(
-                MaterialPageRoute(
-                  // builder: (context) => HomePage(naziv: username,),
-                  builder: (context) => LoginPage(),
-
-                ),
-              );
+                Navigator.of(context).pushAndRemoveUntil<void>
+                (
+                
+                MaterialPageRoute<void>
+                (builder: (BuildContext context) => 
+                LoginPage()),
+                ModalRoute.withName('/Korisnik'),
+                  // MaterialPageRoute(
+                  //   builder: (context) => LoginPage(),
+                  // ),
+                );
               }, child: Text("Nazad na login", 
               style: TextStyle(fontSize: 20),))
             ]),

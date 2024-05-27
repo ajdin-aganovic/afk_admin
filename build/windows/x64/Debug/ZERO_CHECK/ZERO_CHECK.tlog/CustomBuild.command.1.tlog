@@ -1,6 +1,6 @@
-^C:\FAKULTET\FIT-III-GODINA\RS-II\SEMINARSKIRAD\BACKEND\FUDBALSKIKLUB\UI\AFK_ADMIN\BUILD\WINDOWS\CMAKEFILES\6E8ECE5AA5DEF8F0CE3F1FE5622A54A0\GENERATE.STAMP.RULE
+^C:\SEMS\AFK_ADMIN\BUILD\WINDOWS\CMAKEFILES\CA6AEDC461C7A54E9F042D2E5EB4545C\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/windows -BC:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Fakultet/FIT-III-godina/RS-II/SeminarskiRad/Backend/FudbalskiKlub/UI/afk_admin/build/windows/afk_admin.sln
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/sems/afk_admin/windows -BC:/sems/afk_admin/build/windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/sems/afk_admin/build/windows/afk_admin.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

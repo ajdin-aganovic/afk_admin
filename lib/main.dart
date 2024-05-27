@@ -41,7 +41,7 @@ import 'models/korisnik.dart';
 
 void main() async {
   // await dotenv.load(fileName: "lib/.env");
-  Stripe.publishableKey="pk_test_51NnoBzESdHn89Po93TLLgZ3wTUdjypvSv1WwSQPYxEfPXp2B8veWzxeMS2pVRci6UaVbLNW8xE90ND9JixodNVNX00uDND5nc3";
+  // Stripe.publishableKey=
   
   runApp(MultiProvider(providers:
   [

@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\CMakeFiles\c4267e36f917de67b5246421eebf55b6\flutter_windows.dll.rule">
+    <CustomBuild Include="C:\sems\afk_admin\build\windows\CMakeFiles\872abcd65b967fb80d31e7088ba553e6\flutter_windows.dll.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\CMakeFiles\f2c633be3c104a1ffd7ffb6aadc95195\flutter_assemble.rule">
+    <CustomBuild Include="C:\sems\afk_admin\build\windows\CMakeFiles\00cd92a3bd9f09119e64b368cefd5134\flutter_assemble.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\CMakeLists.txt" />
+    <CustomBuild Include="C:\sems\afk_admin\windows\flutter\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\flutter\CMakeFiles\flutter_assemble" />
+    <None Include="C:\sems\afk_admin\build\windows\flutter\CMakeFiles\flutter_assemble" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{C0A6BDE2-C035-3422-A387-3708081395A6}</UniqueIdentifier>
+      <UniqueIdentifier>{0F85F616-2F27-3BA3-804E-7BFB9CE30326}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

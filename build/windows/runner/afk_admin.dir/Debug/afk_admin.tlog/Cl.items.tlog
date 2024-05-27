@@ -1,5 +1,5 @@
-C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\flutter_window.cpp;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\afk_admin.dir\Debug\flutter_window.obj
-C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\main.cpp;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\afk_admin.dir\Debug\main.obj
-C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\utils.cpp;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\afk_admin.dir\Debug\utils.obj
-C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\runner\win32_window.cpp;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\afk_admin.dir\Debug\win32_window.obj
-C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\windows\flutter\generated_plugin_registrant.cc;C:\Fakultet\FIT-III-godina\RS-II\SeminarskiRad\Backend\FudbalskiKlub\UI\afk_admin\build\windows\runner\afk_admin.dir\Debug\generated_plugin_registrant.obj
+C:\sems\afk_admin\windows\runner\flutter_window.cpp;C:\sems\afk_admin\build\windows\runner\afk_admin.dir\Debug\flutter_window.obj
+C:\sems\afk_admin\windows\runner\main.cpp;C:\sems\afk_admin\build\windows\runner\afk_admin.dir\Debug\main.obj
+C:\sems\afk_admin\windows\runner\utils.cpp;C:\sems\afk_admin\build\windows\runner\afk_admin.dir\Debug\utils.obj
+C:\sems\afk_admin\windows\runner\win32_window.cpp;C:\sems\afk_admin\build\windows\runner\afk_admin.dir\Debug\win32_window.obj
+C:\sems\afk_admin\windows\flutter\generated_plugin_registrant.cc;C:\sems\afk_admin\build\windows\runner\afk_admin.dir\Debug\generated_plugin_registrant.obj
