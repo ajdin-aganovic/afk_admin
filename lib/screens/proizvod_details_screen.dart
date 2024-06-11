@@ -1,23 +1,14 @@
-import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
-import 'package:afk_admin/models/transakcijski_racun.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/proizvod_provider.dart';
-import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
 import 'package:afk_admin/screens/proizvod_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
 import '../models/proizvod.dart';
-import '../models/uloga.dart';
 
 class ProizvodDetailsScreen extends StatefulWidget {
   Korisnik?korisnik;
@@ -52,6 +43,8 @@ class _ProizvodDetailsScreen extends State<ProizvodDetailsScreen> {
     'kategorija': widget.proizvod?.kategorija??"---", 
     'cijena': widget.proizvod?.cijena.toString()??"---", 
     'kolicina': widget.proizvod?.kolicina.toString()??"---", 
+    'stateMachine': widget.proizvod?.stateMachine??"creating", 
+
   };
 
     _proizvodProvider=context.read<ProizvodProvider>(); 
@@ -116,7 +109,7 @@ class _ProizvodDetailsScreen extends State<ProizvodDetailsScreen> {
                       child:
                       FormBuilderDropdown(
                               name: 'kategorija',
-                              decoration: InputDecoration(labelText: 'Kategorija proizvoda'),
+                              decoration: const InputDecoration(labelText: 'Kategorija proizvoda'),
                               items: const[ 
                                 DropdownMenuItem(value: 'Dresovi', child: Text('Dresovi'),), 
                                 DropdownMenuItem(value: 'Dukserice', child: Text('Dukserice'),), 
@@ -153,6 +146,15 @@ class _ProizvodDetailsScreen extends State<ProizvodDetailsScreen> {
                 
             ),
           ),
+
+          Expanded(
+            child: FormBuilderTextField (
+                            decoration: const InputDecoration(labelText: "Status proizvoda"), 
+                readOnly: true,
+                name: 'stateMachine',
+                
+            ),
+          ),
           
           ElevatedButton(onPressed: () async{
                 _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
@@ -181,7 +183,7 @@ class _ProizvodDetailsScreen extends State<ProizvodDetailsScreen> {
                             ],
                           ));
                 }
-              }, child: Text("Save")),
+              }, child: const Text("Save")),
               
               ElevatedButton(onPressed: () async{
                 Navigator.of(context).push(
@@ -189,7 +191,7 @@ class _ProizvodDetailsScreen extends State<ProizvodDetailsScreen> {
                     builder: (context) => ProizvodListScreen(),
                   ),
                 );
-              }, child: Text("Svi proizvodi")),
+              }, child: const Text("Svi proizvodi")),
 
              ElevatedButton(onPressed: () async{
           showDialog(context: context, builder: (BuildContext context) => 
@@ -217,7 +219,7 @@ class _ProizvodDetailsScreen extends State<ProizvodDetailsScreen> {
                       ],
                     ));
                         
-                      }, child: Text("Izbriši")),
+                      }, child: const Text("Izbriši")),
           ],
           ),
         ),

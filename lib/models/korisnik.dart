@@ -18,11 +18,12 @@ class Korisnik{
   DateTime? podUgovoromOd;
   DateTime? podUgovoromDo;
   String? uloga;
+  bool? izbrisan;
 
 
   Korisnik(this.korisnikId, this.ime, this.prezime, this.korisnickoIme, this.email, this.lozinkaHash, this.lozinkaSalt,
   this.strucnaSprema, this.datumRodjenja, this.podUgovorom, this.podUgovoromOd, this.podUgovoromDo, this.uloga,
-  this.password, this.passwordPotvrda);
+  this.password, this.passwordPotvrda, this.izbrisan);
   // factory Korisnici.fromJson(Map<String,dynamic>json)=>_$KorisniciFromJson(json);
 
   factory Korisnik.fromJson(Map<String,dynamic>json)=>_$KorisnikFromJson(json);

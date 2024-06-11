@@ -1,17 +1,12 @@
 import 'package:afk_admin/models/search_result.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/stadion_provider.dart';
-import 'package:afk_admin/screens/plata_details_screen.dart';
 import 'package:afk_admin/screens/stadion_details_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
-import '../models/platum.dart';
 import '../models/stadion.dart';
-import '../providers/transakcijski_racun_provider.dart';
 import '../utils/util.dart';
 
 class StadionListScreen extends StatefulWidget {
@@ -103,84 +98,88 @@ Widget _buildDataListView() {
   //   height: 500,
   //   width: 400,
   //   child: 
-    Scrollbar(
-      controller: _vertical,
-      thumbVisibility: true,
-      trackVisibility: true,
-      child: Scrollbar(
-        controller: _horizontal,
-        thumbVisibility: true,
-        trackVisibility: true,
-        notificationPredicate: (notif) => notif.depth == 1,
-        child: SingleChildScrollView(
+    Expanded(
+      child: SingleChildScrollView(
+        child: Scrollbar(
           controller: _vertical,
-          scrollDirection: Axis.vertical,
-          child: SingleChildScrollView(
+          thumbVisibility: true,
+          trackVisibility: true,
+          child: Scrollbar(
             controller: _horizontal,
-            scrollDirection: Axis.horizontal,
-            child: DataTable(
-                columns: const [
-                    DataColumn(label: Expanded(
-                    child: Text("ID",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    
-                    ),
-                    ),
-
-                    DataColumn(label: Expanded(
-                    child: Text("Naziv stadiona",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    ),
-                    ),
-
-                    DataColumn(label: Expanded(
-                    child: Text("Kapacitet stadiona",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    ),
-                    ),
-
-                    ],
-
-              rows: 
-                result?.result.map((Stadion e) => DataRow(
-                  onSelectChanged: (yxc)=>{
-                    if((Authorization.ulogaKorisnika=="Administrator")&&yxc==true)
-                      {
-                        print('selected: ${e.stadionId}'),
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context)=> StadionDetailsScreen(stadion: e,)
-                          )
-                      ) 
-                      }
-                    else
-                    {
-                      showDialog(context: context, builder: (BuildContext context) => 
-                        AlertDialog(
-                          title: Text("You have chosen ${e.stadionId}"),
-                          content: Text("Naziv stadiona: ${e.nazivStadiona}\nKapacitet stadiona: ${e.kapacitetStadiona}"),
-                          actions: [
-                            TextButton(onPressed: ()=>{
-                              Navigator.pop(context),
-                            }, child: const Text("OK"))
-                          ],
-                        )),
-                    }
-                  },
-                  cells: [
-                  DataCell(Text(e.stadionId.toString()??"0")),
-                  DataCell(Text(e.nazivStadiona??"---")),
-                  DataCell(Text(e.kapacitetStadiona.toString()??"---")),
-                  // DataCell(Text(e.datumStadiona.toString()??DateTime.now().toString())),
-
-                  ]
-                )).toList()??[]
-              
+            thumbVisibility: true,
+            trackVisibility: true,
+            notificationPredicate: (notif) => notif.depth == 1,
+            child: SingleChildScrollView(
+              controller: _vertical,
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView(
+                controller: _horizontal,
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                    columns: const [
+                        DataColumn(label: Expanded(
+                        child: Text("ID",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        
+                        ),
+                        ),
+        
+                        DataColumn(label: Expanded(
+                        child: Text("Naziv stadiona",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
+        
+                        DataColumn(label: Expanded(
+                        child: Text("Kapacitet stadiona",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
+        
+                        ],
+        
+                  rows: 
+                    result?.result.map((Stadion e) => DataRow(
+                      onSelectChanged: (yxc)=>{
+                        if((Authorization.ulogaKorisnika=="Administrator")&&yxc==true)
+                          {
+                            print('selected: ${e.stadionId}'),
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context)=> StadionDetailsScreen(stadion: e,)
+                              )
+                          ) 
+                          }
+                        else
+                        {
+                          showDialog(context: context, builder: (BuildContext context) => 
+                            AlertDialog(
+                              title: Text("You have chosen ${e.stadionId}"),
+                              content: Text("Naziv stadiona: ${e.nazivStadiona}\nKapacitet stadiona: ${e.kapacitetStadiona}"),
+                              actions: [
+                                TextButton(onPressed: ()=>{
+                                  Navigator.pop(context),
+                                }, child: const Text("OK"))
+                              ],
+                            )),
+                        }
+                      },
+                      cells: [
+                      DataCell(Text(e.stadionId.toString()??"0")),
+                      DataCell(Text(e.nazivStadiona??"---")),
+                      DataCell(Text(e.kapacitetStadiona.toString()??"---")),
+                      // DataCell(Text(e.datumStadiona.toString()??DateTime.now().toString())),
+        
+                      ]
+                    )).toList()??[]
+                  
+                  ),
               ),
+            ),
           ),
-        ),
+        // ),
+          ),
       ),
-    // ),
-  );
+    );
 }
 }
  

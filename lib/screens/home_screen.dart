@@ -1,52 +1,13 @@
-import 'dart:math';
-import 'dart:convert';
-import 'package:afk_admin/providers/bolest_provider.dart';
-import 'package:afk_admin/providers/clanarina_provider.dart';
-import 'package:afk_admin/providers/pozicija_provider.dart';
-import 'package:afk_admin/providers/stadion_provider.dart';
-import 'package:afk_admin/providers/statistika_provider.dart';
-import 'package:afk_admin/providers/termin_provider.dart';
-import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
-import 'package:afk_admin/providers/trening_provider.dart';
-import 'package:afk_admin/screens/bolest_details_screen.dart';
-import 'package:afk_admin/screens/bolest_list_screen.dart';
-import 'package:afk_admin/screens/clanarina_details_screen.dart';
-import 'package:afk_admin/screens/clanarina_list_screen.dart';
 import 'package:afk_admin/screens/igrac_opcije_screen.dart';
-import 'package:afk_admin/screens/korisnici_list_screen.dart';
-import 'package:afk_admin/screens/korisnik_insert_screen.dart';
 import 'package:afk_admin/screens/medicinsko_opcije_screen.dart';
-import 'package:afk_admin/screens/plata_details_screen.dart';
-import 'package:afk_admin/screens/pozicija_details_screen.dart';
-import 'package:afk_admin/screens/pozicija_list_screen.dart';
 import 'package:afk_admin/screens/proizvod_list_screen.dart';
-import 'package:afk_admin/screens/reset_password_screen.dart';
-import 'package:afk_admin/screens/stadion_details_screen.dart';
-import 'package:afk_admin/screens/stadion_screen.dart';
-import 'package:afk_admin/screens/statistika_details_screen.dart';
-import 'package:afk_admin/screens/statistika_list_screen.dart';
-import 'package:afk_admin/screens/termin_details_screen.dart';
-import 'package:afk_admin/screens/termin_list_screen.dart';
-import 'package:afk_admin/screens/transakcijski_racun_details.dart';
-import 'package:afk_admin/screens/transakcijski_racun_list_screen.dart';
-import 'package:afk_admin/screens/trening_details_screen.dart';
-import 'package:afk_admin/screens/trening_list_screen.dart';
-import 'package:afk_admin/screens/uloga_details_screen.dart';
-import 'package:afk_admin/screens/uloga_list_screen.dart';
 import 'package:afk_admin/screens/uprava_opcije_screen.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
-import 'package:http/http.dart' as http;
 import 'package:afk_admin/providers/korisnik_provider.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:afk_admin/screens/plata_list_screen.dart';
 import 'package:afk_admin/screens/korisnik_details_screen.dart';
 import 'package:afk_admin/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:afk_admin/widgets/makePayment.dart';
 // import 'package:afk_admin/api/client.dart';
 
 import '../models/korisnik.dart';
@@ -55,7 +16,7 @@ import 'administracija_opcije_screen.dart';
 
 class HomePage extends StatefulWidget {
   final Korisnik? loggovaniUser;
-  HomePage({this.loggovaniUser, super.key});
+  const HomePage({this.loggovaniUser, super.key});
 
   @override
   State<HomePage> createState() => _HomePage();
@@ -67,7 +28,7 @@ class _HomePage extends State<HomePage>{
    final ScrollController _horizontal = ScrollController(),
       _vertical = ScrollController();
   
-Map<String,dynamic>_initialValue={};
+final Map<String,dynamic>_initialValue={};
 
   late KorisnikProvider _korisnikProvider;
   
@@ -115,7 +76,7 @@ Map<String,dynamic>_initialValue={};
           title: const Text("Home"),),
           body: Center(
             child: 
-            Container(
+            SingleChildScrollView(
               // constraints: const BoxConstraints(maxHeight: 600,maxWidth: 400),
               child: 
               Card(
@@ -127,17 +88,17 @@ Map<String,dynamic>_initialValue={};
                       child: 
                         Column(
                           children: [
-                              SizedBox(height: 12,),
-                              Text('Aplikacija Fudbalskog Kluba',
+                              const SizedBox(height: 12,),
+                              const Text('Aplikacija Fudbalskog Kluba',
                               style: TextStyle(fontSize: 30),), 
-                              SizedBox(height: 12,),
+                              const SizedBox(height: 12,),
                               // Text('Dobrodošli ${widget.loggovaniUser?.korisnickoIme??"nazad"}',
                               Text('Dobrodošli ${Authorization.username}',
 
                               
                               // Text('Dobrodošli ${widget.korisnik?.korisnickoIme}',
-                              style: TextStyle(fontSize: 30),),
-                              SizedBox(height: 24,),
+                              style: const TextStyle(fontSize: 30),),
+                              const SizedBox(height: 24,),
                                           
       
 
@@ -164,7 +125,7 @@ Map<String,dynamic>_initialValue={};
                                          showDialog(context: context, builder: (BuildContext context) => 
                                     AlertDialog(
                                       title: const Text("You are not Admin."),
-                                      content: Text("Try again"),
+                                      content: const Text("Try again"),
                                       actions: [
                                         TextButton(onPressed: ()=>{
                                           Navigator.pop(context),
@@ -172,7 +133,7 @@ Map<String,dynamic>_initialValue={};
                                       ],
                                     ));
                                       }
-                                    }, child: Text("Go to Admin dio")),
+                                    }, child: const Text("Go to Admin dio")),
                                     
                                     )
                                   ],
@@ -197,7 +158,7 @@ Map<String,dynamic>_initialValue={};
                                          showDialog(context: context, builder: (BuildContext context) => 
                                     AlertDialog(
                                       title: const Text("You are not Uprava."),
-                                      content: Text("Try again"),
+                                      content: const Text("Try again"),
                                       actions: [
                                         TextButton(onPressed: ()=>{
                                           Navigator.pop(context),
@@ -205,7 +166,7 @@ Map<String,dynamic>_initialValue={};
                                       ],
                                     ));
                                       }
-                                    }, child: Text("Go to Uprava dio")),
+                                    }, child: const Text("Go to Uprava dio")),
                                     ),
                                   ],
                                 ),
@@ -233,7 +194,7 @@ Map<String,dynamic>_initialValue={};
                                          showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
                               title: const Text("You are not Medicinsko osoblje."),
-                              content: Text("Try again"),
+                              content: const Text("Try again"),
                               actions: [
                                 TextButton(onPressed: ()=>{
                                           Navigator.pop(context),
@@ -241,7 +202,7 @@ Map<String,dynamic>_initialValue={};
                               ],
                             ));
                               }
-                            }, child: Text("Go to Medicinski dio")),
+                            }, child: const Text("Go to Medicinski dio")),
                                         ),
                                        ],
                                      ),
@@ -266,7 +227,7 @@ Map<String,dynamic>_initialValue={};
                                          showDialog(context: context, builder: (BuildContext context) => 
                                           AlertDialog(
                                             title: const Text("You are not Igrač."),
-                                            content: Text("Try again"),
+                                            content: const Text("Try again"),
                                             actions: [
                                               TextButton(onPressed: ()=>{
                                                 Navigator.pop(context),
@@ -274,7 +235,7 @@ Map<String,dynamic>_initialValue={};
                                             ],
                                           ));
                                   }
-                                }, child: Text("Go to Igrač dio")),
+                                }, child: const Text("Go to Igrač dio")),
                               ),
                             ],
                           ),
@@ -310,7 +271,7 @@ Map<String,dynamic>_initialValue={};
                                     showDialog(context: context, builder: (BuildContext context) => 
                                         AlertDialog(
                                           title: const Text("Error"),
-                                          content: Text("${e.toString()}"),
+                                          content: Text(e.toString()),
                                           actions: [
                                             TextButton(onPressed: ()=>{
                                               Navigator.pop(context),
@@ -320,7 +281,7 @@ Map<String,dynamic>_initialValue={};
                                   }
 
 
-                                }, child: Text("Account details"),
+                                }, child: const Text("Account details"),
 
 
                                 ),
@@ -338,7 +299,7 @@ Map<String,dynamic>_initialValue={};
                                     );
                                     
                                       
-                                    }, child: Text("Go to Fan shop")),
+                                    }, child: const Text("Go to Fan shop")),
                                   ),
                                 
                               ],

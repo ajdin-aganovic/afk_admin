@@ -1,22 +1,13 @@
-import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
-import 'package:afk_admin/models/transakcijski_racun.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
 import 'package:afk_admin/screens/uloga_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
-import '../models/uloga.dart';
 import '../models/uloga.dart';
 
 class UlogaDetailsScreen extends StatefulWidget {
@@ -137,7 +128,7 @@ class _UlogaDetailsScreen extends State<UlogaDetailsScreen> {
                             ],
                           ));
                 }
-              }, child: Text("Save")),
+              }, child: const Text("Save")),
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
@@ -145,7 +136,7 @@ class _UlogaDetailsScreen extends State<UlogaDetailsScreen> {
                     builder: (context) => UlogaListScreen(),
                   ),
                 );
-              }, child: Text("Sve uloge")),
+              }, child: const Text("Sve uloge")),
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
             AlertDialog(
@@ -172,7 +163,7 @@ class _UlogaDetailsScreen extends State<UlogaDetailsScreen> {
               ],
             ));
         
-                      }, child: Text("Izbriši")),
+                      }, child: const Text("Izbriši")),
           ],
           ),
         ),

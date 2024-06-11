@@ -1,26 +1,15 @@
 import 'package:afk_admin/models/korisnik.dart';
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/providers/korisnik_pozicija_provider.dart';
-import 'package:afk_admin/providers/korisnik_uloga_provider.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/screens/bolest_list_screen.dart';
-import 'package:afk_admin/screens/igrac_opcije_screen.dart';
 import 'package:afk_admin/screens/korisnici_editable_screen.dart';
-import 'package:afk_admin/screens/korisnici_list_screen.dart';
-import 'package:afk_admin/screens/korisnik_insert_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import 'package:afk_admin/providers/korisnik_provider.dart';
-import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:afk_admin/screens/korisnik_details_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../models/korisnik_pozicija.dart';
-import '../models/platum.dart';
-import '../models/korisnik_uloga.dart';
 import '../models/pozicija.dart';
 import '../models/uloga.dart';
 import '../providers/pozicija_provider.dart';
@@ -159,7 +148,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                       onChanged: (value) {
                         setState(() {
                           
-                          print("Odabrani ${value}");
+                          print("Odabrani $value");
                         });
                       },
                       validator: (value) {
@@ -186,7 +175,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                       onChanged: (value) {
                         setState(() {
                           
-                          print("Odabrani ${value}");
+                          print("Odabrani $value");
                         });
                       },
                       validator: (value) {
@@ -207,10 +196,10 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             
-                            builder: (context) => KorisniciEditableScreen(),
+                            builder: (context) => const KorisniciEditableScreen(),
                           ),
                         );
-                      }, child: Text("Svi korisnici")),
+                      }, child: const Text("Svi korisnici")),
                   ],
                 ),
 
@@ -220,7 +209,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                         setState(() {
                           
                         });
-                      }, child: Text("Refresh podataka")),
+                      }, child: const Text("Refresh podataka")),
                   ],
                 ),
 
@@ -230,10 +219,10 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             
-                            builder: (context) => HomePage(),
+                            builder: (context) => const HomePage(),
                           ),
                         );
-                      }, child: Text("Home page")),
+                      }, child: const Text("Home page")),
 
                       ElevatedButton(onPressed: () async{
                         _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
@@ -246,7 +235,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                           }
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => HomePage(),
+                              builder: (context) => const HomePage(),
 
                             ),
                                     );
@@ -262,7 +251,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                                     ],
                                   ));
                         }
-                      }, child: Text("Save")),
+                      }, child: const Text("Save")),
                     ],
                   ),
               ],

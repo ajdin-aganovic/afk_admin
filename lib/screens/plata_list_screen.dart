@@ -3,8 +3,6 @@ import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/screens/plata_details_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../models/korisnik.dart';
@@ -148,159 +146,163 @@ class _PlatumListScreen extends State<PlatumListScreen> {
 
 Widget _buildDataListView() {
   return 
-  SizedBox(
-    height: 500,
-    width: 800,
-    child: 
-    Scrollbar(
-      controller: _vertical,
-      thumbVisibility: true,
-      trackVisibility: true,
-      child: Scrollbar(
-        controller: _horizontal,
-        thumbVisibility: true,
-        trackVisibility: true,
-        notificationPredicate: (notif) => notif.depth == 1,
-        child: SingleChildScrollView(
+  Expanded(
+    child: SingleChildScrollView(
+      child: SizedBox(
+        height: 500,
+        width: 800,
+        child: 
+        Scrollbar(
           controller: _vertical,
-          scrollDirection: Axis.vertical,
-          child: SingleChildScrollView(
+          thumbVisibility: true,
+          trackVisibility: true,
+          child: Scrollbar(
             controller: _horizontal,
-            scrollDirection: Axis.horizontal,
-            // scrollDirection:Axis.vertical,
-            child: DataTable(
-                columns: const [
-                    DataColumn(label: Expanded(
-                    child: Text("ID",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    
-                    ),
-                    ),
-
-                    DataColumn(label: Expanded(
-                    child: Text("Br. tr. računa",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    ),
-                    ),
-
-                    DataColumn(label: Expanded(
-                    child: Text("Status plate",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    ),
-                    ),
-
-                    DataColumn(label: Expanded(
-                    child: Text("Iznos",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    ),
-                    ),
-
-                    DataColumn(label: Expanded(
-                    child: Text("Datum slanja",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    
-                    ),
-                    ),
-
-                    DataColumn(label: Expanded(
-                    child: Text("Izmijeni status",
-                    style: TextStyle(fontStyle: FontStyle.italic),),
-                    
-                    ),
-                    ),
-                    ],
-
-              rows: 
-                result?.result.map((Platum e) => DataRow(
-                  onSelectChanged: (yxc)=>{
-                    if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Računovođa")&&yxc==true)
-                      {
-                        print('selected: ${e.plataId}'),
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context)=> PlatumDetailsScreen(platum: e,)
-                          )
-                      ) 
-                      }
-                    else
-                    {
-                      showDialog(context: context, builder: (BuildContext context) => 
-                        AlertDialog(
-                          title: Text("You have chosen ${e.plataId}"),
-                          content: Text("Transakcijski račun ID: ${getBrojRacuna(e.transakcijskiRacunId!)}\nStanje: ${e.stateMachine}\nIznos: ${e.iznos}\nDatum slanja: ${e.datumSlanja}"),
-                          actions: [
-                            TextButton(onPressed: ()=>{
-                              Navigator.pop(context),
-                            }, child: const Text("OK"))
-                          ],
-                        )),
-                    }
-                  },
-                  cells: [
-                  DataCell(Text(e.plataId?.toString()??"")),
-                  // DataCell(Text(e.transakcijskiRacunId.toString() ??"")),
-                  DataCell(Text(getBrojRacuna(e.transakcijskiRacunId!) ??"")),
-                  DataCell(Text(e.stateMachine ??"")),
-                  DataCell(Text(e.iznos.toString() ??"")),
-                  DataCell(Text(e.datumSlanja.toString() ??"")),
-                  DataCell(const Text("Edit"), onTap: () async => {
-                        if(Authorization.ulogaKorisnika=="Administrator"&&e.stateMachine!.contains("active"))
-                        {
-                          // Navigator.of(context).push(
-                          //       MaterialPageRoute(builder: (context)=> InsertScreen(korisnik: e,)
-                          //       )
-                          //   ) 
-                         await _platumProvider.hidePlatum(e.plataId!),
-                          showDialog(context: context, builder: (BuildContext context) => 
-                              AlertDialog(
-                                title: Text("Successful operation!"),
-                                content: Text("Plata je zatvorena"),
-                                actions: [
-                                  TextButton(onPressed: ()=>{
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (context)=> PlatumListScreen()
-                                        )
-                                    ) 
-                                  }, child: const Text("OK"))
-                                ],
-                              )),
-                        }
-                        else if(Authorization.ulogaKorisnika=="Administrator"&&e.stateMachine!.contains("draft"))
-                        {
-                           await _platumProvider.activatePlatum(e.plataId!),
-                          showDialog(context: context, builder: (BuildContext context) => 
-                              AlertDialog(
-                                title: Text("Successful operation!"),
-                                content: Text("Plata je otvorena"),
-                                actions: [
-                                  TextButton(onPressed: ()=>{
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (context)=> PlatumListScreen()
-                                        )
-                                    ) 
-                                  }, child: const Text("OK"))
-                                ],
-                              )),
-                        }
+            thumbVisibility: true,
+            trackVisibility: true,
+            notificationPredicate: (notif) => notif.depth == 1,
+            child: SingleChildScrollView(
+              controller: _vertical,
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView(
+                controller: _horizontal,
+                scrollDirection: Axis.horizontal,
+                // scrollDirection:Axis.vertical,
+                child: DataTable(
+                    columns: const [
+                        DataColumn(label: Expanded(
+                        child: Text("ID",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        
+                        ),
+                        ),
+      
+                        DataColumn(label: Expanded(
+                        child: Text("Br. tr. računa",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
+      
+                        DataColumn(label: Expanded(
+                        child: Text("Status plate",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
+      
+                        DataColumn(label: Expanded(
+                        child: Text("Iznos",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
+      
+                        DataColumn(label: Expanded(
+                        child: Text("Datum slanja",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        
+                        ),
+                        ),
+      
+                        DataColumn(label: Expanded(
+                        child: Text("Izmijeni status",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        
+                        ),
+                        ),
+                        ],
+      
+                  rows: 
+                    result?.result.map((Platum e) => DataRow(
+                      onSelectChanged: (yxc)=>{
+                        if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Računovođa")&&yxc==true)
+                          {
+                            print('selected: ${e.plataId}'),
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context)=> PlatumDetailsScreen(platum: e,)
+                              )
+                          ) 
+                          }
                         else
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
-                              AlertDialog(
-                                title: Text("Warning!"),
-                                content: Text("Unauthorized call of a function.\nYou do not have the permission!"),
-                                actions: [
-                                  TextButton(onPressed: ()=>{
-                                    Navigator.pop(context),
-                                  }, child: const Text("OK"))
-                                ],
-                              )),
+                            AlertDialog(
+                              title: Text("You have chosen ${e.plataId}"),
+                              content: Text("Transakcijski račun ID: ${getBrojRacuna(e.transakcijskiRacunId!)}\nStanje: ${e.stateMachine}\nIznos: ${e.iznos}\nDatum slanja: ${e.datumSlanja}"),
+                              actions: [
+                                TextButton(onPressed: ()=>{
+                                  Navigator.pop(context),
+                                }, child: const Text("OK"))
+                              ],
+                            )),
                         }
-                      })
-
-                  ]
-                )).toList()??[]
-              
+                      },
+                      cells: [
+                      DataCell(Text(e.plataId?.toString()??"")),
+                      // DataCell(Text(e.transakcijskiRacunId.toString() ??"")),
+                      DataCell(Text(getBrojRacuna(e.transakcijskiRacunId!) ??"")),
+                      DataCell(Text(e.stateMachine ??"")),
+                      DataCell(Text(e.iznos.toString() ??"")),
+                      DataCell(Text(e.datumSlanja.toString() ??"")),
+                      DataCell(const Text("Edit"), onTap: () async => {
+                            if(Authorization.ulogaKorisnika=="Administrator"&&e.stateMachine!.contains("active"))
+                            {
+                              // Navigator.of(context).push(
+                              //       MaterialPageRoute(builder: (context)=> InsertScreen(korisnik: e,)
+                              //       )
+                              //   ) 
+                             await _platumProvider.hidePlatum(e.plataId!),
+                              showDialog(context: context, builder: (BuildContext context) => 
+                                  AlertDialog(
+                                    title: const Text("Successful operation!"),
+                                    content: const Text("Plata je zatvorena"),
+                                    actions: [
+                                      TextButton(onPressed: ()=>{
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(builder: (context)=> PlatumListScreen()
+                                            )
+                                        ) 
+                                      }, child: const Text("OK"))
+                                    ],
+                                  )),
+                            }
+                            else if(Authorization.ulogaKorisnika=="Administrator"&&e.stateMachine!.contains("draft"))
+                            {
+                               await _platumProvider.activatePlatum(e.plataId!),
+                              showDialog(context: context, builder: (BuildContext context) => 
+                                  AlertDialog(
+                                    title: const Text("Successful operation!"),
+                                    content: const Text("Plata je otvorena"),
+                                    actions: [
+                                      TextButton(onPressed: ()=>{
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(builder: (context)=> PlatumListScreen()
+                                            )
+                                        ) 
+                                      }, child: const Text("OK"))
+                                    ],
+                                  )),
+                            }
+                            else
+                            {
+                              showDialog(context: context, builder: (BuildContext context) => 
+                                  AlertDialog(
+                                    title: const Text("Warning!"),
+                                    content: const Text("Unauthorized call of a function.\nYou do not have the permission!"),
+                                    actions: [
+                                      TextButton(onPressed: ()=>{
+                                        Navigator.pop(context),
+                                      }, child: const Text("OK"))
+                                    ],
+                                  )),
+                            }
+                          })
+      
+                      ]
+                    )).toList()??[]
+                  
+                  ),
+                  
               ),
-              
+            ),
           ),
         ),
       ),

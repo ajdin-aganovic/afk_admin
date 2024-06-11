@@ -1,22 +1,14 @@
-import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
-import 'package:afk_admin/models/transakcijski_racun.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
 import 'package:afk_admin/providers/trening_provider.dart';
 import 'package:afk_admin/screens/trening_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:provider/provider.dart';
 
 import '../models/korisnik.dart';
 import '../models/trening.dart';
-import '../models/uloga.dart';
 
 class TreningDetailsScreen extends StatefulWidget {
 
@@ -147,7 +139,7 @@ Navigator.of(context).push(
                             ],
                           ));
                 }
-              }, child: Text("Save")),
+              }, child: const Text("Save")),
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
@@ -155,7 +147,7 @@ Navigator.of(context).push(
                     builder: (context) => TreningListScreen(),
                   ),
                 );
-              }, child: Text("Svi treninzi")),
+              }, child: const Text("Svi treninzi")),
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
                 AlertDialog(
@@ -182,7 +174,7 @@ Navigator.of(context).push(
                   ],
                 ));
                         
-                      }, child: Text("Izbriši")),
+                      }, child: const Text("Izbriši")),
           ],
           ),
         ),

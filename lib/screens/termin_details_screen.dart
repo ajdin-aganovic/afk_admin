@@ -1,24 +1,15 @@
-import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
-import 'package:afk_admin/models/transakcijski_racun.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/termin_provider.dart';
-import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
 import 'package:afk_admin/screens/termin_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
 import '../models/stadion.dart';
 import '../models/termin.dart';
-import '../models/uloga.dart';
 import '../providers/stadion_provider.dart';
 
 class TerminDetailsScreen extends StatefulWidget {
@@ -108,7 +99,7 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                       child:
                       FormBuilderDropdown(
                               name: 'tipTermina',
-                              decoration: InputDecoration(labelText: 'Tip termina'),
+                              decoration: const InputDecoration(labelText: 'Tip termina'),
                               items: const[ 
                                 DropdownMenuItem(value: 'Domaća utakmica', child: Text('Domaća utakmica'),), 
                                 DropdownMenuItem(value: 'Gostujuća utakmica', child: Text('Gostujuća utakmica'),), 
@@ -146,7 +137,7 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                       onChanged: (value) {
                         setState(() {
                           
-                          print("Odabrani ${value}");
+                          print("Odabrani $value");
                         });
                       },
                       validator: (value) {
@@ -185,14 +176,14 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                             ],
                           ));
                 }
-              }, child: Text("Save")),
+              }, child: const Text("Save")),
 
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 setState(() {
                   
                 });
-              }, child: Text("Reload podataka")),
+              }, child: const Text("Reload podataka")),
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
@@ -200,7 +191,7 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                     builder: (context) => TerminListScreen(),
                   ),
                 );
-              }, child: Text("Svi termini")),
+              }, child: const Text("Svi termini")),
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
                   AlertDialog(
@@ -227,7 +218,7 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                     ],
                             ));
                         
-                      }, child: Text("Izbriši")),
+                      }, child: const Text("Izbriši")),
           ],
           ),
         ),

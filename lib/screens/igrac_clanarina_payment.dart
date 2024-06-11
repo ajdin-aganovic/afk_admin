@@ -1,27 +1,16 @@
 import 'dart:convert';
-import 'dart:ffi';
 
-import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
-import 'package:afk_admin/models/transakcijski_racun.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/clanarina_provider.dart';
-import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
-import 'package:afk_admin/screens/clanarina_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
 import '../models/clanarina.dart';
-import '../models/uloga.dart';
 import '../providers/korisnik_provider.dart';
 
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -149,7 +138,7 @@ class _IgracClanarinaScreen extends State<IgracClanarinaScreen> {
           buildForm(),
            ElevatedButton(onPressed: (){
             
-          }, child: Text("Add new KorisnikPozicija")),
+          }, child: const Text("Add new KorisnikPozicija")),
         ],
       )
      
@@ -165,7 +154,7 @@ class _IgracClanarinaScreen extends State<IgracClanarinaScreen> {
           child: Column(children: [
               ElevatedButton(onPressed: (){
               makePayment();
-              }, child: Text("Plati članarinu")),
+              }, child: const Text("Plati članarinu")),
              ],
           ),
         ),

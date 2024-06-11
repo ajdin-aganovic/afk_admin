@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:afk_admin/models/search_result.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +9,7 @@ import 'package:http/http.dart';
 
 import '../utils/util.dart';
 
-import 'package:jwt_decoder/jwt_decoder.dart';
 
-import 'korisnik_provider.dart';
 
 abstract class BaseProvider<T> with ChangeNotifier{
   static String? _baseUrl;
@@ -23,6 +20,13 @@ abstract class BaseProvider<T> with ChangeNotifier{
   BaseProvider(String endpoint){
     _endpoint=endpoint;
     _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "https://localhost:7181/");
+    // _baseUrl=dotenv.env['ADRESA_LOKALNE']??'http://192.168.1.0/';
+    // _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "https://192.168.1.10:7181/");
+
+    // _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "http://localhost:7181/");
+    // _baseUrl=dotenv.env['ADRESA_MOBILNE']??'http://192.168.1.0/';
+
+
     // _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "https://77.77.223.104/");
 
 
@@ -194,7 +198,9 @@ bool IsValidResponse(Response response){
     }
     else
     {
-      throw Exception("Something happened. Try again" + response.statusCode.toString());
+      throw Exception("Something happened. Try again${response.statusCode}");
+      // throw Exception("Something happened. Try again" + response.toString());
+
     }
 }
 
@@ -269,7 +275,7 @@ String getQueryString(Map params,
         }
         query += '$prefix$key=$encoded';
       } else if (value is DateTime) {
-        query += '$prefix$key=${(value as DateTime).toIso8601String()}';
+        query += '$prefix$key=${(value).toIso8601String()}';
       } else if (value is List || value is Map) {
         if (value is List) value = value.asMap();
         value.forEach((k, v) {

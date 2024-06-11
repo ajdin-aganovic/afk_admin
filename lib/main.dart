@@ -2,7 +2,6 @@
 import 'dart:convert';
 import 'dart:math';
 // import 'dart:convert';
-import 'package:afk_admin/providers/base_provider.dart';
 import 'package:afk_admin/providers/bolest_provider.dart';
 import 'package:afk_admin/providers/clanarina_provider.dart';
 import 'package:afk_admin/providers/korisnik_bolest_provider.dart';
@@ -19,28 +18,28 @@ import 'package:afk_admin/providers/trening_provider.dart';
 import 'package:afk_admin/providers/trening_stadion_provider.dart';
 // import 'package:paypal_sdk/paypal_sdk.dart';
 // import 'package:afk_admin/screens/bolest_list_screen.dart';
-import 'package:afk_admin/screens/home_screen.dart';
 // import 'package:afk_admin/screens/korisnici_list_screen.dart';
 import 'package:afk_admin/screens/reset_password_screen.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:http/http.dart' as http;
 import 'package:afk_admin/providers/korisnik_provider.dart';
 import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:afk_admin/screens/plata_list_screen.dart';
 import 'package:afk_admin/screens/korisnik_details_screen.dart';
 import 'package:afk_admin/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:afk_admin/widgets/makePayment.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 // import 'package:afk_admin/api/client.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'models/korisnik.dart';
 
 void main() async {
-  // await dotenv.load(fileName: "lib/.env");
+  // try{
+  //   await dotenv.load(fileName: ".env");
+  // }
+  // catch(e)
+  // {
+  //   print('Could not find .env file');
+  // }
   // Stripe.publishableKey=
   
   runApp(MultiProvider(providers:
@@ -73,11 +72,29 @@ class MyMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'AFK Material app',
-      theme: ThemeData(primarySwatch: Colors.red),
-      home: LoginPage(),
-
-    );
+          title: 'AFK Material app',
+          theme: ThemeData(
+          primarySwatch: Colors.red,
+            primaryColor: Colors.red,
+            // accentColor: Colors.amber,
+            brightness: Brightness.light, // Ensure light theme
+            scaffoldBackgroundColor: Colors.white, // Set a background color
+            appBarTheme: const AppBarTheme(
+              color: Colors.red, // AppBar color
+            ),
+            buttonTheme: const ButtonThemeData(
+              buttonColor: Colors.red, // Button color
+              textTheme: ButtonTextTheme.primary,
+            ),
+            textTheme: const TextTheme(
+              bodyLarge: TextStyle(color: Colors.black), // Text color
+              bodyMedium: TextStyle(color: Colors.black),
+              headlineLarge: TextStyle(color: Colors.red),
+            ),
+            ),
+          home: LoginPage(),
+        
+        );
   }
 }
 
@@ -100,24 +117,16 @@ class LoginPage extends StatelessWidget {
     _korisniciProvider=context.read<KorisnikProvider>();
 
     String encodeBase64(String data) {
-      if(data!=null)
-      {
-        List<int> bytes = utf8.encode(data); // Convert string to bytes
-        return base64.encode(bytes); // Encode bytes as Base64
-      }
-      else
-      return "error";
-    }
+      List<int> bytes = utf8.encode(data); // Convert string to bytes
+      return base64.encode(bytes); // Encode bytes as Base64
+        }
 
     String decodeBase64(String lozinkaGore)
     {
-      if(lozinkaGore!=null)
-      {
-        List<int> bytes=base64.decode(lozinkaGore);
+      List<int> bytes=base64.decode(lozinkaGore);
 
-      return utf8.decode(bytes);
-      }
-      return "error";
+    return utf8.decode(bytes);
+          // return "error";
     }
 
     return 
@@ -212,7 +221,7 @@ class LoginPage extends StatelessWidget {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
                               // title: Text("Dobro došli (${username}) (${password})"),
-                              title: Text("Dobro došli (${username})"),
+                              title: Text("Dobro došli ($username)"),
 
                               content: Text(
                               //   "password enkodirani1: ${lozinkaHashIzUsera}"+
@@ -229,7 +238,11 @@ class LoginPage extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) => KorisnikDetailsScreen(korisnik: foundFirst,),
                                     ),
-                                  )
+                                    
+                                  ),
+                                    _usernamecontroller.text="",
+                                    _passwordcontroller.text=""
+
                                   }, child: const Text("OK"))
                               ],
                             ));
@@ -273,20 +286,27 @@ class LoginPage extends StatelessWidget {
                             }
                           }
                         }
-                    }, child: const Text("Login")),
+                    }, child: const Text("Login", 
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                      // selectionColor: Colors.red,
+                    ),
+                    ),
                     const SizedBox(height: 20,),
 
                     ElevatedButton(onPressed: (){
                       
+                                    _usernamecontroller.text="";
+                                    _passwordcontroller.text="";
                         Navigator.of(context).push(
                         MaterialPageRoute(
-                        builder: (context) => ContactPage(),
+                        builder: (context) => const ContactPage(),
+                        
                             ),
                             );
                           }, 
                     child: const Text(
                       'Forgot Password',
-                      style: TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.black, fontSize: 15),
                      ),
                      
                     ),
@@ -297,7 +317,6 @@ class LoginPage extends StatelessWidget {
                     // }, 
                     // child: const Text('Go to Payment'),
                     // )
-
 
                   ]),
                 // ),

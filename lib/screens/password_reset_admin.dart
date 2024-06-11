@@ -4,7 +4,6 @@ import 'package:afk_admin/screens/korisnici_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
@@ -16,14 +15,8 @@ import '../providers/korisnik_provider.dart';
 import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
 
-import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
-import 'package:intl/intl.dart';
 
-import '../models/korisnik.dart';
-import '../models/termin.dart';
-import '../models/uloga.dart';
-import '../utils/util.dart';
 
 
 class PasswordAdmin extends StatefulWidget {
@@ -51,9 +44,9 @@ final ScrollController _vertical = ScrollController();
   {
      super.initState();
      String defaultDate;
-    if(DateTime.now().month<10&&DateTime.now().day<10)
+    if(DateTime.now().month<10&&DateTime.now().day<10) {
       defaultDate="${DateTime.now().year}-0${DateTime.now().month}-0${DateTime.now().day}";
-    else if(DateTime.now().day<10)
+    } else if(DateTime.now().day<10)
       defaultDate="${DateTime.now().year}-${DateTime.now().month}-0${DateTime.now().day}";
     else if(DateTime.now().month<10)
       defaultDate="${DateTime.now().year}-0${DateTime.now().month}-${DateTime.now().day}";
@@ -117,14 +110,14 @@ final ScrollController _vertical = ScrollController();
                child: 
                Column(children: [
                     
-                    Text('Promjena passworda',
+                    const Text('Promjena passworda',
                     style: TextStyle(fontSize: 30),), 
-                    SizedBox(height: 12,),
+                    const SizedBox(height: 12,),
                     // Text('Dobrodošli ${widget.loggovaniUser?.korisnickoIme??"nazad"}',
                     Text('za korisnika - ${widget.korisnik?.korisnickoIme??"Nije proslijeđeno"}',
                     
                     // Text('Dobrodošli ${widget.korisnik?.korisnickoIme}',
-                    style: TextStyle(fontSize: 30),),
+                    style: const TextStyle(fontSize: 30),),
 
                     //  Expanded(
                     //     child: FormBuilderTextField (
@@ -273,7 +266,7 @@ final ScrollController _vertical = ScrollController();
                      ElevatedButton(onPressed: () async{
 
 
-                        if (_lozinkaController.text!=null&&_lozinkaController.text!="") {
+                        if (_lozinkaController.text!="") {
                                 String generateSalt() {
                                         final random = Random.secure();
                                         final List<int> saltBytes = List<int>.generate(16, (_) => random.nextInt(256));
@@ -289,7 +282,7 @@ final ScrollController _vertical = ScrollController();
                                 dst.setAll(0, src);
                                 dst.setAll(src.length, bytes);
                                                     
-                                final algorithm = sha1;
+                                const algorithm = sha1;
                                 final inArray = algorithm.convert(dst).bytes;
                                 return base64.encode(inArray);
                                                       }
@@ -300,7 +293,7 @@ final ScrollController _vertical = ScrollController();
                                   _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
 
                                   print(_formKey.currentState?.value);
-                                  print("${novaHash}");
+                                  print(novaHash);
                                   
                                 
                                     
@@ -311,7 +304,7 @@ final ScrollController _vertical = ScrollController();
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         // builder: (context) => HomePage(naziv: username,),
-                                        builder: (context) => KorisniciListScreen(),
+                                        builder: (context) => const KorisniciListScreen(),
                                   
                                       ),
                                               );
@@ -333,7 +326,7 @@ final ScrollController _vertical = ScrollController();
                               showDialog(context: context, builder: (BuildContext context) => 
                                             AlertDialog(
                                               title: const Text("Error"),
-                                              content: Text("Enter a password"),
+                                              content: const Text("Enter a password"),
                                               actions: [
                                                 TextButton(onPressed: ()=>{
                                                   Navigator.pop(context),
@@ -341,7 +334,7 @@ final ScrollController _vertical = ScrollController();
                                               ],
                                             ));
                             }
-                        }, child: Text("Save new password")),
+                        }, child: const Text("Save new password")),
                       
                     ],))
                     

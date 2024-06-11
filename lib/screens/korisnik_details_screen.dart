@@ -1,25 +1,17 @@
 import 'package:afk_admin/models/korisnik.dart';
 import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/providers/korisnik_uloga_provider.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/screens/bolest_list_screen.dart';
 import 'package:afk_admin/screens/korisnici_editable_screen.dart';
-import 'package:afk_admin/screens/korisnici_list_screen.dart';
-import 'package:afk_admin/screens/korisnik_insert_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import 'package:afk_admin/providers/korisnik_provider.dart';
 import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:afk_admin/screens/korisnik_details_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../models/platum.dart';
 import '../models/korisnik_uloga.dart';
 import '../models/uloga.dart';
-import '../utils/util.dart';
 import 'home_screen.dart';
 
 class KorisnikDetailsScreen extends StatefulWidget {
@@ -239,10 +231,10 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             
-                            builder: (context) => KorisniciEditableScreen(),
+                            builder: (context) => const KorisniciEditableScreen(),
                           ),
                         );
-                      }, child: Text("Svi korisnici")),
+                      }, child: const Text("Svi korisnici")),
                   ],
                 ),
 
@@ -252,10 +244,10 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             
-                            builder: (context) => HomePage(),
+                            builder: (context) => const HomePage(),
                           ),
                         );
-                      }, child: Text("Home page")),
+                      }, child: const Text("Home page")),
                     ],
                   ),
               ],
@@ -274,7 +266,7 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
   }
 
 FormBuilder zaboravljenPassword() {
-  return FormBuilder(child: 
+  return const FormBuilder(child: 
   Text("Dob"));
   }
 }

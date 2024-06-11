@@ -7,14 +7,10 @@ import 'package:afk_admin/screens/transakcijski_racun_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/uloga_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../models/korisnik.dart';
-import '../models/uloga.dart';
 import '../providers/korisnik_provider.dart';
 
 class TransakcijskiRacunDetailsScreen extends StatefulWidget {
@@ -156,7 +152,7 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                       onChanged: (value) {
                         setState(() {
                           
-                          print("Odabrani ${value}");
+                          print("Odabrani $value");
                         });
                       },
                       validator: (value) {
@@ -203,7 +199,7 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                               ],
                             ));
                   }
-                }, child: Text("Save")),
+                }, child: const Text("Save")),
                 
           ),
           ElevatedButton(onPressed: () async{
@@ -213,11 +209,11 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                     builder: (context) => TransakcijskiRacunListScreen(),
                   ),
                 );
-              }, child: Text("Svi transakcijski računi")),
+              }, child: const Text("Svi transakcijski računi")),
 
               ElevatedButton(onPressed: () async{
                         setState(() { });
-                      }, child: Text("Refresh podataka")),
+                      }, child: const Text("Refresh podataka")),
 
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
@@ -245,7 +241,7 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
               ],
             ));
                         
-                      }, child: Text("Izbriši")),
+                      }, child: const Text("Izbriši")),
           ],
           ),
         ),

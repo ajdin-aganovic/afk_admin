@@ -11,14 +11,9 @@ import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
-import '../models/uloga.dart';
 
 class PlatumDetailsScreen extends StatefulWidget {
 Korisnik?korisnik;
@@ -146,7 +141,7 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                       onChanged: (value) {
                         setState(() {
                           
-                          print("Odabrani ${value}");
+                          print("Odabrani $value");
                         });
                       },
                       validator: (value) {
@@ -219,7 +214,7 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                             ],
                           ));
                 }
-              }, child: Text("Save")),
+              }, child: const Text("Save")),
 
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
@@ -228,14 +223,14 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                     builder: (context) => PlatumListScreen(),
                   ),
                 );
-              }, child: Text("Sve plate")),
+              }, child: const Text("Sve plate")),
 
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 setState(() {
                   
                 });
-              }, child: Text("Osvježi podatke")),
+              }, child: const Text("Osvježi podatke")),
 
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
@@ -263,7 +258,7 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                   ],
                 ));
                         
-                      }, child: Text("Izbriši")),
+                      }, child: const Text("Izbriši")),
           ],
           ),
         ),

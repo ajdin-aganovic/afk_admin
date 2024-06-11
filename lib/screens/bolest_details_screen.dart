@@ -1,12 +1,9 @@
 import 'package:afk_admin/models/bolest.dart';
 import 'package:afk_admin/models/korisnik.dart';
 import 'package:afk_admin/models/search_result.dart';
-import 'package:afk_admin/models/transakcijski_racun.dart';
 import 'package:afk_admin/providers/bolest_provider.dart';
-import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
 import 'package:afk_admin/screens/bolest_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -197,7 +194,7 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
                           ));
                 }
                 
-              }, child: Text("Save")),
+              }, child: const Text("Save")),
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
@@ -205,7 +202,7 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
                     builder: (context) => BolestListScreen(),
                   ),
                 );
-              }, child: Text("Sve bolesti")),
+              }, child: const Text("Sve bolesti")),
 
              ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
@@ -233,7 +230,7 @@ class _BolestDetailsScreen extends State<BolestDetailsScreen> {
                       ],
                     ));
                 
-                      }, child: Text("Izbriši")),
+                      }, child: const Text("Izbriši")),
             ],
           )
           

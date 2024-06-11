@@ -1,23 +1,14 @@
-import 'package:afk_admin/models/platum.dart';
 import 'package:afk_admin/models/search_result.dart';
-import 'package:afk_admin/models/transakcijski_racun.dart';
-import 'package:afk_admin/providers/platum_provider.dart';
 import 'package:afk_admin/providers/statistika_provider.dart';
-import 'package:afk_admin/providers/transakcijski_racun_provider.dart';
 import 'package:afk_admin/screens/statistika_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:afk_admin/providers/platum_provider.dart';
-import 'package:afk_admin/providers/uloga_provider.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import '../models/korisnik.dart';
 import '../models/statistika.dart';
-import '../models/uloga.dart';
 import '../providers/korisnik_provider.dart';
 
 class StatistikaDetailsScreen extends StatefulWidget {
@@ -138,7 +129,7 @@ _korisnikProvider=context.read<KorisnikProvider>();
                       onChanged: (value) {
                         setState(() {
                           
-                          print("Odabrani ${value}");
+                          print("Odabrani $value");
                         });
                       },
                       validator: (value) {
@@ -168,7 +159,7 @@ _korisnikProvider=context.read<KorisnikProvider>();
             child:
             FormBuilderDropdown(
               name: 'igracMjeseca',
-              decoration: InputDecoration(labelText: 'Igrač mjeseca'),
+              decoration: const InputDecoration(labelText: 'Igrač mjeseca'),
               items: const[ 
                 DropdownMenuItem(value: true, child: Text('Yes'),), 
                 DropdownMenuItem(value: false, child: Text('No'),), 
@@ -249,7 +240,7 @@ _korisnikProvider=context.read<KorisnikProvider>();
                             ],
                           ));
                 }
-              }, child: Text("Save")),
+              }, child: const Text("Save")),
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
@@ -257,14 +248,14 @@ _korisnikProvider=context.read<KorisnikProvider>();
                     builder: (context) => StatistikaListScreen(),
                   ),
                 );
-              }, child: Text("Sve statistike")),
+              }, child: const Text("Sve statistike")),
 
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 setState(() {
                   
                 });
-              }, child: Text("Refresh podataka")),
+              }, child: const Text("Refresh podataka")),
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
@@ -291,7 +282,7 @@ _korisnikProvider=context.read<KorisnikProvider>();
                               ],
                             ));
                         
-                      }, child: Text("Izbriši")),
+                      }, child: const Text("Izbriši")),
           ],
           ),
         ),

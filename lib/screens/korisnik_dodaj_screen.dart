@@ -1,13 +1,8 @@
 import 'dart:math';
 
 import 'package:afk_admin/screens/korisnici_editable_screen.dart';
-import 'package:afk_admin/screens/korisnici_list_screen.dart';
-import 'package:afk_admin/screens/password_reset_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 
@@ -18,12 +13,8 @@ import '../providers/korisnik_provider.dart';
 import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
 
-import 'package:afk_admin/models/search_result.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
-import 'package:intl/intl.dart';
 
-import '../models/korisnik.dart';
-import '../models/termin.dart';
 import '../models/uloga.dart';
 import '../providers/uloga_provider.dart';
 
@@ -61,9 +52,9 @@ final ScrollController _vertical = ScrollController();
      super.initState();
     
     String defaultDate;
-    if(DateTime.now().month<10&&DateTime.now().day<10)
+    if(DateTime.now().month<10&&DateTime.now().day<10) {
       defaultDate="${DateTime.now().year}-0${DateTime.now().month}-0${DateTime.now().day}";
-    else if(DateTime.now().day<10)
+    } else if(DateTime.now().day<10)
       defaultDate="${DateTime.now().year}-${DateTime.now().month}-0${DateTime.now().day}";
     else if(DateTime.now().month<10)
       defaultDate="${DateTime.now().year}-0${DateTime.now().month}-${DateTime.now().day}";
@@ -212,7 +203,7 @@ final ScrollController _vertical = ScrollController();
                       child:
                       FormBuilderDropdown(
                               name: 'strucnaSprema',
-                              decoration: InputDecoration(labelText: 'Stručna sprema'),
+                              decoration: const InputDecoration(labelText: 'Stručna sprema'),
                               items: const[ 
                                 DropdownMenuItem(value: 'SSS', child: Text('SSS'),), 
                                 DropdownMenuItem(value: 'VSS', child: Text('VSS'),), 
@@ -265,7 +256,7 @@ final ScrollController _vertical = ScrollController();
                       FormBuilderDropdown(
                         
                               name: 'podUgovorom',
-                              decoration: InputDecoration(labelText: 'Pod ugovorom'),
+                              decoration: const InputDecoration(labelText: 'Pod ugovorom'),
                               items: const[ 
                                 DropdownMenuItem(value: true, child: Text('Yes'),), 
                                 DropdownMenuItem(value: false, child: Text('No'),), 
@@ -346,7 +337,7 @@ final ScrollController _vertical = ScrollController();
                       onChanged: (value) {
                         setState(() {
                           
-                          print("Odabrana ${value}");
+                          print("Odabrana $value");
                         });
                       },
                       validator: (value) {
@@ -378,7 +369,7 @@ final ScrollController _vertical = ScrollController();
                         dst.setAll(0, src);
                         dst.setAll(src.length, bytes);
                     
-                        final algorithm = sha1;
+                        const algorithm = sha1;
                         final inArray = algorithm.convert(dst).bytes;
                         return base64.encode(inArray);
                       }
@@ -422,11 +413,11 @@ final ScrollController _vertical = ScrollController();
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 // builder: (context) => HomePage(naziv: username,),
-                                builder: (context) => KorisniciEditableScreen(),
+                                builder: (context) => const KorisniciEditableScreen(),
 
                               ),
                             );
-                        }, child: Text("Save")),
+                        }, child: const Text("Save")),
 
 
 
@@ -434,14 +425,14 @@ final ScrollController _vertical = ScrollController();
                         // _formKey.currentState?.saveAndValidate();
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => KorisniciEditableScreen(),
+                            builder: (context) => const KorisniciEditableScreen(),
                           ),
                         );
-                      }, child: Text("Svi korisnici")),
+                      }, child: const Text("Svi korisnici")),
                     
                       ElevatedButton(onPressed: () async{
                         setState(() { });
-                      }, child: Text("Refresh podataka")),
+                      }, child: const Text("Refresh podataka")),
 
              
                     ],))
