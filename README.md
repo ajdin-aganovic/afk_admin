@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## Getting Started
 
-##Login kredencijali su Admin1:asd; Trener1:string; Ljekar1:string; kako bi se ispoštovale odgovarajući screenovi i adekvatni pristupi istima
+##Login kredencijali su (Administrator) "ajdo:string"; (Glavni trener) "Trener1:string"; (Glavni doktor) "Doktor1:string"; 
 
 This project is a starting point for a Flutter application.
 
