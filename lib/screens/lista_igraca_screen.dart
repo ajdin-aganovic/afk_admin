@@ -23,8 +23,8 @@ class ListaIgracaScreen extends StatefulWidget {
 }
 
 class _ListaIgracaScreen extends State<ListaIgracaScreen> {
-  late KorisnikProvider _korisniciProvider;
-  SearchResult<Korisnik>? result;
+  // late KorisnikProvider _korisniciProvider;
+  // SearchResult<Korisnik>? result;
   SearchResult<Korisnik>? _korisnikResult;
   late KorisnikProvider _korisnikProvider;
 
@@ -48,7 +48,7 @@ class _ListaIgracaScreen extends State<ListaIgracaScreen> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     _korisnikPozicijaProvider=context.read<KorisnikPozicijaProvider>();
-    _korisniciProvider=context.read<KorisnikProvider>();
+    _korisnikProvider=context.read<KorisnikProvider>();
     _pozicijaProvider=context.read<PozicijaProvider>();
     initForm();
     

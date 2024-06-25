@@ -27,6 +27,8 @@ class _TransakcijskiRacunListScreen extends State<TransakcijskiRacunListScreen> 
   late KorisnikProvider _korisnikProvider;
   SearchResult<Korisnik>? _korisnikResult;
 
+  
+
    
   final TextEditingController _brojRacuna=TextEditingController();
 
@@ -46,11 +48,16 @@ class _TransakcijskiRacunListScreen extends State<TransakcijskiRacunListScreen> 
       _korisnikResult=await _korisnikProvider.get();
   }
 
-   String getKorisnikDetails(int? id)
+   String? getKorisnikDetails(int? id)
   {
     var pronadjeniRacun=_korisnikResult?.result.firstWhere((element) => element.korisnikId==id);
-    String? pronadjeniBrojRacuna="${pronadjeniRacun?.ime} ${pronadjeniRacun?.prezime}"??"Nije pronađen";
-    return pronadjeniBrojRacuna;
+    if(pronadjeniRacun==null) {
+      return "Greška. Nema takvog računa";
+    } else
+     {
+      String? pronadjeniBrojRacuna="${pronadjeniRacun.ime} ${pronadjeniRacun.prezime}"??"Nije pronađen";
+      return pronadjeniBrojRacuna;
+     }
   }
 
   @override
@@ -195,7 +202,7 @@ Widget _buildDataListView() {
                       DataCell(Text(e.adresaPrebivalista ??"")),
                       DataCell(Text(e.nazivBanke??"")),
                       // DataCell(Text(e.korisnikId.toString()??"")),
-                      DataCell(Text(getKorisnikDetails(e.korisnikId!)??"")),
+                      DataCell(Text(getKorisnikDetails(e.korisnikId)??"")),
         
         
                       ]
