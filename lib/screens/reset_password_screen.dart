@@ -17,10 +17,12 @@ class ContactPage extends StatefulWidget {
   final emailController = TextEditingController();
   final messageController = TextEditingController();
   final usernameController = TextEditingController();
+  final recipientController = TextEditingController();
 
   final ScrollController _horizontal = ScrollController(), _vertical=ScrollController();
 
   Future sendEmail()async{
+    
     final url=Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
     const serviceId="service_smd9uuu";
     const templateId="template_i9f6la9";
@@ -36,7 +38,8 @@ class ContactPage extends StatefulWidget {
         "user_name":usernameController.text,
         "message":messageController.text,
         "subject":subjectController.text,
-        "user_email":emailController.text
+        "user_email":emailController.text,
+        "recipient_email":recipientController.text,
       }
       })
     );
@@ -83,8 +86,8 @@ class _ContactPageState extends State<ContactPage> {
                     controller: nameController,
                     decoration: const InputDecoration(
                       // icon: const Icon(Icons.account_circle),
-                      labelText: 'Name',
-                      hintText: 'Name'),
+                      labelText: 'Ime i prezime',
+                      hintText: 'Vaše ime'),
                   ),
                 ),
                 const SizedBox(height: 25,),
@@ -94,7 +97,7 @@ class _ContactPageState extends State<ContactPage> {
                     decoration: const InputDecoration(
                       // icon: const Icon(Icons.account_circle),
                       labelText: 'Username',
-                      hintText: 'Username'),
+                      hintText: 'Vaš username'),
                   ),
                 ),
                 const SizedBox(height: 25,),
@@ -104,7 +107,7 @@ class _ContactPageState extends State<ContactPage> {
                     decoration: const InputDecoration(
                       // icon: const Icon(Icons.account_circle),
                       labelText: 'Message',
-                      hintText: 'Message'),
+                      hintText: 'Vaša poruka za ovaj mail'),
                   ),
                 ),
                 const SizedBox(height: 25,),
@@ -113,8 +116,10 @@ class _ContactPageState extends State<ContactPage> {
                     controller: subjectController,
                     decoration: const InputDecoration(
                       // icon: const Icon(Icons.account_circle),
-                      labelText: 'Subject',
-                      hintText: 'Subject'),
+                      labelText: 'Zaboravljen password',
+                      enabled: true,
+
+                      ),
                   ),
                 ),
                 const SizedBox(height: 25,),
@@ -124,7 +129,17 @@ class _ContactPageState extends State<ContactPage> {
                     decoration: const InputDecoration(
                       // icon: const Icon(Icons.account_circle),
                       labelText: 'Email',
-                      hintText: 'Email'),
+                      hintText: 'Vaš email'),
+                  ),
+                ),
+                const SizedBox(height: 25,),
+                Expanded(
+                  child: TextFormField(
+                    controller: recipientController,
+                    decoration: const InputDecoration(
+                      // icon: const Icon(Icons.account_circle),
+                      labelText: 'Admins email',
+                      hintText: 'Email administratora'),
                   ),
                 ),
                 const SizedBox(height: 25,),
@@ -136,6 +151,7 @@ class _ContactPageState extends State<ContactPage> {
                     emailController.text="";
                     messageController.text="";
                     usernameController.text="";
+                    recipientController.text="";
                     Navigator.pop(context);
                   }, child: const Text("Pošalji", 
                   style: TextStyle(fontSize: 20),)),
@@ -143,6 +159,12 @@ class _ContactPageState extends State<ContactPage> {
                 const SizedBox(height: 25,),
                 Expanded(
                   child: ElevatedButton(onPressed: (){
+                    nameController.text="";
+                    subjectController.text="";
+                    emailController.text="";
+                    messageController.text="";
+                    usernameController.text="";
+                    recipientController.text="";
                     Navigator.of(context).pushAndRemoveUntil<void>
                     (
                     
