@@ -41,7 +41,7 @@ class _PozicijaListScreen extends State<PozicijaListScreen> {
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Lista pozicijaa"),
+      title_widget: const Text("Lista pozicija"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -73,7 +73,7 @@ class _PozicijaListScreen extends State<PozicijaListScreen> {
               
             });
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -106,12 +106,12 @@ Widget _buildDataListView() {
                 child: 
                 DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
         
                         DataColumn(label: Expanded(
                         child: Text("Naziv pozicije",
@@ -131,7 +131,7 @@ Widget _buildDataListView() {
                       onSelectChanged: (yxc)=>{
                         if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Glavni trener")&&yxc==true)
                           {
-                            print('selected: ${e.pozicijaId}'),
+                            print('odabrani: ${e.pozicijaId}'),
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context)=> PozicijaDetailsScreen(pozicija: e,)
                               )
@@ -141,7 +141,7 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.pozicijaId}"),
+                              title: Text("Odabrali ste poziciju ${e.pozicijaId}"),
                               content: Text("${e.nazivPozicije}/${e.kategorijaPozicije}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -152,7 +152,7 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.pozicijaId.toString()??"0")),
+                      // DataCell(Text(e.pozicijaId.toString()??"0")),
                       DataCell(Text(e.nazivPozicije??"---")),
                       DataCell(Text(e.kategorijaPozicije??"---")),
         

@@ -134,7 +134,7 @@ _korisnikProvider=context.read<KorisnikProvider>();
                       },
                       validator: (value) {
                         if (value == null) {
-                          return 'Please enter the Korisnik';
+                          return 'Molimo Vas da unesete Korisnika';
                         }
                         return null;
                       },
@@ -231,7 +231,7 @@ _korisnikProvider=context.read<KorisnikProvider>();
                 } on Exception catch (err) {
                   showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(
-                            title: const Text("Error"),
+                            title: const Text("Greška"),
                             content: Text(err.toString()),
                             actions: [
                               TextButton(onPressed: ()=>{
@@ -240,7 +240,7 @@ _korisnikProvider=context.read<KorisnikProvider>();
                             ],
                           ));
                 }
-              }, child: const Text("Save")),
+              }, child: const Text("Snimi")),
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
@@ -255,12 +255,12 @@ _korisnikProvider=context.read<KorisnikProvider>();
                 setState(() {
                   
                 });
-              }, child: const Text("Refresh podataka")),
+              }, child: const Text("Osvježi podatke")),
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: const Text("Warning!!!"),
-                              content: Text("Are you sure you want to delete statistika ${widget.statistika!.statistikaId} from ${widget.statistika!.korisnikId}?"),
+                              title: const Text("Upozorenje!!!"),
+                              content: Text("Da li ste sigurni da želite izbrisati statistiku ${widget.statistika!.statistikaId} od ${widget.statistika!.korisnikId}?"),
                               actions: [
                                 
                                 TextButton(onPressed: () async =>{
@@ -274,10 +274,10 @@ _korisnikProvider=context.read<KorisnikProvider>();
                                   )
                               
 
-                                }, child: const Text("Yes")),
+                                }, child: const Text("Da")),
                                 TextButton(onPressed: ()=>{
                                   Navigator.pop(context),
-                                }, child: const Text("No")),
+                                }, child: const Text("Ne")),
                       
                               ],
                             ));

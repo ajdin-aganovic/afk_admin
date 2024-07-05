@@ -78,7 +78,7 @@ class _StadionListScreen extends State<StadionListScreen> {
               
             });
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -117,12 +117,12 @@ Widget _buildDataListView() {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
         
                         DataColumn(label: Expanded(
                         child: Text("Naziv stadiona",
@@ -143,7 +143,7 @@ Widget _buildDataListView() {
                       onSelectChanged: (yxc)=>{
                         if((Authorization.ulogaKorisnika=="Administrator")&&yxc==true)
                           {
-                            print('selected: ${e.stadionId}'),
+                            print('odabrani: ${e.stadionId}'),
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context)=> StadionDetailsScreen(stadion: e,)
                               )
@@ -153,7 +153,7 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.stadionId}"),
+                              title: Text("Izabrali ste ${e.stadionId}"),
                               content: Text("Naziv stadiona: ${e.nazivStadiona}\nKapacitet stadiona: ${e.kapacitetStadiona}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -164,7 +164,7 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.stadionId.toString()??"0")),
+                      // DataCell(Text(e.stadionId.toString()??"0")),
                       DataCell(Text(e.nazivStadiona??"---")),
                       DataCell(Text(e.kapacitetStadiona.toString()??"---")),
                       // DataCell(Text(e.datumStadiona.toString()??DateTime.now().toString())),

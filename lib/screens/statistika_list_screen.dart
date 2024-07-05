@@ -84,7 +84,7 @@ class _StatistikaListScreen extends State<StatistikaListScreen> {
               
             });
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -118,12 +118,12 @@ Widget _buildDataListView() {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
         
                         DataColumn(label: Expanded(
                         child: Text("Korisnik ID",
@@ -195,8 +195,8 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.statistikaId}"),
-                              content: Text("KorisnikID: ${e.korisnikId}"),
+                              title: Text("Odabrali ste ${e.statistikaId}"),
+                              content: Text("Korisnik ID: ${e.korisnikId}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
                                   Navigator.pop(context),
@@ -206,7 +206,7 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.statistikaId.toString()??"0")),
+                      // DataCell(Text(e.statistikaId.toString()??"0")),
                       // DataCell(Text(e.korisnikId.toString()??"0")),
                       DataCell(Text(getKorisnikDetails(e.korisnikId!)??"0")),
                       DataCell(Text(e.golovi.toString()??"0")),

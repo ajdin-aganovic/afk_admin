@@ -88,7 +88,7 @@ if(korisnickoIme!=null) {
       child: 
       Scaffold(
         appBar: AppBar(
-          title: const Text("Home"),),
+          title: const Text("Početna"),),
           body: Center(
             child: 
             SingleChildScrollView(
@@ -124,7 +124,7 @@ if(korisnickoIme!=null) {
                                   builder: (context) => PlatumListScreen()
                                   ),
                                   );
-                                  }, child: const Text("Go to Platna lista")),),
+                                  }, child: const Text("Idi na Platnu listu")),),
                                  SizedBox(height: 50, width: 300, child: 
                                                 
                                       ElevatedButton(onPressed: (){
@@ -133,7 +133,7 @@ if(korisnickoIme!=null) {
                                   //     builder: (context) => PlatumDetailsScreen()
                                   //     ),
                                   // );
-                                  }, child: const Text("Go to Best performers")),),
+                                  }, child: const Text("Idi na 'Najbolji igrači'")))
                                 ]
                               ),
 
@@ -147,7 +147,7 @@ if(korisnickoIme!=null) {
                                       builder: (context) => TransakcijskiRacunListScreen()
                                       ),
                                   );
-                                  }, child: const Text("Go to Transakcijski račun")),),
+                                  }, child: const Text("Idi na Transakcijske račune")),),
                                 SizedBox(height: 50, width: 300, child: 
                                                 
                                       ElevatedButton(onPressed: (){
@@ -156,7 +156,7 @@ if(korisnickoIme!=null) {
                                       builder: (context) => TransakcijskiRacunDetailsScreen()
                                       ),
                                   );
-                                  }, child: const Text("Add new Transakcijski račun")),),
+                                  }, child: const Text("Dodaj novi Transakcijski račun")),),
                               ]
                               ),
                              
@@ -175,7 +175,7 @@ if(korisnickoIme!=null) {
                                   ),
                               );
                               
-                              }, child: const Text("Go to Termin")),),
+                              }, child: const Text("Idi na Termin")),),
                                             
                               SizedBox(height: 50, width: 300, child: 
                                             
@@ -185,7 +185,7 @@ if(korisnickoIme!=null) {
                                   builder: (context) => TerminDetailsScreen()
                                   ),
                               );
-                              }, child: const Text("Add new Termin")),),
+                              }, child: const Text("Dodaj novi Termin")),),
                       ]
                     ),
                     Row(children: [
@@ -197,7 +197,7 @@ if(korisnickoIme!=null) {
                               builder: (context) => ClanarinaListScreen()
                               ),
                           );
-                          }, child: const Text("Go to Članarina")),),
+                          }, child: const Text("Idi na Članarina")),),
                           
                          SizedBox(height: 50, width: 300, child: 
                                         
@@ -207,7 +207,7 @@ if(korisnickoIme!=null) {
                               builder: (context) => ClanarinaDetailsScreen()
                               ),
                           );
-                          }, child: const Text("Add new Članarina")),  ),
+                          }, child: const Text("Dodaj novu Članarinu")),  ),
         
                     ]
                     ),
@@ -220,7 +220,7 @@ if(korisnickoIme!=null) {
                               builder: (context) => PozicijaListScreen()
                               ),
                           );
-                          }, child: const Text("Go to Pozicija")),),
+                          }, child: const Text("Idi na Pozicije")),),
                           
                           SizedBox(height: 50, width: 300, child: 
                                         
@@ -230,7 +230,7 @@ if(korisnickoIme!=null) {
                               builder: (context) => PozicijaDetailsScreen()
                               ),
                           );
-                          }, child: const Text("Add new Pozicija")),  ),
+                          }, child: const Text("Dodaj novu Poziciju")),  ),
                       ],
                     ),
 
@@ -243,7 +243,7 @@ if(korisnickoIme!=null) {
                                   builder: (context) => TreningListScreen()
                                   ),
                               );
-                              }, child: const Text("Go to Trening")),),
+                              }, child: const Text("Idi na Treninge")),),
                               
                               SizedBox(height: 50, width: 300, child: 
                                             
@@ -253,7 +253,7 @@ if(korisnickoIme!=null) {
                                   builder: (context) => TreningDetailsScreen()
                                   ),
                               );
-                              }, child: const Text("Add new Trening")), ),
+                              }, child: const Text("Dodaj novi Trening")), ),
                       ],
                     ),
                       
@@ -267,7 +267,7 @@ if(korisnickoIme!=null) {
                               builder: (context) => StatistikaListScreen()
                               ),
                           );
-                          }, child: const Text("Go to Statistika")),),
+                          }, child: const Text("Idi na Statistike")),),
                           
                          SizedBox(height: 50, width: 300, child: 
                                         
@@ -277,7 +277,7 @@ if(korisnickoIme!=null) {
                               builder: (context) => StatistikaDetailsScreen()
                               ),
                           );
-                          }, child: const Text("Add new Statistika")), ),
+                          }, child: const Text("Dodaj novu Statistiku")), ),
                       ]
                     ),
 
@@ -291,7 +291,7 @@ if(korisnickoIme!=null) {
                               builder: (context) => UlogaListScreen()
                               ),
                           );
-                          }, child: const Text("Go to Uloga")),),
+                          }, child: const Text("Idi na Uloge")),),
                           
                           SizedBox(height: 50, width: 300, child: 
                                         
@@ -301,7 +301,7 @@ if(korisnickoIme!=null) {
                               builder: (context) => const KorisniciEditableScreen()
                               ),
                           );
-                          }, child: const Text("Go to Korisnici")), ),
+                          }, child: const Text("Idi na Korisnike")), ),
                       ],
                     )
                     ]),

@@ -45,7 +45,7 @@ class _BolestListScreen extends State<BolestListScreen> {
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Bolests list"),
+      title_widget: const Text("Lista bolesti"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -101,7 +101,7 @@ class _BolestListScreen extends State<BolestListScreen> {
           
           
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -139,12 +139,12 @@ Widget _buildDataListView() {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
         
                         DataColumn(label: Expanded(
                         child: Text("Šifra povrede",
@@ -172,7 +172,7 @@ Widget _buildDataListView() {
                       onSelectChanged: (yxc)=>{
                         if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Doktor")&&yxc==true)
                           {
-                            print('selected: ${e.bolestId}'),
+                            print('odabrani: ${e.bolestId}'),
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context)=> BolestDetailsScreen(bolest: e,)
                               )
@@ -182,7 +182,7 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.bolestId}"),
+                              title: Text("Odabrali ste ${e.bolestId}"),
                               content: Text("${e.tipPovrede}/${e.sifraPovrede}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -193,7 +193,7 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.bolestId?.toString()??"")),
+                      // DataCell(Text(e.bolestId?.toString()??"")),
                       DataCell(Text(e.sifraPovrede ??"")),
                       DataCell(Text(e.tipPovrede ??"")),
                       DataCell(Text(e.trajanjePovredeDani.toString() ??"")),

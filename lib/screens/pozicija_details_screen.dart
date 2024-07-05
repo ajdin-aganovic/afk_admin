@@ -119,7 +119,7 @@ class _PozicijaDetailsScreen extends State<PozicijaDetailsScreen> {
                 } on Exception catch (err) {
                   showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(
-                            title: const Text("Error"),
+                            title: const Text("Greška"),
                             content: Text(err.toString()),
                             actions: [
                               TextButton(onPressed: ()=>{
@@ -128,7 +128,7 @@ class _PozicijaDetailsScreen extends State<PozicijaDetailsScreen> {
                             ],
                           ));
                 }
-              }, child: const Text("Save")),
+              }, child: const Text("Snimi")),
               
               ElevatedButton(onPressed: () async{
                 Navigator.of(context).push(
@@ -141,8 +141,8 @@ class _PozicijaDetailsScreen extends State<PozicijaDetailsScreen> {
              ElevatedButton(onPressed: () async{
           showDialog(context: context, builder: (BuildContext context) => 
                     AlertDialog(
-                      title: const Text("Warning!!!"),
-                      content: Text("Are you sure you want to delete pozicija ${widget.pozicija!.pozicijaId}?"),
+                      title: const Text("Upozorenje!!!"),
+                      content: Text("Da li ste sigurni da želite izbrisati Poziciju ${widget.pozicija!.pozicijaId}?"),
                       actions: [
                         
                         TextButton(onPressed: () async =>{
@@ -156,10 +156,10 @@ class _PozicijaDetailsScreen extends State<PozicijaDetailsScreen> {
                           )
                       
 
-                        }, child: const Text("Yes")),
+                        }, child: const Text("Da")),
                         TextButton(onPressed: ()=>{
                           Navigator.pop(context),
-                        }, child: const Text("No")),
+                        }, child: const Text("Ne")),
               
                       ],
                     ));

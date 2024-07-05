@@ -119,7 +119,7 @@ class _StadionDetailsScreen extends State<StadionDetailsScreen> {
                 } on Exception catch (err) {
                   showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(
-                            title: const Text("Error"),
+                            title: const Text("Greška"),
                             content: Text(err.toString()),
                             actions: [
                               TextButton(onPressed: ()=>{
@@ -128,7 +128,7 @@ class _StadionDetailsScreen extends State<StadionDetailsScreen> {
                             ],
                           ));
                 }
-              }, child: const Text("Save")),
+              }, child: const Text("Snimi")),
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
@@ -140,8 +140,8 @@ class _StadionDetailsScreen extends State<StadionDetailsScreen> {
              ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
             AlertDialog(
-              title: const Text("Warning!!!"),
-              content: Text("Are you sure you want to delete stadion ${widget.stadion!.stadionId}?"),
+              title: const Text("Upozorenje!!!"),
+              content: Text("Da li ste sigurni da želite izbrisati stadion ${widget.stadion!.stadionId}?"),
               actions: [
                 
                 TextButton(onPressed: () async =>{
@@ -155,10 +155,10 @@ class _StadionDetailsScreen extends State<StadionDetailsScreen> {
                   )
               
 
-                }, child: const Text("Yes")),
+                }, child: const Text("Da")),
                 TextButton(onPressed: ()=>{
                   Navigator.pop(context),
-                }, child: const Text("No")),
+                }, child: const Text("Ne")),
       
               ],
             ));

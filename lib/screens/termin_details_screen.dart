@@ -105,7 +105,7 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                                 DropdownMenuItem(value: 'Gostujuća utakmica', child: Text('Gostujuća utakmica'),), 
                                 DropdownMenuItem(value: 'Opšti pregled', child: Text('Opšti pregled'),), 
                                 DropdownMenuItem(value: 'Neutralni teren', child: Text('Neutralni teren'),), 
-                                DropdownMenuItem(value: 'Other', child: Text('Other'),), 
+                                DropdownMenuItem(value: 'Drugo', child: Text('Drugo'),), 
                               ],
                               onChanged: (value) {
                                 setState(() {
@@ -114,7 +114,7 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                               },
                               validator: (value) {
                                 if (value == null) {
-                                  return 'Please enter the Stručna sprema';
+                                  return 'Molimo Vas unesite tip termina';
                                 }
                                 return null;
                               },
@@ -142,7 +142,7 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                       },
                       validator: (value) {
                         if (value == null) {
-                          return 'Please enter the Stadion';
+                          return 'Molimo Vas unesite Stadion';
                         }
                         return null;
                       },
@@ -167,7 +167,7 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                 } on Exception catch (err) {
                   showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(
-                            title: const Text("Error"),
+                            title: const Text("Greška"),
                             content: Text(err.toString()),
                             actions: [
                               TextButton(onPressed: ()=>{
@@ -176,14 +176,14 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                             ],
                           ));
                 }
-              }, child: const Text("Save")),
+              }, child: const Text("Snimi")),
 
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 setState(() {
                   
                 });
-              }, child: const Text("Reload podataka")),
+              }, child: const Text("Osvježi podatke")),
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
@@ -195,8 +195,8 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
                   AlertDialog(
-                    title: const Text("Warning!!!"),
-                    content: Text("Are you sure you want to delete termin ${widget.termin!.terminId}?"),
+                    title: const Text("Upozorenje!!!"),
+                    content: Text("Da li ste sigurni da želite izbrisati termin ${widget.termin!.terminId}?"),
                     actions: [
                       
                       TextButton(onPressed: () async =>{
@@ -210,10 +210,10 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                         )
                     
 
-                      }, child: const Text("Yes")),
+                      }, child: const Text("Da")),
                       TextButton(onPressed: ()=>{
                         Navigator.pop(context),
-                      }, child: const Text("No")),
+                      }, child: const Text("Ne")),
             
                     ],
                             ));

@@ -89,7 +89,7 @@ class _TerminListScreen extends State<TerminListScreen> {
               
             });
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -128,12 +128,12 @@ Widget _buildDataListView() {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
         
                         DataColumn(label: Expanded(
                         child: Text("Šifra termina",
@@ -166,7 +166,7 @@ Widget _buildDataListView() {
                       onSelectChanged: (yxc)=>{
                         if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Doktor"||Authorization.ulogaKorisnika=="Glavni trener")&&yxc==true)
                           {
-                            print('selected: ${e.terminId}'),
+                            print('odabrani: ${e.terminId}'),
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context)=> TerminDetailsScreen(termin: e,)
                               )
@@ -176,7 +176,7 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.terminId}"),
+                              title: Text("Odabrali ste ${e.terminId}"),
                               content: Text("Šifra termina: ${e.sifraTermina}\nTip termina: ${e.tipTermina}\nStadion: ${getStadionDetails(e.stadionId!)}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -187,7 +187,7 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.terminId.toString()??"0")),
+                      // DataCell(Text(e.terminId.toString()??"0")),
                       DataCell(Text(e.sifraTermina??"---")),
                       DataCell(Text(e.tipTermina??"---")),
                       DataCell(Text(getStadionDetails(e.stadionId!)??"1")),

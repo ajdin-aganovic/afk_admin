@@ -42,7 +42,7 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Korisnici list"),
+      title_widget: const Text("Lista korisnika"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -127,10 +127,10 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                     result=data;
                   });
           
-                  print("data: successfully loaded");
+                  print("podaci: učitani");
           
           
-                }, child: const Text("Load data")),
+                }, child: const Text("Učitaj podatke")),
       ],
         ),
     
@@ -174,12 +174,12 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
                         columns: const [
-                    DataColumn(label: Expanded(
-                            child: Text("ID",
-                            style: TextStyle(fontStyle: FontStyle.italic),),
+                    // DataColumn(label: Expanded(
+                    //         child: Text("ID",
+                    //         style: TextStyle(fontStyle: FontStyle.italic),),
                             
-                            ),
-                            ),
+                    //         ),
+                    //         ),
         
                             DataColumn(label: Expanded(
                             child: Text("Ime",
@@ -264,7 +264,7 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                           onSelectChanged: (yxc)=>{
                                 showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: Text("You have chosen KorisnikID ${e.korisnikId}"),
+                                    title: Text("Odabrali ste korisnika ${e.korisnikId}"),
                                     content: Text("Ime: ${e.ime}\nPrezime: ${e.prezime}\nEmail: ${e.email}\nKorisničko ime: ${e.korisnickoIme}\nUloga: ${e.uloga}\nStručna sprema: ${e.strucnaSprema}"),
                                     actions: [
                                       TextButton(onPressed: ()=>{
@@ -275,7 +275,7 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
         
                           },
                           cells: [
-                          DataCell(Text(e.korisnikId?.toString()??"not set")),
+                          // DataCell(Text(e.korisnikId?.toString()??"not set")),
                           DataCell(Text(e.ime ??"not set")),
                           DataCell(Text(e.prezime ??"not set")),
                           DataCell(Text(e.email ??"not set")),
@@ -286,7 +286,7 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                           DataCell(Text(e.podUgovorom.toString() ??"not set")),
                           DataCell(Text(e.podUgovoromOd.toString() ??"not set")),
                           DataCell(Text(e.podUgovoromDo.toString() ??"not set")),
-                          DataCell(const Text("Edit"), onTap: () => {
+                          DataCell(const Text("Uredi"), onTap: () => {
                             if(Authorization.ulogaKorisnika=="Administrator")
                             {
                               Navigator.of(context).push(
@@ -298,8 +298,8 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                             {
                               showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: const Text("Warning!"),
-                                    content: const Text("Unauthorized call of a function.\nYou do not have the permission!"),
+                                    title: const Text("Upozorenje!"),
+                                    content: const Text("Neautorizovani poziv funkcije.\nNemate pravo pristupa ovoj komandi!"),
                                     actions: [
                                       TextButton(onPressed: ()=>{
                                         Navigator.pop(context),

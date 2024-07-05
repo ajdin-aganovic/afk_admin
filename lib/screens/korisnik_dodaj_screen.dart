@@ -163,7 +163,7 @@ final ScrollController _vertical = ScrollController();
                           validator: (value) {
                             if(value==null)
                             {
-                              return 'Please enter the email';
+                              return 'Molimo Vas unesite email';
                             }
                             return null;
                           },
@@ -173,8 +173,8 @@ final ScrollController _vertical = ScrollController();
                     Expanded(
                       child: FormBuilderTextField (
                         controller: _lozinkaController,
-                          decoration: const InputDecoration(labelText: "Password"
-                          , hintText:'Unesi password',), 
+                          decoration: const InputDecoration(labelText: "Lozinka"
+                          , hintText:'Unesite lozinku',), 
                           name: 'password',
                           obscureText: true,
 
@@ -184,14 +184,14 @@ final ScrollController _vertical = ScrollController();
                     Expanded(
                       child: FormBuilderTextField (
                         controller: _lozinkaProvjeraController,
-                          decoration: const InputDecoration(labelText: "Potvrdi password"
-                          , hintText:'Potvrdite password',), 
+                          decoration: const InputDecoration(labelText: "Potvrdi lozinku"
+                          , hintText:'Potvrdite lozinku',), 
                           name: 'passwordPotvrda',
                           obscureText: true,
                           validator: (value) {
                             if(value!=_lozinkaController.text)
                             {
-                              return 'Please enter the same password';
+                              return 'Molimo Vas unesite istu lozinku';
                             }
                             return null;
                           },
@@ -209,7 +209,7 @@ final ScrollController _vertical = ScrollController();
                                 DropdownMenuItem(value: 'VSS', child: Text('VSS'),), 
                                 DropdownMenuItem(value: 'BA', child: Text('BA'),), 
                                 DropdownMenuItem(value: 'MA', child: Text('MA'),), 
-                                DropdownMenuItem(value: 'No option', child: Text('No option'),), 
+                                DropdownMenuItem(value: 'Bez odabira', child: Text('Bez odabira'),), 
                               ],
                               onChanged: (value) {
                                 setState(() {
@@ -218,7 +218,7 @@ final ScrollController _vertical = ScrollController();
                               },
                               validator: (value) {
                                 if (value == null) {
-                                  return 'Please enter the Stručna sprema';
+                                  return 'Molimo Vas unesite stručnu spremu';
                                 }
                                 return null;
                               },
@@ -258,8 +258,8 @@ final ScrollController _vertical = ScrollController();
                               name: 'podUgovorom',
                               decoration: const InputDecoration(labelText: 'Pod ugovorom'),
                               items: const[ 
-                                DropdownMenuItem(value: true, child: Text('Yes'),), 
-                                DropdownMenuItem(value: false, child: Text('No'),), 
+                                DropdownMenuItem(value: true, child: Text('Da'),), 
+                                DropdownMenuItem(value: false, child: Text('Ne'),), 
                               ],
                               onChanged: (value) {
                                 setState(() {
@@ -268,7 +268,7 @@ final ScrollController _vertical = ScrollController();
                               },
                               validator: (value) {
                                 if (value == null) {
-                                  return 'Please enter the Pod ugovorom';
+                                  return 'Molimo Vas unesite da li je pod ugovorom';
                                 }
                                 return null;
                               },
@@ -342,7 +342,7 @@ final ScrollController _vertical = ScrollController();
                       },
                       validator: (value) {
                         if (value == null) {
-                          return 'Please enter the Uloga';
+                          return 'Molimo Vas unesite ulogu';
                         }
                         return null;
                       },
@@ -417,7 +417,7 @@ final ScrollController _vertical = ScrollController();
 
                               ),
                             );
-                        }, child: const Text("Save")),
+                        }, child: const Text("Snimi")),
 
 
 
@@ -432,7 +432,7 @@ final ScrollController _vertical = ScrollController();
                     
                       ElevatedButton(onPressed: () async{
                         setState(() { });
-                      }, child: const Text("Refresh podataka")),
+                      }, child: const Text("Osvježi podatke")),
 
              
                     ],))
@@ -456,7 +456,7 @@ final ScrollController _vertical = ScrollController();
     return 
     
     MasterScreenWidget(
-      title: 'Insert new korisnik',
+      title: 'Unesite novog korisnika',
       child: 
        buildForm()
       

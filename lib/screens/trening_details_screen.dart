@@ -130,7 +130,7 @@ Navigator.of(context).push(
                 } on Exception catch (err) {
                   showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(
-                            title: const Text("Error"),
+                            title: const Text("Greška"),
                             content: Text(err.toString()),
                             actions: [
                               TextButton(onPressed: ()=>{
@@ -139,7 +139,7 @@ Navigator.of(context).push(
                             ],
                           ));
                 }
-              }, child: const Text("Save")),
+              }, child: const Text("Spremi")),
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
@@ -151,8 +151,8 @@ Navigator.of(context).push(
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
                 AlertDialog(
-                  title: const Text("Warning!!!"),
-                  content: Text("Are you sure you want to delete trening ${widget.trening!.treningId}?"),
+                  title: const Text("Upozorenje!!!"),
+                  content: Text("Da li ste sigurni da želite izbrisati trening ${widget.trening!.treningId}?"),
                   actions: [
                     
                     TextButton(onPressed: () async =>{
@@ -166,10 +166,10 @@ Navigator.of(context).push(
                       )
                   
 
-                    }, child: const Text("Yes")),
+                    }, child: const Text("Da")),
                     TextButton(onPressed: ()=>{
                       Navigator.pop(context),
-                    }, child: const Text("No")),
+                    }, child: const Text("Ne")),
           
                   ],
                 ));

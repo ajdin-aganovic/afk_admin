@@ -96,7 +96,7 @@ if(korisnickoIme!=null) {
       child: 
       Scaffold(
         appBar: AppBar(
-          title: const Text("Home"),),
+          title: const Text("Početna"),),
           body: Center(
             child: 
             SingleChildScrollView(
@@ -132,7 +132,7 @@ if(korisnickoIme!=null) {
                                   builder: (context) => PlatumListScreen()
                                   ),
                                   );
-                                  }, child: const Text("Go to Platna lista")),),
+                                  }, child: const Text("Idi na Platne liste")),),
                                  
                                 ]
                               ),
@@ -145,7 +145,7 @@ if(korisnickoIme!=null) {
                                       builder: (context) => TransakcijskiRacunListScreen()
                                       ),
                                   );
-                                  }, child: const Text("Go to Transakcijski račun")),),
+                                  }, child: const Text("Idi na Transakcijske račune")),),
                                 
                               ]
                               ),
@@ -159,7 +159,7 @@ if(korisnickoIme!=null) {
                                       builder: (context) => const KorisniciEditableScreen()
                                       ),
                                   );
-                                  }, child: const Text("Go to Korisnici lista")),),
+                                  }, child: const Text("Idi na Listu korisnika")),),
                                   
                                 ],
                               ),
@@ -178,7 +178,7 @@ if(korisnickoIme!=null) {
                           ),
                       );
                       
-                      }, child: const Text("Go to Termin")),),
+                      }, child: const Text("Idi na Termine")),),
                                     
                       SizedBox(height: 50, width: 300, child: 
                                     
@@ -188,7 +188,7 @@ if(korisnickoIme!=null) {
                           builder: (context) => TerminDetailsScreen()
                           ),
                       );
-                      }, child: const Text("Add new Termin")),),
+                      }, child: const Text("Dodaj novi termin")),),
 
                       ]
                     ),
@@ -204,7 +204,7 @@ if(korisnickoIme!=null) {
                                   builder: (context) => TreningListScreen()
                                   ),
                               );
-                              }, child: const Text("Go to Trening")),),
+                              }, child: const Text("Idi na Treninge")),),
                               
                           SizedBox(height: 50, width: 300, child: 
                                             
@@ -214,7 +214,7 @@ if(korisnickoIme!=null) {
                                   builder: (context) => TreningDetailsScreen()
                                   ),
                               );
-                              }, child: const Text("Add new Trening")),),
+                              }, child: const Text("Dodaj novi trening")),),
                                   
                                 ],
                               ),
@@ -228,7 +228,7 @@ if(korisnickoIme!=null) {
                                   builder: (context) => BolestListScreen()
                                   ),
                               );
-                              }, child: const Text("Go to Bolests")),),
+                              }, child: const Text("Idi na bolesti")),),
                               SizedBox(height: 50, width: 300, child: 
                                             
                                   ElevatedButton(onPressed: (){
@@ -237,7 +237,7 @@ if(korisnickoIme!=null) {
                                   builder: (context) => BolestDetailsScreen()
                                   ),
                               );
-                              }, child: const Text("Add new Bolest")),),
+                              }, child: const Text("Dodaj novu bolest")),),
         
                     ]
                     ),

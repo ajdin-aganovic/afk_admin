@@ -132,7 +132,7 @@ class LoginPage extends StatelessWidget {
     return 
         Scaffold(
           appBar: AppBar(
-            title: const Text("Login"),),
+            title: const Text("Prijava"),),
             body: Center(
               child: 
               Container(
@@ -147,7 +147,7 @@ class LoginPage extends StatelessWidget {
                       const SizedBox(height: 20,),
                     TextField(
                       decoration: const InputDecoration(
-                        labelText: "Username",
+                        labelText: "Korisničko ime",
                         prefixIcon: Icon(Icons.email),
                       ),
                       controller: _usernamecontroller,
@@ -156,8 +156,8 @@ class LoginPage extends StatelessWidget {
                     TextField(
                       obscureText: true,
                       decoration: const InputDecoration(
-                        labelText: "Password",
-                        hintText: 'Enter your secure password',
+                        labelText: "Lozinka",
+                        hintText: 'Unesite svoju sigurnu lozinku',
                         prefixIcon: Icon(Icons.password_outlined),
                       ),
                       controller: _passwordcontroller, 
@@ -178,7 +178,7 @@ class LoginPage extends StatelessWidget {
                       {
                         showDialog(context: context, builder: (BuildContext context) => 
                               AlertDialog(
-                                title: const Text("You must enter credentials."),
+                                title: const Text("Morate unijeti kredencijale."),
                                 content: Text(e.toString()),
                                 actions: [
                                   TextButton(onPressed: ()=>{
@@ -230,7 +230,7 @@ class LoginPage extends StatelessWidget {
                               // "\npassword salt dekodirani1:${dekodiraniSalt1}"+
                               // "\npassword enkodirani2: ${kodiranaLozinka2}"+
                               // "\npassword dekodirani2:${dekodiranaLozinka2}"+
-                              "\nuloga usera: ${Authorization.ulogaKorisnika}"
+                              "\nuloga korisnika: ${Authorization.ulogaKorisnika}"
                               ),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -258,7 +258,7 @@ class LoginPage extends StatelessWidget {
                             {
                               showDialog(context: context, builder: (BuildContext context) => 
                               AlertDialog(
-                                title: const Text("No user found with these credentials."),
+                                title: const Text("Nije pronađen korisnik sa ovim kredencijalima."),
                                 content: Text(e.toString()),
                                 actions: [
                                   TextButton(onPressed: ()=>{
@@ -273,7 +273,7 @@ class LoginPage extends StatelessWidget {
                             {
                               showDialog(context: context, builder: (BuildContext context) => 
                               AlertDialog(
-                                title: const Text("Error"),
+                                title: const Text("Greška"),
                                 content: Text(e.toString()),
                                 actions: [
                                   TextButton(onPressed: ()=>{
@@ -286,7 +286,7 @@ class LoginPage extends StatelessWidget {
                             }
                           }
                         }
-                    }, child: const Text("Login", 
+                    }, child: const Text("Prijava", 
                       style: TextStyle(color: Colors.black, fontSize: 15),
                       // selectionColor: Colors.red,
                     ),
@@ -305,7 +305,7 @@ class LoginPage extends StatelessWidget {
                             );
                           }, 
                     child: const Text(
-                      'Forgot Password',
+                      'Zaboravljena lozinka',
                       style: TextStyle(color: Colors.black, fontSize: 15),
                      ),
                      

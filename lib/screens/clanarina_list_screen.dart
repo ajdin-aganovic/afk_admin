@@ -83,7 +83,7 @@ class _ClanarinaListScreen extends State<ClanarinaListScreen> {
               
             });
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -116,12 +116,12 @@ Widget _buildDataListView() {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
         
                         DataColumn(label: Expanded(
                         child: Text("KorisnikId",
@@ -147,7 +147,7 @@ Widget _buildDataListView() {
                       onSelectChanged: (yxc)=>{
                         if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Računovođa")&&yxc==true)
                           {
-                            print('selected: ${e.clanarinaId}'),
+                            print('odabrani: ${e.clanarinaId}'),
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context)=> ClanarinaDetailsScreen(clanarina: e,)
                               )
@@ -157,7 +157,7 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.clanarinaId}"),
+                              title: Text("Odabrali ste članarinu ${e.clanarinaId}"),
                               content: Text("KorisnikID: ${e.korisnikId}\nIznos članarine: ${e.iznosClanarine}\nDug: ${e.dug}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -168,7 +168,7 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.clanarinaId.toString()??"0")),
+                      // DataCell(Text(e.clanarinaId.toString()??"0")),
                       // DataCell(Text(e.korisnikId.toString()??"0")),
                       DataCell(Text(getKorisnikDetails(e.korisnikId!)??"2")),
                       DataCell(Text(e.iznosClanarine.toString()??"0")),

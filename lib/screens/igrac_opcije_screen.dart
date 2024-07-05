@@ -98,7 +98,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
       child: 
       Scaffold(
         appBar: AppBar(
-          title: const Text("Home"),),
+          title: const Text("Početna"),),
           body: Center(
             child: 
             SingleChildScrollView(
@@ -135,7 +135,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                                           builder: (context) => PlatumListScreen()
                                           ),
                                           );
-                                          }, child: const Text("Go to Platna lista")),),
+                                          }, child: const Text("Idi na platne liste")),),
                                     ],
                                   ),
                                       
@@ -149,7 +149,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                                            builder: (context) => TransakcijskiRacunListScreen()
                                            ),
                                        );
-                                       }, child: const Text("Go to Transakcijski račun")),),
+                                       }, child: const Text("Idi na transakcijske račune")),),
                                     ],
                                   ),
 
@@ -165,7 +165,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
 
                                            ),
                                        );
-                                       }, child: const Text("Go to Korisnici lista")),),
+                                       }, child: const Text("Idi na listu korisnika")),),
                                     ],
                                   ),
                                 ],
@@ -183,7 +183,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
 
                                            ),
                                        );
-                                       }, child: const Text("Go to Igrač članarina")),),
+                                       }, child: const Text("Idi na članarine igrača")),),
                                     ],
                                   ),
                               ],)
@@ -205,7 +205,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                                    builder: (context) => StadionListScreen()
                                    ),
                                );
-                               }, child: const Text("Go to Stadion")),),
+                               }, child: const Text("Idi na stadion")),),
                           ],
                         ),
 
@@ -220,7 +220,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                                 builder: (context) => ClanarinaListScreen()
                                 ),
                             );
-                            }, child: const Text("Go to Članarina")),),
+                            }, child: const Text("Idi na članarine")),),
                           ],
                         ),
                       ],
@@ -239,7 +239,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                                 builder: (context) => PozicijaListScreen()
                                 ),
                             );
-                            }, child: const Text("Go to Pozicija")),),
+                            }, child: const Text("Idi na pozicije")),),
                           ],
                         ),
                         
@@ -253,7 +253,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                               builder: (context) => BolestListScreen()
                               ),
                   );
-                  }, child: const Text("Go to Bolests")),),
+                  }, child: const Text("Idi na bolesti")),),
                           ],
                         ),
                           
@@ -267,7 +267,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                                   builder: (context) => StatistikaListScreen()
                                   ),
                               );
-                              }, child: const Text("Go to Statistika")),),
+                              }, child: const Text("Idi na statistike")),),
                           ],
                         ),
                       ],
@@ -286,7 +286,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                                    builder: (context) => UlogaListScreen()
                                    ),
                                );
-                               }, child: const Text("Go to Uloga")),),
+                               }, child: const Text("Idi na uloge")),),
                             ],
                           ),
 
@@ -301,7 +301,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                                         ),
                                     );
                                     
-                                    }, child: const Text("Go to Termin")),),
+                                    }, child: const Text("Idi na termine")),),
                           ],
                         ),
 
@@ -315,7 +315,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                                     builder: (context) => TreningListScreen()
                                     ),
                                 );
-                                }, child: const Text("Go to Trening")),),
+                                }, child: const Text("Idi na treninge")),),
                           ],
                         ),
                       ],
@@ -331,7 +331,7 @@ KorisnikPozicija? getKorisnikPozicija(int id)
                           builder: (context) => ViseDetaljaScreen(korisnikPozicija: getKorisnikPozicija(widget.korisnik?.korisnikId??2),)
                           ),
                       );
-                      }, child: const Text("Go to Više detalja")),),
+                      }, child: const Text("Idi na više detalja o korisniku")),),
                     ],
                     )
 

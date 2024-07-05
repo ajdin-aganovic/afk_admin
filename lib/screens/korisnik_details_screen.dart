@@ -247,7 +247,7 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
                             builder: (context) => const HomePage(),
                           ),
                         );
-                      }, child: const Text("Home page")),
+                      }, child: const Text("Početna")),
                     ],
                   ),
               ],
@@ -267,6 +267,6 @@ class _KorisnikDetailsScreen extends State<KorisnikDetailsScreen> {
 
 FormBuilder zaboravljenPassword() {
   return const FormBuilder(child: 
-  Text("Dob"));
+  Text("Zaboravljena lozinka"));
   }
 }

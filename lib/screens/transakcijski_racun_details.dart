@@ -157,7 +157,7 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                       },
                       validator: (value) {
                         if (value == null) {
-                          return 'Please enter the Korisnik';
+                          return 'Molimo Vas, unesite ispravnog Korisnika';
                         }
                         return null;
                       },
@@ -190,7 +190,7 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                   } on Exception catch (err) {
                     showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: const Text("Error"),
+                              title: const Text("Greška"),
                               content: Text(err.toString()),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -199,7 +199,7 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                               ],
                             ));
                   }
-                }, child: const Text("Save")),
+                }, child: const Text("Spremi")),
                 
           ),
           ElevatedButton(onPressed: () async{
@@ -213,13 +213,13 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
 
               ElevatedButton(onPressed: () async{
                         setState(() { });
-                      }, child: const Text("Refresh podataka")),
+                      }, child: const Text("Osvježi podatke")),
 
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
             AlertDialog(
-              title: const Text("Warning!!!"),
-              content: Text("Are you sure you want to delete TRačun ${widget.transakcijskiRacun!.transakcijskiRacunId}?"),
+              title: const Text("Upozorenje!!!"),
+              content: Text("Da li ste sigurni da želite izbrisati transakcijski račun ${widget.transakcijskiRacun!.transakcijskiRacunId}?"),
               actions: [
                 
                 TextButton(onPressed: () async =>{
@@ -233,10 +233,10 @@ class _TransakcijskiRacunDetailsScreen extends State<TransakcijskiRacunDetailsSc
                   )
               
 
-                }, child: const Text("Yes")),
+                }, child: const Text("Da")),
                 TextButton(onPressed: ()=>{
                   Navigator.pop(context),
-                }, child: const Text("No")),
+                }, child: const Text("Ne")),
       
               ],
             ));

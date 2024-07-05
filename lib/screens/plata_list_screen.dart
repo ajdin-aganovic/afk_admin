@@ -58,7 +58,7 @@ class _PlatumListScreen extends State<PlatumListScreen> {
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Plata list"),
+      title_widget: const Text("Lista plata"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -103,7 +103,7 @@ class _PlatumListScreen extends State<PlatumListScreen> {
             
               TextField(
                 decoration: 
-                const InputDecoration(labelText: "Maximalna plata"), 
+                const InputDecoration(labelText: "Maksimalna plata"), 
                 controller:_maxIznos
               ),
             
@@ -128,7 +128,7 @@ class _PlatumListScreen extends State<PlatumListScreen> {
           
           
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -170,12 +170,12 @@ Widget _buildDataListView() {
                 // scrollDirection:Axis.vertical,
                 child: DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
       
                         DataColumn(label: Expanded(
                         child: Text("Br. tr. računa",
@@ -215,7 +215,7 @@ Widget _buildDataListView() {
                       onSelectChanged: (yxc)=>{
                         if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Računovođa")&&yxc==true)
                           {
-                            print('selected: ${e.plataId}'),
+                            print('odabrani: ${e.plataId}'),
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context)=> PlatumDetailsScreen(platum: e,)
                               )
@@ -225,7 +225,7 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.plataId}"),
+                              title: Text("Odabrali ste ${e.plataId}"),
                               content: Text("Transakcijski račun ID: ${getBrojRacuna(e.transakcijskiRacunId!)}\nStanje: ${e.stateMachine}\nIznos: ${e.iznos}\nDatum slanja: ${e.datumSlanja}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -236,13 +236,13 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.plataId?.toString()??"")),
+                      // DataCell(Text(e.plataId?.toString()??"")),
                       // DataCell(Text(e.transakcijskiRacunId.toString() ??"")),
                       DataCell(Text(getBrojRacuna(e.transakcijskiRacunId!) ??"")),
                       DataCell(Text(e.stateMachine ??"")),
                       DataCell(Text(e.iznos.toString() ??"")),
                       DataCell(Text(e.datumSlanja.toString() ??"")),
-                      DataCell(const Text("Edit"), onTap: () async => {
+                      DataCell(const Text("Uredi"), onTap: () async => {
                             if(Authorization.ulogaKorisnika=="Administrator"&&e.stateMachine!.contains("active"))
                             {
                               // Navigator.of(context).push(
@@ -252,8 +252,8 @@ Widget _buildDataListView() {
                              await _platumProvider.hidePlatum(e.plataId!),
                               showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: const Text("Successful operation!"),
-                                    content: const Text("Plata je zatvorena"),
+                                    title: const Text("Uspješna operacija!"),
+                                    content: const Text("Plata je deaktivirana"),
                                     actions: [
                                       TextButton(onPressed: ()=>{
                                         Navigator.of(context).push(
@@ -269,8 +269,8 @@ Widget _buildDataListView() {
                                await _platumProvider.activatePlatum(e.plataId!),
                               showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: const Text("Successful operation!"),
-                                    content: const Text("Plata je otvorena"),
+                                    title: const Text("Uspješna operacija!"),
+                                    content: const Text("Plata je aktivna"),
                                     actions: [
                                       TextButton(onPressed: ()=>{
                                         Navigator.of(context).push(
@@ -285,8 +285,8 @@ Widget _buildDataListView() {
                             {
                               showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: const Text("Warning!"),
-                                    content: const Text("Unauthorized call of a function.\nYou do not have the permission!"),
+                                    title: const Text("Upozorenje!"),
+                                    content: const Text("Neautorizovani poziv funkcije.\nNemate dozvolu za ovom komandom!"),
                                     actions: [
                                       TextButton(onPressed: ()=>{
                                         Navigator.pop(context),

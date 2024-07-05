@@ -73,7 +73,7 @@ final Map<String,dynamic>_initialValue={};
       child: 
       Scaffold(
         appBar: AppBar(
-          title: const Text("Home"),),
+          title: const Text("Početna"),),
           body: Center(
             child: 
             SingleChildScrollView(
@@ -124,8 +124,8 @@ final Map<String,dynamic>_initialValue={};
                                       {
                                          showDialog(context: context, builder: (BuildContext context) => 
                                     AlertDialog(
-                                      title: const Text("You are not Admin."),
-                                      content: const Text("Try again"),
+                                      title: const Text("Vi niste administrator."),
+                                      content: const Text("Pokušajte ponovo"),
                                       actions: [
                                         TextButton(onPressed: ()=>{
                                           Navigator.pop(context),
@@ -133,7 +133,7 @@ final Map<String,dynamic>_initialValue={};
                                       ],
                                     ));
                                       }
-                                    }, child: const Text("Go to Admin dio")),
+                                    }, child: const Text("Idite na administratorski dio")),
                                     
                                     )
                                   ],
@@ -157,8 +157,8 @@ final Map<String,dynamic>_initialValue={};
                                       {
                                          showDialog(context: context, builder: (BuildContext context) => 
                                     AlertDialog(
-                                      title: const Text("You are not Uprava."),
-                                      content: const Text("Try again"),
+                                      title: const Text("Vi niste uprava."),
+                                      content: const Text("Pokušajte ponovo"),
                                       actions: [
                                         TextButton(onPressed: ()=>{
                                           Navigator.pop(context),
@@ -166,7 +166,7 @@ final Map<String,dynamic>_initialValue={};
                                       ],
                                     ));
                                       }
-                                    }, child: const Text("Go to Uprava dio")),
+                                    }, child: const Text("Idite na upravni dio")),
                                     ),
                                   ],
                                 ),
@@ -193,8 +193,8 @@ final Map<String,dynamic>_initialValue={};
                               {
                                          showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: const Text("You are not Medicinsko osoblje."),
-                              content: const Text("Try again"),
+                              title: const Text("Vi niste medicinsko osoblje."),
+                              content: const Text("Pokušajte ponovo"),
                               actions: [
                                 TextButton(onPressed: ()=>{
                                           Navigator.pop(context),
@@ -202,7 +202,7 @@ final Map<String,dynamic>_initialValue={};
                               ],
                             ));
                               }
-                            }, child: const Text("Go to Medicinski dio")),
+                            }, child: const Text("Idite na medicinski dio")),
                                         ),
                                        ],
                                      ),
@@ -226,8 +226,8 @@ final Map<String,dynamic>_initialValue={};
                                   {
                                          showDialog(context: context, builder: (BuildContext context) => 
                                           AlertDialog(
-                                            title: const Text("You are not Igrač."),
-                                            content: const Text("Try again"),
+                                            title: const Text("Vi niste igrač."),
+                                            content: const Text("Pokušajte ponovo"),
                                             actions: [
                                               TextButton(onPressed: ()=>{
                                                 Navigator.pop(context),
@@ -235,7 +235,7 @@ final Map<String,dynamic>_initialValue={};
                                             ],
                                           ));
                                   }
-                                }, child: const Text("Go to Igrač dio")),
+                                }, child: const Text("Idite na igrački dio")),
                               ),
                             ],
                           ),
@@ -270,7 +270,7 @@ final Map<String,dynamic>_initialValue={};
                                   } on Exception catch (e) {
                                     showDialog(context: context, builder: (BuildContext context) => 
                                         AlertDialog(
-                                          title: const Text("Error"),
+                                          title: const Text("Greška"),
                                           content: Text(e.toString()),
                                           actions: [
                                             TextButton(onPressed: ()=>{
@@ -281,7 +281,7 @@ final Map<String,dynamic>_initialValue={};
                                   }
 
 
-                                }, child: const Text("Account details"),
+                                }, child: const Text("Detalji o računu"),
 
 
                                 ),
@@ -299,7 +299,7 @@ final Map<String,dynamic>_initialValue={};
                                     );
                                     
                                       
-                                    }, child: const Text("Go to Fan shop")),
+                                    }, child: const Text("Idite u Prodavnicu")),
                                   ),
                                 
                               ],

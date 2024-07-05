@@ -153,7 +153,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                       },
                       validator: (value) {
                         if (value == null) {
-                          return 'Please enter the Korisnik';
+                          return 'Molimo Vas unesite korisnika';
                         }
                         return null;
                       },
@@ -180,7 +180,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                       },
                       validator: (value) {
                         if (value == null) {
-                          return 'Please enter the Pozicija';
+                          return 'Molimo Vas unesite poziciju';
                         }
                         return null;
                       },
@@ -209,7 +209,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                         setState(() {
                           
                         });
-                      }, child: const Text("Refresh podataka")),
+                      }, child: const Text("Osvježi podatke")),
                   ],
                 ),
 
@@ -222,7 +222,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                             builder: (context) => const HomePage(),
                           ),
                         );
-                      }, child: const Text("Home page")),
+                      }, child: const Text("Početna stranica")),
 
                       ElevatedButton(onPressed: () async{
                         _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
@@ -242,7 +242,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                         } on Exception catch (err) {
                           showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: const Text("Error"),
+                                    title: const Text("Greška"),
                                     content: Text(err.toString()),
                                     actions: [
                                       TextButton(onPressed: ()=>{
@@ -251,7 +251,7 @@ class _ViseDetaljaScreen extends State<ViseDetaljaScreen> {
                                     ],
                                   ));
                         }
-                      }, child: const Text("Save")),
+                      }, child: const Text("Snimi")),
                     ],
                   ),
               ],

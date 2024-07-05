@@ -138,12 +138,12 @@ Widget _buildDataListView() {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
         
                         DataColumn(label: Expanded(
                         child: Text("Broj računa",
@@ -176,7 +176,7 @@ Widget _buildDataListView() {
                       onSelectChanged: (yxc)=>{
                        if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Računovođa")&&yxc==true)
                           {
-                            print('selected: ${e.transakcijskiRacunId}'),
+                            print('odabrani: ${e.transakcijskiRacunId}'),
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context)=> TransakcijskiRacunDetailsScreen(transakcijskiRacun: e,)
                               )
@@ -186,7 +186,7 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.transakcijskiRacunId}"),
+                              title: Text("Odabrali ste ${e.transakcijskiRacunId}"),
                               content: Text("Broj računa: ${e.brojRacuna}\nAdresa prebivališa: ${e.adresaPrebivalista}\nNaziv banke: ${e.nazivBanke}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -197,7 +197,7 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.transakcijskiRacunId?.toString()??"")),
+                      // DataCell(Text(e.transakcijskiRacunId?.toString()??"")),
                       DataCell(Text(e.brojRacuna??"")),
                       DataCell(Text(e.adresaPrebivalista ??"")),
                       DataCell(Text(e.nazivBanke??"")),

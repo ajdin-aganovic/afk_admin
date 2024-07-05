@@ -107,7 +107,7 @@ if(korisnickoIme!=null) {
         child: 
         Scaffold(
           appBar: AppBar(
-            title: const Text("Home"),),
+            title: const Text("Početna"),),
             body: Center(
               child: 
               SingleChildScrollView(
@@ -144,7 +144,7 @@ if(korisnickoIme!=null) {
                                     builder: (context) => PlatumListScreen()
                                     ),
                                     );
-                                    }, child: const Text("Go to Platna lista")),
+                                    }, child: const Text("Idi na platne liste")),
                                       ),
                                                   
       
@@ -157,7 +157,7 @@ if(korisnickoIme!=null) {
                                         builder: (context) => PlatumDetailsScreen()
                                         ),
                                     );
-                                    }, child: const Text("Add new Platna lista")),
+                                    }, child: const Text("Dodaj novu platnu listu")),
                                    ),
                                                   
                                   ]
@@ -171,7 +171,7 @@ if(korisnickoIme!=null) {
                                         builder: (context) => TransakcijskiRacunListScreen()
                                         ),
                                     );
-                                    }, child: const Text("Go to Transakcijski račun")),
+                                    }, child: const Text("Idi na transakcijske račune")),
                                    ),
                                                   
       
@@ -182,7 +182,7 @@ if(korisnickoIme!=null) {
                                         builder: (context) => TransakcijskiRacunDetailsScreen()
                                         ),
                                     );
-                                    }, child: const Text("Add new Transakcijski račun")),
+                                    }, child: const Text("Dodaj novi transakcijski račun")),
                                   
                                   ),
                                                   
@@ -198,7 +198,7 @@ if(korisnickoIme!=null) {
                                         builder: (context) => const KorisniciEditableScreen()
                                         ),
                                     );
-                                    }, child: const Text("Go to Korisnici lista")),
+                                    }, child: const Text("Idi na listu korisnika")),
                                     ),
                                                   
       
@@ -210,7 +210,7 @@ if(korisnickoIme!=null) {
                                         builder: (context) => DodajScreen()
                                         ),
                                     );
-                                    }, child: const Text("Add new Korisnik")),
+                                    }, child: const Text("Dodaj novog korisnika")),
                                     ),
                                                   
                                     
@@ -230,7 +230,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => StadionListScreen()
                                 ),
                             );
-                            }, child: const Text("Go to Stadion")),
+                            }, child: const Text("Idi na stadion")),
                           ),
                                           
                             
@@ -241,7 +241,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => StadionDetailsScreen()
                                 ),
                             );
-                            }, child: const Text("Add new Stadion")),
+                            }, child: const Text("Dodaj novi stadion")),
                             ),
                                           
       
@@ -256,7 +256,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => ClanarinaListScreen()
                                 ),
                             );
-                            }, child: const Text("Go to Članarina")),
+                            }, child: const Text("Idi na članarine")),
                               ),
                                           
                             
@@ -267,7 +267,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => ClanarinaDetailsScreen()
                                 ),
                             );
-                            }, child: const Text("Add new Članarina")),  
+                            }, child: const Text("Dodaj novu članarinu")),  
                            
                            ),
                                           
@@ -283,7 +283,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => PozicijaListScreen()
                                 ),
                             );
-                            }, child: const Text("Go to Pozicija")),
+                            }, child: const Text("Idi na poziciju")),
                              ),
                                           
                             
@@ -295,7 +295,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => PozicijaDetailsScreen()
                                 ),
                             );
-                            }, child: const Text("Add new Pozicija")),  
+                            }, child: const Text("Dodaj novu poziciju")),  
                             
                             ),
                                           
@@ -312,7 +312,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => StatistikaListScreen()
                                 ),
                             );
-                            }, child: const Text("Go to Statistika")),
+                            }, child: const Text("Idi na statistiku")),
                            ),
                                           
                             
@@ -324,7 +324,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => StatistikaDetailsScreen()
                                 ),
                             );
-                            }, child: const Text("Add new Statistika")), 
+                            }, child: const Text("Dodaj novu statistiku")), 
                             
                             ),
                                           
@@ -341,7 +341,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => UlogaListScreen()
                                 ),
                             );
-                            }, child: const Text("Go to Uloga")),
+                            }, child: const Text("Idi na uloge")),
                             
                             ),
                                           
@@ -354,7 +354,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => UlogaDetailsScreen()
                                 ),
                             );
-                            }, child: const Text("Add new Uloga")), 
+                            }, child: const Text("Dodaj novu ulogu")), 
                             ),
                                           
                         ],
@@ -369,7 +369,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => const ListaIgracaScreen()
                                 ),
                             );
-                            }, child: const Text("Go to Lista igrača po pozicijama")),
+                            }, child: const Text("Lista igrača po pozicijama")),
                             
                             ),
       
@@ -381,7 +381,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => ProizvodDetailsScreen()
                                 ),
                             );
-                            }, child: const Text("Add new Proizvod")),
+                            }, child: const Text("Dodaj novi proizvod")),
                             
                             ),                
                         ],
@@ -396,7 +396,7 @@ if(korisnickoIme!=null) {
                                 builder: (context) => ProizvodListScreen()
                                 ),
                             );
-                            }, child: const Text("Go to lista Proizvoda")),
+                            }, child: const Text("Idi na listu proizvoda")),
                             
                             ),  
                       ],)

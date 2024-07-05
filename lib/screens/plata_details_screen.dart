@@ -146,7 +146,7 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                       },
                       validator: (value) {
                         if (value == null) {
-                          return 'Please enter the Transakcijski račun';
+                          return 'Molimo Vas unesite ispravan Transakcijski račun';
                         }
                         return null;
                       },
@@ -178,7 +178,7 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
             
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter the DatumSlanja';
+                    return 'Molimo Vas unesite datum slanja';
                   }
                   return null;
                 },
@@ -205,7 +205,7 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                 } on Exception catch (err) {
                   showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(
-                            title: const Text("Error"),
+                            title: const Text("Greška"),
                             content: Text(err.toString()),
                             actions: [
                               TextButton(onPressed: ()=>{
@@ -214,7 +214,7 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                             ],
                           ));
                 }
-              }, child: const Text("Save")),
+              }, child: const Text("Snimi")),
 
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
@@ -235,8 +235,8 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
                 AlertDialog(
-                  title: const Text("Warning!!!"),
-                  content: Text("Are you sure you want to delete Plata ${widget.platum!.plataId}?"),
+                  title: const Text("Upozorenje!!!"),
+                  content: Text("Da li ste sigurni da želite izbrisati platu ${widget.platum!.plataId}?"),
                   actions: [
                     
                     TextButton(onPressed: () async =>{
@@ -250,10 +250,10 @@ class _PlatumDetailsScreen extends State<PlatumDetailsScreen> {
                       )
                   
 
-                    }, child: const Text("Yes")),
+                    }, child: const Text("Da")),
                     TextButton(onPressed: ()=>{
                       Navigator.pop(context),
-                    }, child: const Text("No")),
+                    }, child: const Text("Ne")),
           
                   ],
                 ));

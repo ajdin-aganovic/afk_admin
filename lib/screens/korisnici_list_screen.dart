@@ -40,7 +40,7 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Korisnici list"),
+      title_widget: const Text("Lista korisnika"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -113,10 +113,10 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
                     result=data;
                   });
           
-                  print("data: successfully loaded");
+                  print("podaci: učitani");
           
           
-                }, child: const Text("Load data")),
+                }, child: const Text("Učitaj podatke")),
       ],
         ),
     
@@ -160,12 +160,12 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
                         columns: const [
-                    DataColumn(label: Expanded(
-                            child: Text("ID",
-                            style: TextStyle(fontStyle: FontStyle.italic),),
+                    // DataColumn(label: Expanded(
+                    //         child: Text("ID",
+                    //         style: TextStyle(fontStyle: FontStyle.italic),),
                             
-                            ),
-                            ),
+                    //         ),
+                    //         ),
         
                             DataColumn(label: Expanded(
                             child: Text("Ime",
@@ -242,7 +242,7 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
                           onSelectChanged: (yxc)=>{
                             if(yxc==true)
                             {
-                              print('selected: ${e.korisnikId}'),
+                              print('odabrani: ${e.korisnikId}'),
                               Navigator.of(context).push(
                                   MaterialPageRoute(builder: (context)=> KorisnikDetailsScreen(korisnik: e,)
                                   )
@@ -251,7 +251,7 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
                            
                           },
                           cells: [
-                          DataCell(Text(e.korisnikId?.toString()??"")),
+                          // DataCell(Text(e.korisnikId?.toString()??"")),
                           DataCell(Text(e.ime ??"")),
                           DataCell(Text(e.prezime ??"")),
                           DataCell(Text(e.email ??"")),

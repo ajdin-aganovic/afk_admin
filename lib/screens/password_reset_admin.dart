@@ -110,7 +110,7 @@ final ScrollController _vertical = ScrollController();
                child: 
                Column(children: [
                     
-                    const Text('Promjena passworda',
+                    const Text('Promjena lozinke',
                     style: TextStyle(fontSize: 30),), 
                     const SizedBox(height: 12,),
                     // Text('Dobrodošli ${widget.loggovaniUser?.korisnickoIme??"nazad"}',
@@ -185,7 +185,7 @@ final ScrollController _vertical = ScrollController();
                           name: 'passwordPotvrda',
                           validator: (value) {
                                 if (value != _lozinkaController.text) {
-                                  return 'Passwords do not match';
+                                  return 'Lozinke se ne podudaraju';
                                 }
                                 return null;
                               },
@@ -311,7 +311,7 @@ final ScrollController _vertical = ScrollController();
                                   } on Exception catch (err) {
                                     showDialog(context: context, builder: (BuildContext context) => 
                                             AlertDialog(
-                                              title: const Text("Error"),
+                                              title: const Text("Greška"),
                                               content: Text(err.toString()),
                                               actions: [
                                                 TextButton(onPressed: ()=>{
@@ -325,8 +325,8 @@ final ScrollController _vertical = ScrollController();
                             {
                               showDialog(context: context, builder: (BuildContext context) => 
                                             AlertDialog(
-                                              title: const Text("Error"),
-                                              content: const Text("Enter a password"),
+                                              title: const Text("Greška"),
+                                              content: const Text("Unesite lozinku"),
                                               actions: [
                                                 TextButton(onPressed: ()=>{
                                                   Navigator.pop(context),
@@ -334,7 +334,7 @@ final ScrollController _vertical = ScrollController();
                                               ],
                                             ));
                             }
-                        }, child: const Text("Save new password")),
+                        }, child: const Text("Snimi novu lozinku")),
                       
                     ],))
                     
@@ -357,7 +357,7 @@ final ScrollController _vertical = ScrollController();
     return 
     
     MasterScreenWidget(
-      title: 'Insert new korisnik',
+      title: 'Promijeni lozinku',
       child: 
        buildForm()
       
@@ -377,10 +377,10 @@ final ScrollController _vertical = ScrollController();
 
   if (response.statusCode > 199 && response.statusCode<300) {
     // Insert operation successful
-    print('Change password successful: ${response.body} ${response.statusCode}');
+    print('Uspješna promjena lozinke: ${response.body} ${response.statusCode}');
   } else {
     // Insert operation failed
-    print('Change password failed: ${response.body} ${response.statusCode}');
+    print('Promjena lozinke neuspješna: ${response.body} ${response.statusCode}');
   }
 }
 

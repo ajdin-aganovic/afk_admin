@@ -34,7 +34,7 @@ class _UlogaListScreen extends State<UlogaListScreen> {
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      title_widget: const Text("Lista ulogaa"),
+      title_widget: const Text("Lista uloga"),
       child: Container(
         child: Column(children: [
           _buildSearch(),
@@ -66,7 +66,7 @@ class _UlogaListScreen extends State<UlogaListScreen> {
               
             });
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -99,15 +99,15 @@ Widget _buildDataListView() {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
         
                         DataColumn(label: Expanded(
-                        child: Text("Nazive uloge",
+                        child: Text("Naziv uloge",
                         style: TextStyle(fontStyle: FontStyle.italic),),
                         ),
                         ),
@@ -125,7 +125,7 @@ Widget _buildDataListView() {
                       onSelectChanged: (yxc)=>{
                         if((Authorization.ulogaKorisnika=="Administrator")&&yxc==true)
                           {
-                            print('selected: ${e.ulogaId}'),
+                            print('odabrana: ${e.ulogaId}'),
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context)=> UlogaDetailsScreen(uloga: e,)
                               )
@@ -135,7 +135,7 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.ulogaId}"),
+                              title: Text("Izabrali ste ${e.ulogaId}"),
                               content: Text("${e.nazivUloge}/${e.podtipUloge}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -146,7 +146,7 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.ulogaId.toString()??"0")),
+                      // DataCell(Text(e.ulogaId.toString()??"0")),
                       DataCell(Text(e.nazivUloge??"---")),
                       DataCell(Text(e.podtipUloge??"---")),
         

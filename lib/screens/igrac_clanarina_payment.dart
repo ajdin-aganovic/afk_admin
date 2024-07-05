@@ -138,7 +138,7 @@ class _IgracClanarinaScreen extends State<IgracClanarinaScreen> {
           buildForm(),
            ElevatedButton(onPressed: (){
             
-          }, child: const Text("Add new KorisnikPozicija")),
+          }, child: const Text("Dodaj novu plaćenu članarinu")),
         ],
       )
      

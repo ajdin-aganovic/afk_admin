@@ -81,11 +81,11 @@ class _TreningListScreen extends State<TreningListScreen> {
               result=data;
             });
         
-            print("data: ${data.result[0].treningId}");
+            print("podaci: ${data.result[0].treningId}");
           
           
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -123,21 +123,21 @@ Widget _buildDataListView() {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
         
                         DataColumn(label: Expanded(
-                        child: Text("NazivTreninga",
+                        child: Text("Naziv treninga",
                         style: TextStyle(fontStyle: FontStyle.italic),),
                         ),
                         ),
         
                         DataColumn(label: Expanded(
-                        child: Text("TipTreninga",
+                        child: Text("Tip treninga",
                         style: TextStyle(fontStyle: FontStyle.italic),),
                         ),
                         ),
@@ -154,7 +154,7 @@ Widget _buildDataListView() {
                       onSelectChanged: (yxc)=>{
                         if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Glavni trener"||Authorization.ulogaKorisnika=="Pomoćni trener")&&yxc==true)
                           {
-                            print('selected: ${e.treningId}'),
+                            print('odabrani: ${e.treningId}'),
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context)=> TreningDetailsScreen(trening: e,)
                               )
@@ -164,7 +164,7 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.treningId}"),
+                              title: Text("Izabrali ste ${e.treningId}"),
                               content: Text("${e.tipTreninga}/${e.nazivTreninga}/${e.datumTreninga}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -175,7 +175,7 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.treningId?.toString()??"0")),
+                      // DataCell(Text(e.treningId?.toString()??"0")),
                       DataCell(Text(e.nazivTreninga ??"---")),
                       DataCell(Text(e.tipTreninga ??"---")),
                       // DataCell(Text(e.datumTreninga.toString() ??DateTime.now().toString())),

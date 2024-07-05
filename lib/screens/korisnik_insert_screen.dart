@@ -197,7 +197,7 @@ final ScrollController _vertical = ScrollController();
                               },
                               validator: (value) {
                                 if (value == null) {
-                                  return 'Please enter the Stručna sprema';
+                                  return 'Molimo Vas unesite stručnu spremu';
                                 }
                                 return null;
                               },
@@ -218,8 +218,8 @@ final ScrollController _vertical = ScrollController();
                               name: 'podUgovorom',
                               decoration: const InputDecoration(labelText: 'Pod ugovorom'),
                               items: const[ 
-                                DropdownMenuItem(value: true, child: Text('Yes'),), 
-                                DropdownMenuItem(value: false, child: Text('No'),), 
+                                DropdownMenuItem(value: true, child: Text('Da'),), 
+                                DropdownMenuItem(value: false, child: Text('Ne'),), 
                               ],
                               onChanged: (value) {
                                 setState(() {
@@ -228,7 +228,7 @@ final ScrollController _vertical = ScrollController();
                               },
                               validator: (value) {
                                 if (value == null) {
-                                  return 'Please enter the Pod ugovorom';
+                                  return 'Molimo Vas unesite da li je pod ugovorom';
                                 }
                                 return null;
                               },
@@ -270,7 +270,7 @@ final ScrollController _vertical = ScrollController();
                       },
                       validator: (value) {
                         if (value == null) {
-                          return 'Please enter the Uloga';
+                          return 'Molimo Vas unesite ulogu';
                         }
                         return null;
                       },
@@ -327,7 +327,7 @@ final ScrollController _vertical = ScrollController();
                           } on Exception catch (err) {
                             showDialog(context: context, builder: (BuildContext context) => 
                                     AlertDialog(
-                                      title: const Text("Error"),
+                                      title: const Text("Greška"),
                                       content: Text(err.toString()),
                                       actions: [
                                         TextButton(onPressed: ()=>{
@@ -336,7 +336,7 @@ final ScrollController _vertical = ScrollController();
                                       ],
                                     ));
                           }
-                        }, child: const Text("Save")),
+                        }, child: const Text("Snimi")),
 
 
 
@@ -351,14 +351,14 @@ final ScrollController _vertical = ScrollController();
                     
                       ElevatedButton(onPressed: () async{
                         setState(() { });
-                      }, child: const Text("Refresh podataka")),
+                      }, child: const Text("Osvježi podatke")),
 
 
                       ElevatedButton(onPressed: () async{
                         showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: const Text("Warning!!!"),
-                                    content: Text("Are you sure you want to delete ${widget.korisnik!.korisnickoIme}?"),
+                                    title: const Text("Upozorenje!!!"),
+                                    content: Text("Da li ste sigurni da želite izbrisati korisnika ${widget.korisnik!.korisnickoIme}?"),
                                     actions: [
                                       
                                       TextButton(onPressed: () async =>{
@@ -372,10 +372,10 @@ final ScrollController _vertical = ScrollController();
                                         )
                                     
 
-                                      }, child: const Text("Yes")),
+                                      }, child: const Text("Da")),
                                       TextButton(onPressed: ()=>{
                                         Navigator.pop(context),
-                                      }, child: const Text("No")),
+                                      }, child: const Text("Ne")),
                             
                                     ],
                                   ));
@@ -391,7 +391,7 @@ final ScrollController _vertical = ScrollController();
                           ),
                         );
                         
-                      }, child: const Text("Change password")),
+                      }, child: const Text("Promijeni lozinku")),
              
              
                     ],))
@@ -415,7 +415,7 @@ final ScrollController _vertical = ScrollController();
     return 
     
     MasterScreenWidget(
-      title: 'Insert data for user ${widget.korisnik?.ime} ${widget.korisnik?.prezime}'??'Insert data for user',
+      title: 'Unesite podatke za ${widget.korisnik?.ime} ${widget.korisnik?.prezime}'??'Unos podataka za korisnika',
       child: 
        buildForm()
       
@@ -433,10 +433,10 @@ final ScrollController _vertical = ScrollController();
 
   if (response.statusCode > 199 && response.statusCode<300) {
     // Insert operation successful
-    print('Insert operation successful: ${response.body} ${response.statusCode}');
+    print('Operacija unosa uspješna: ${response.body} ${response.statusCode}');
   } else {
     // Insert operation failed
-    print('Insert operation failed: ${response.body} ${response.statusCode}');
+    print('Operacija unosa neuspješna: ${response.body} ${response.statusCode}');
   }
 }
 

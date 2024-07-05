@@ -83,7 +83,7 @@ class _ProizvodListScreen extends State<ProizvodListScreen> {
               
             });
             }, 
-            child: const Text("Load data")),
+            child: const Text("Učitaj podatke")),
         ],
       ),
     
@@ -116,12 +116,12 @@ Widget _buildDataListView() {
                 child: 
                 DataTable(
                     columns: const [
-                        DataColumn(label: Expanded(
-                        child: Text("ID",
-                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        // DataColumn(label: Expanded(
+                        // child: Text("ID",
+                        // style: TextStyle(fontStyle: FontStyle.italic),),
                         
-                        ),
-                        ),
+                        // ),
+                        // ),
         
                         DataColumn(label: Expanded(
                         child: Text("Naziv proizvoda",
@@ -154,7 +154,7 @@ Widget _buildDataListView() {
                       onSelectChanged: (yxc)=>{
                         if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Glavni trener")&&yxc==true)
                           {
-                            print('selected: ${e.proizvodId}'),
+                            print('odabrani: ${e.proizvodId}'),
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context)=> ProizvodDetailsScreen(proizvod: e,)
                               )
@@ -164,7 +164,7 @@ Widget _buildDataListView() {
                         {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
-                              title: Text("You have chosen ${e.proizvodId}"),
+                              title: Text("Izabrali ste ${e.proizvodId}"),
                               content: Text("${e.naziv}/${e.kategorija}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
@@ -175,11 +175,11 @@ Widget _buildDataListView() {
                         }
                       },
                       cells: [
-                      DataCell(Text(e.proizvodId.toString()??"0")),
+                      // DataCell(Text(e.proizvodId.toString()??"0")),
                       DataCell(Text(e.naziv??"---")),
                       DataCell(Text(e.kategorija??"---")),
                       DataCell(Text(e.stateMachine ??"")),
-                      DataCell(const Text("Edit"), onTap: () async => {
+                      DataCell(const Text("Uredi"), onTap: () async => {
                             if(Authorization.ulogaKorisnika=="Administrator"&&e.stateMachine!.contains("active"))
                             {
                               // Navigator.of(context).push(
@@ -189,8 +189,8 @@ Widget _buildDataListView() {
                              await _proizvodProvider.hidePlatum(e.proizvodId!),
                               showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: const Text("Successful operation!"),
-                                    content: const Text("Proizvod je zatvoren"),
+                                    title: const Text("Uspješna operacija!"),
+                                    content: const Text("Proizvod je deaktiviran"),
                                     actions: [
                                       TextButton(onPressed: ()=>{
                                         Navigator.of(context).push(
@@ -206,8 +206,8 @@ Widget _buildDataListView() {
                                await _proizvodProvider.activatePlatum(e.proizvodId!),
                               showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: const Text("Successful operation!"),
-                                    content: const Text("Plata je otvorena"),
+                                    title: const Text("Uspješna operacija!"),
+                                    content: const Text("Proizvod je aktiviran"),
                                     actions: [
                                       TextButton(onPressed: ()=>{
                                         Navigator.of(context).push(
@@ -222,8 +222,8 @@ Widget _buildDataListView() {
                             {
                               showDialog(context: context, builder: (BuildContext context) => 
                                   AlertDialog(
-                                    title: const Text("Warning!"),
-                                    content: const Text("Unauthorized call of a function.\nYou do not have the permission!"),
+                                    title: const Text("Upozorenje!"),
+                                    content: const Text("Neautorizovani poziv funkcije.\nNemate pravo pristupa ovoj komandi!"),
                                     actions: [
                                       TextButton(onPressed: ()=>{
                                         Navigator.pop(context),

@@ -114,7 +114,7 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
                       },
                       validator: (value) {
                         if (value == null) {
-                          return 'Please enter the Uloga';
+                          return 'Molimo Vas unesite Ulogu';
                         }
                         return null;
                       },
@@ -140,7 +140,7 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
           ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 setState(() {});
-              }, child: const Text("Reload podataka")),
+              }, child: const Text("Osvježi podatke")),
           ElevatedButton(onPressed: () async{
                 _formKey.currentState?.saveAndValidate(focusOnInvalid: false);
                 print(_formKey.currentState?.value);
@@ -159,7 +159,7 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
                 } on Exception catch (err) {
                   showDialog(context: context, builder: (BuildContext context) => 
                           AlertDialog(
-                            title: const Text("Error"),
+                            title: const Text("Greška"),
                             content: Text(err.toString()),
                             actions: [
                               TextButton(onPressed: ()=>{
@@ -168,7 +168,7 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
                             ],
                           ));
                 }
-              }, child: const Text("Save")),
+              }, child: const Text("Snimi")),
               ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();
                 Navigator.of(context).push(
@@ -180,8 +180,8 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
               ElevatedButton(onPressed: () async{
                   showDialog(context: context, builder: (BuildContext context) => 
                     AlertDialog(
-                      title: const Text("Warning!!!"),
-                      content: Text("Are you sure you want to delete clanarina ${widget.clanarina!.clanarinaId}?"),
+                      title: const Text("Upozorenje!!!"),
+                      content: Text("Da li ste sigurni da želite izbrisati članarinu ${widget.clanarina!.clanarinaId}?"),
                       actions: [
                         
                         TextButton(onPressed: () async =>{
@@ -195,10 +195,10 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
                           )
                       
 
-                        }, child: const Text("Yes")),
+                        }, child: const Text("Da")),
                         TextButton(onPressed: ()=>{
                           Navigator.pop(context),
-                        }, child: const Text("No")),
+                        }, child: const Text("Ne")),
               
                       ],
                     ));

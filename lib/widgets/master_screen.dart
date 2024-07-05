@@ -26,7 +26,8 @@ class _MasterScreenWidgetState extends State<MasterScreenWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: widget.title_widget?? Text(widget.title??"")
+        title: widget.title_widget?? Text(widget.title??""),
+        // automaticallyImplyLeading: false,
       ),
       drawer: Drawer(
         child: ListView(
