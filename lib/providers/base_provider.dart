@@ -19,7 +19,10 @@ abstract class BaseProvider<T> with ChangeNotifier{
 
   BaseProvider(String endpoint){
     _endpoint=endpoint;
-    _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "https://localhost:7181/");
+    // _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "https://localhost:7181/"); //ZA LOKAL
+     _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "http://localhost:7181/"); //ZA DOCKER
+
+
     // _baseUrl=dotenv.env['ADRESA_LOKALNE']??'http://192.168.1.0/';
     // _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "https://192.168.1.10:7181/");
 

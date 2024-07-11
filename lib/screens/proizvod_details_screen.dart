@@ -40,7 +40,7 @@ class _ProizvodDetailsScreen extends State<ProizvodDetailsScreen> {
     'proizvodId':widget.proizvod?.proizvodId.toString()??"0",
     'naziv':widget.proizvod?.naziv??"---",
     'sifra': widget.proizvod?.sifra??"---", 
-    'kategorija': widget.proizvod?.kategorija??"---", 
+    'kategorija': widget.proizvod?.kategorija??"Razno", 
     'cijena': widget.proizvod?.cijena.toString()??"---", 
     'kolicina': widget.proizvod?.kolicina.toString()??"---", 
     'stateMachine': widget.proizvod?.stateMachine??"creating", 

@@ -41,8 +41,8 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
   _initialValue= {
     'terminId':widget.termin?.terminId.toString()??"0",
     'sifraTermina':widget.termin?.sifraTermina??"---",
-    'tipTermina': widget.termin?.tipTermina??"---", 
-    'stadionId':widget.termin?.stadionId.toString()??"2"
+    'tipTermina': widget.termin?.tipTermina??"Drugo", 
+    'stadionId':widget.termin?.stadionId.toString()??"1"
   };
 
     _terminProvider=context.read<TerminProvider>(); 

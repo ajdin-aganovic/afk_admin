@@ -134,6 +134,18 @@ Widget _buildDataListView() {
                         style: TextStyle(fontStyle: FontStyle.italic),),
                         ),
                         ),
+
+                        DataColumn(label: Expanded(
+                        child: Text("Cijena proizvoda",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
+
+                        DataColumn(label: Expanded(
+                        child: Text("Količina proizvoda",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
         
                         DataColumn(label: Expanded(
                         child: Text("Status proizvoda",
@@ -152,7 +164,9 @@ Widget _buildDataListView() {
                   rows: 
                     result?.result.map((Proizvod e) => DataRow(
                       onSelectChanged: (yxc)=>{
-                        if((Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Glavni trener")&&yxc==true)
+                        if((Authorization.ulogaKorisnika=="Administrator"
+                        // ||Authorization.ulogaKorisnika=="Glavni trener"
+                        )&&yxc==true)
                           {
                             print('odabrani: ${e.proizvodId}'),
                             Navigator.of(context).push(
@@ -178,6 +192,8 @@ Widget _buildDataListView() {
                       // DataCell(Text(e.proizvodId.toString()??"0")),
                       DataCell(Text(e.naziv??"---")),
                       DataCell(Text(e.kategorija??"---")),
+                      DataCell(Text(e.cijena.toString()??"0")),
+                      DataCell(Text(e.kolicina.toString() ??"0")),
                       DataCell(Text(e.stateMachine ??"")),
                       DataCell(const Text("Uredi"), onTap: () async => {
                             if(Authorization.ulogaKorisnika=="Administrator"&&e.stateMachine!.contains("active"))

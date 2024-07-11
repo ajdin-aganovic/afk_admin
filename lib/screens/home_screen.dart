@@ -111,7 +111,8 @@ final Map<String,dynamic>_initialValue={};
                                     SizedBox(height: 80, width: 200, child: 
                                     
                                     ElevatedButton(onPressed: (){
-                                    if(Authorization.ulogaKorisnika=="Administrator")
+                                    if(Authorization.ulogaKorisnika=="Administrator"||Authorization.ulogaKorisnika=="Analiticar"
+                                    ||Authorization.ulogaKorisnika=="Racunovodja")
                                     // if(1==1)
                                     { 
                                     Navigator.of(context).push(
@@ -144,7 +145,7 @@ final Map<String,dynamic>_initialValue={};
                                   children: [
                                     SizedBox(height: 80, width: 200, child: 
                                     ElevatedButton(onPressed: (){
-                                    if(Authorization.ulogaKorisnika=="Glavni trener"||Authorization.ulogaKorisnika=="Pomoćni trener")
+                                    if(Authorization.ulogaKorisnika=="Glavni trener"||Authorization.ulogaKorisnika=="Pomocni trener")
                                     // if(1==1)
                            { 
                                     Navigator.of(context).push(
@@ -180,7 +181,7 @@ final Map<String,dynamic>_initialValue={};
                                        children: [
                                         SizedBox(height: 80, width: 200, child: 
                                          ElevatedButton(onPressed: (){
-                            if(Authorization.ulogaKorisnika=="Doktor")
+                            if(Authorization.ulogaKorisnika=="Doktor"||Authorization.ulogaKorisnika=="Bolnicar")
                             // if(1==1)
                            { 
                             Navigator.of(context).push(
@@ -213,7 +214,7 @@ final Map<String,dynamic>_initialValue={};
                             children: [
                               SizedBox(height: 80, width: 200, child: 
                               ElevatedButton(onPressed: (){
-                                if(Authorization.ulogaKorisnika=="Igrač")
+                                if(Authorization.ulogaKorisnika=="Igrac"||Authorization.ulogaKorisnika=="Junior")
                                 // if(1==1)
                                { 
                                 Navigator.of(context).push(
@@ -226,7 +227,7 @@ final Map<String,dynamic>_initialValue={};
                                   {
                                          showDialog(context: context, builder: (BuildContext context) => 
                                           AlertDialog(
-                                            title: const Text("Vi niste igrač."),
+                                            title: const Text("Vi niste član."),
                                             content: const Text("Pokušajte ponovo"),
                                             actions: [
                                               TextButton(onPressed: ()=>{
