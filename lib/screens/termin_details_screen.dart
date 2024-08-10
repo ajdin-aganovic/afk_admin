@@ -4,6 +4,7 @@ import 'package:afk_admin/screens/termin_list_screen.dart';
 import 'package:afk_admin/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:intl/intl.dart';
 
 import 'package:provider/provider.dart';
 
@@ -38,11 +39,27 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+String defaultDate;
+    if(DateTime.now().month<10&&DateTime.now().day<10) {
+      defaultDate="${DateTime.now().year}-0${DateTime.now().month}-0${DateTime.now().day}";
+    } else if(DateTime.now().day<10)
+      defaultDate="${DateTime.now().year}-${DateTime.now().month}-0${DateTime.now().day}";
+    else if(DateTime.now().month<10)
+      defaultDate="${DateTime.now().year}-0${DateTime.now().month}-${DateTime.now().day}";
+    else
+      defaultDate="${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}";
+
+      
+
   _initialValue= {
     'terminId':widget.termin?.terminId.toString()??"0",
     'sifraTermina':widget.termin?.sifraTermina??"---",
     'tipTermina': widget.termin?.tipTermina??"Drugo", 
-    'stadionId':widget.termin?.stadionId.toString()??"1"
+    'stadionId':widget.termin?.stadionId.toString()??"1",
+    'rezultat':widget.termin?.rezultat.toString()??"-",
+    'datum':widget.termin?.datum!.toIso8601String()??'GGGG-MM-DD'
+    // 'datum':widget.termin!=null?widget.termin?.datum!.toIso8601String():'GGGG-MM-DD'
   };
 
     _terminProvider=context.read<TerminProvider>(); 
@@ -96,30 +113,38 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
             ),
           ),   //od prije ID što radi
           Expanded(
-                      child:
-                      FormBuilderDropdown(
-                              name: 'tipTermina',
-                              decoration: const InputDecoration(labelText: 'Tip termina'),
-                              items: const[ 
-                                DropdownMenuItem(value: 'Domaća utakmica', child: Text('Domaća utakmica'),), 
-                                DropdownMenuItem(value: 'Gostujuća utakmica', child: Text('Gostujuća utakmica'),), 
-                                DropdownMenuItem(value: 'Opšti pregled', child: Text('Opšti pregled'),), 
-                                DropdownMenuItem(value: 'Neutralni teren', child: Text('Neutralni teren'),), 
-                                DropdownMenuItem(value: 'Drugo', child: Text('Drugo'),), 
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  widget.korisnik?.strucnaSprema = value!.toString();
-                                });
-                              },
-                              validator: (value) {
-                                if (value == null) {
-                                  return 'Molimo Vas unesite tip termina';
-                                }
-                                return null;
-                              },
-                            ),
+            child: FormBuilderTextField (
+                decoration: const InputDecoration(labelText: "Datum termina", 
+                prefixIcon: Icon(Icons.date_range)
+                ), 
+                name: 'datum',
+            ),
+          ),
+          Expanded(
+              child:
+              FormBuilderDropdown(
+                      name: 'tipTermina',
+                      decoration: const InputDecoration(labelText: 'Tip termina'),
+                      items: const[ 
+                        DropdownMenuItem(value: 'Domaca utakmica', child: Text('Domaca utakmica'),), 
+                        DropdownMenuItem(value: 'Gostujuca utakmica', child: Text('Gostujuca utakmica'),), 
+                        DropdownMenuItem(value: 'Opsti pregled', child: Text('Opsti pregled'),), 
+                        DropdownMenuItem(value: 'Neutralni teren', child: Text('Neutralni teren'),), 
+                        DropdownMenuItem(value: 'Drugo', child: Text('Drugo'),), 
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          widget.korisnik?.strucnaSprema = value!.toString();
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Molimo Vas unesite tip termina';
+                        }
+                        return null;
+                      },
                     ),
+            ),
           
          Expanded(
               child: 
@@ -148,6 +173,14 @@ class _TerminDetailsScreen extends State<TerminDetailsScreen> {
                       },
                     ),
                     ),
+
+                    Expanded(
+            child: FormBuilderTextField (
+                decoration: const InputDecoration(labelText: "Rezultat termina"), 
+                
+                name: 'rezultat',
+            ),
+          ),
           
           ElevatedButton(onPressed: () async{
                 _formKey.currentState?.saveAndValidate(focusOnInvalid: false);

@@ -11,8 +11,13 @@ String? tipTermina;
 
 int? stadionId;
 
+DateTime? datum;
 
-  Termin(this.terminId, this.sifraTermina, this.tipTermina, this.stadionId);
+String? rezultat;
+
+
+
+  Termin(this.terminId, this.sifraTermina, this.tipTermina, this.stadionId, this.datum, this.rezultat);
   // factory Korisnici.fromJson(Map<String,dynamic>json)=>_$KorisniciFromJson(json);
 
   factory Termin.fromJson(Map<String,dynamic>json)=>_$TerminFromJson(json);

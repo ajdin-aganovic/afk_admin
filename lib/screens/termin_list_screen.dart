@@ -152,13 +152,18 @@ Widget _buildDataListView() {
                         style: TextStyle(fontStyle: FontStyle.italic),),
                         ),
                         ),
+
+                        DataColumn(label: Expanded(
+                        child: Text("Datum",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
         
-                        // DataColumn(label: Expanded(
-                        // child: Text("Datum termina",
-                        // style: TextStyle(fontStyle: FontStyle.italic),),
-                        
-                        // ),
-                        // ),
+                        DataColumn(label: Expanded(
+                        child: Text("Rezultat",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
                         ],
         
                   rows: 
@@ -188,10 +193,11 @@ Widget _buildDataListView() {
                       },
                       cells: [
                       // DataCell(Text(e.terminId.toString()??"0")),
-                      DataCell(Text(e.sifraTermina??"---")),
-                      DataCell(Text(e.tipTermina??"---")),
-                      DataCell(Text(getStadionDetails(e.stadionId!)??"1")),
-        
+                      DataCell(Text(e.sifraTermina??"")),
+                      DataCell(Text(e.tipTermina??"")),
+                      DataCell(Text(getStadionDetails(e.stadionId!)??"")),
+                      DataCell(Text(e.datum.toString()??'')),
+                      DataCell(Text(e.rezultat.toString()??""))
                       ]
                     )).toList()??[]
                   

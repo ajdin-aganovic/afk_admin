@@ -227,10 +227,12 @@ final ScrollController _vertical = ScrollController();
                            
                     Expanded(
                       child: FormBuilderTextField (
-                          decoration: const InputDecoration(labelText: "Datum rođenja"), 
-                          onTap: () => {
-                            showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1950,1,1), lastDate:DateTime(2003,1,1))
-                          },
+                          decoration: const InputDecoration(labelText: "Datum rođenja", 
+                          // prefixIcon: Icon(Icons.date_range)
+                          ), 
+                          // onTap: () => {
+                          //   showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1950,1,1), lastDate:DateTime(2003,1,1))
+                          // },
                           name: 'datumRodjenja',
                       ),
                     ),

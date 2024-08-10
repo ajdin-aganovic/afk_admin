@@ -206,10 +206,23 @@ final ScrollController _vertical = ScrollController();
                            
                     Expanded(
                       child: FormBuilderTextField (
-                          decoration: const InputDecoration(labelText: "Datum rođenja"), 
+                          decoration: const InputDecoration(labelText: "Datum rođenja",
+                          //  prefixIcon: Icon(Icons.date_range)
+                           ), 
                           name: 'datumRodjenja',
                       ),
                     ),
+                    // Expanded(
+                    //   child: FormBuilderTextField (
+                    //       decoration: const InputDecoration(labelText: "Datum rođenja",prefixIcon: Icon(Icons.date_range) ), 
+                    //       onTap: () => {
+                    //         // showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1950,1,1), lastDate:DateTime(2003,1,1))
+                    //         showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1920,1,1), lastDate:DateTime(2032,1,1))
+
+                    //       },
+                    //       name: 'datumRodjenja',
+                    //   ),
+                    // ),
                            
                     Expanded(
                       child:
@@ -237,14 +250,18 @@ final ScrollController _vertical = ScrollController();
                            
                     Expanded(
                       child: FormBuilderTextField (
-                          decoration: const InputDecoration(labelText: "Pod ugovorom od"), 
+                          decoration: const InputDecoration(labelText: "Pod ugovorom od", 
+                          // prefixIcon: Icon(Icons.date_range)
+                          ), 
                           name: 'podUgovoromOd',
                       ),
                     ),
                            
                     Expanded(
                       child: FormBuilderTextField (
-                          decoration: const InputDecoration(labelText: "Pod ugovorom do"), 
+                          decoration: const InputDecoration(labelText: "Pod ugovorom do", 
+                          // prefixIcon: Icon(Icons.date_range)
+                          ), 
                           name: 'podUgovoromDo',
                       ),
                     ),
