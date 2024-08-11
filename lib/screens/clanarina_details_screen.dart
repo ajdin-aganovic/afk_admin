@@ -40,11 +40,31 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
     // TODO: implement initState
     super.initState();
 
+    String defaultDate;
+    if(DateTime.now().month<10&&DateTime.now().day<10) {
+      defaultDate="${DateTime.now().year}-0${DateTime.now().month}-0${DateTime.now().day}";
+    } else if(DateTime.now().day<10)
+      defaultDate="${DateTime.now().year}-${DateTime.now().month}-0${DateTime.now().day}";
+    else if(DateTime.now().month<10)
+      defaultDate="${DateTime.now().year}-0${DateTime.now().month}-${DateTime.now().day}";
+    else
+      defaultDate="${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}";
+
+  String? vratiBoolVrijednost(bool? vrijednost)
+  {
+    if(vrijednost==true)
+      return 'Placena';
+    else
+      return 'Nije placena';
+  }
+
   _initialValue= {
     'clanarinaId':widget.clanarina?.clanarinaId.toString()??"0",
     'korisnikId':widget.clanarina?.korisnikId.toString()??"2",
     'iznosClanarine': widget.clanarina?.iznosClanarine.toString()??"---", 
     'dug':widget.clanarina?.dug.toString()??"0",
+    'datumPlacanja':widget.clanarina?.datumPlacanja!.toString()??defaultDate,
+    'placena':widget.clanarina?.placena??false,
   };
 
     _clanarinaProvider=context.read<ClanarinaProvider>(); 
@@ -136,6 +156,37 @@ class _ClanarinaDetailsScreen extends State<ClanarinaDetailsScreen> {
             ),
           ),
           
+          Expanded(
+              child:
+              FormBuilderDropdown(
+                      name: 'placena',
+                      decoration: const InputDecoration(labelText: 'Placena'),
+                      items: const[ 
+                        DropdownMenuItem(value: true, child: Text('Da'),), 
+                        DropdownMenuItem(value: false, child: Text('Ne'),), 
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          // widget.korisnik?.strucnaSprema = value!.toString();
+                          widget.clanarina?.placena=value;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Molimo Vas unesite da li je placena clanarina!';
+                        }
+                        return null;
+                      },
+                    ),
+            ),
+                           
+                    Expanded(
+                      child: FormBuilderTextField (
+                          decoration: const InputDecoration(labelText: "Datum placanja", 
+                          ), 
+                          name: 'datumPlacanja',
+                      ),
+                    ),
 
           ElevatedButton(onPressed: () async{
                 // _formKey.currentState?.saveAndValidate();

@@ -37,6 +37,15 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
     
   }
 
+    String? vratiBoolVrijednost(bool? vrijednost)
+  {
+    if(vrijednost==true)
+      return 'Da';
+    else
+      return 'Ne';
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
@@ -87,13 +96,29 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
               const SizedBox(
                 height: 8,
               ),
-              Expanded(child:
+              Expanded(
+                // child:
                     
-                          TextField(
-                            decoration: const InputDecoration(labelText: "Pretraga po stručnoj spremi"), 
-                            controller:_fullNameSearch
-                          ),
-                    
+                //           TextField(
+                //             decoration: const InputDecoration(labelText: "Pretraga po stručnoj spremi"), 
+                //             controller:_fullNameSearch
+                //           ),
+                  child: DropdownButtonFormField<String>(
+              decoration: const InputDecoration(labelText: "Pretraga po stručnoj spremi"),
+              value: _fullNameSearch.text.isNotEmpty ? _fullNameSearch.text : null,
+              items: [
+                DropdownMenuItem(value: 'SSS', child: Text('SSS')),
+                DropdownMenuItem(value: 'VSS', child: Text('VSS')),
+                DropdownMenuItem(value: 'BA', child: Text('BA')),
+                DropdownMenuItem(value: 'MA', child: Text('MA')),
+                DropdownMenuItem(value: '*', child: Text('Bez odabira')),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _fullNameSearch.text = value ?? ''; // Update the controller's text with the selected value
+                });
+              },
+            ),    
                     ),
               const SizedBox(
                 height: 8,
@@ -257,7 +282,7 @@ class _KorisniciListScreen extends State<KorisniciListScreen> {
                           DataCell(Text(e.email ??"")),
                           DataCell(Text(e.strucnaSprema ??"")),
                           DataCell(Text(e.datumRodjenja.toString() ??"")),
-                          DataCell(Text(e.podUgovorom.toString() ??"")),
+                          DataCell(Text(vratiBoolVrijednost(e.podUgovorom) ??"")),
                           DataCell(Text(e.podUgovoromOd.toString() ??"")),
                           DataCell(Text(e.podUgovoromDo.toString() ??"")),
                           DataCell(Text(e.korisnickoIme ??"")),

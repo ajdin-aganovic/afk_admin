@@ -39,6 +39,15 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
     
   }
 
+    String? vratiBoolVrijednost(bool? vrijednost)
+  {
+    if(vrijednost==true)
+      return 'Da';
+    else
+      return 'Ne';
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
@@ -89,24 +98,39 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
               const SizedBox(
                 height: 8,
               ),
-              Expanded(child:
-                    
-                          TextField(
-                            decoration: const InputDecoration(labelText: "Pretraga po stručnoj spremi"), 
-                            controller:_fullNameSearch
-                          ),
-                    
+              Expanded(
+                // child:
+                //     TextField(
+                //       decoration: const InputDecoration(labelText: "Pretraga po stručnoj spremi"), 
+                //       controller:_fullNameSearch
+                //     ),
+                child: DropdownButtonFormField<String>(
+              decoration: const InputDecoration(labelText: "Pretraga po stručnoj spremi"),
+              value: _fullNameSearch.text.isNotEmpty ? _fullNameSearch.text : null,
+              items: [
+                DropdownMenuItem(value: 'SSS', child: Text('SSS')),
+                DropdownMenuItem(value: 'VSS', child: Text('VSS')),
+                DropdownMenuItem(value: 'BA', child: Text('BA')),
+                DropdownMenuItem(value: 'MA', child: Text('MA')),
+                DropdownMenuItem(value: '*', child: Text('Bez odabira')),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _fullNameSearch.text = value ?? ''; // Update the controller's text with the selected value
+                });
+              },
+            ),
                     ),
               const SizedBox(
                 height: 8,
               ),
               Expanded(child:
-                    
-                          TextField(
-                            decoration: const InputDecoration(labelText: "Pretraga po ulozi"), 
-                            controller:_uloga
-                          ),
-                    
+          
+                TextField(
+                  decoration: const InputDecoration(labelText: "Pretraga po ulozi"), 
+                  controller:_uloga
+                ),
+          
                     ),
               const SizedBox(
                 height: 8,
@@ -283,7 +307,7 @@ class _KorisniciEditableScreen extends State<KorisniciEditableScreen> {
                           DataCell(Text(e.uloga ??"not set")),
                           DataCell(Text(e.strucnaSprema ??"not set")),
                           DataCell(Text(e.datumRodjenja.toString() ??"not set")),
-                          DataCell(Text(e.podUgovorom.toString() ??"not set")),
+                          DataCell(Text(vratiBoolVrijednost(e.podUgovorom) ??"not set")),
                           DataCell(Text(e.podUgovoromOd.toString() ??"not set")),
                           DataCell(Text(e.podUgovoromDo.toString() ??"not set")),
                           DataCell(const Text("Uredi"), onTap: () => {

@@ -59,13 +59,26 @@ class _ProizvodListScreen extends State<ProizvodListScreen> {
       child: 
       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-                     Expanded(
-              child: 
-              TextField(
-                  decoration: 
-                  const InputDecoration(labelText: "Pretraga po stanju"), 
-                  controller:_stateMachine,
-                ),
+            Expanded(
+              // child: 
+              // TextField(
+              //     decoration: 
+              //     const InputDecoration(labelText: "Pretraga po stanju"), 
+              //     controller:_stateMachine,
+              //   ),
+              child: DropdownButtonFormField<String>(
+              decoration: const InputDecoration(labelText: "Pretraga po stanju"),
+              value: _stateMachine.text.isNotEmpty ? _stateMachine.text : null,
+              items: [
+                DropdownMenuItem(value: 'active', child: Text('Aktivna')),
+                DropdownMenuItem(value: 'draft', child: Text('Nije aktivna')),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _stateMachine.text = value ?? ''; // Update the controller's text with the selected value
+                });
+              },
+            ),
             ), 
             const SizedBox(
               height: 8,

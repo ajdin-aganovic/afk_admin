@@ -14,17 +14,11 @@ import '../utils/util.dart';
 abstract class BaseProvider<T> with ChangeNotifier{
   static String? _baseUrl;
   String _endpoint="";
-  // String baseUrl = dotenv.env['ADRESA_DOCKER'] ?? 'http://localhost:7181/';
-  // late KorisnikProvider _korisniciProvider;
   String get envValue => dotenv.env['ADRESA_DOCKER'] ?? 'https://google.ba';
 
 
   BaseProvider(String endpoint){
     _endpoint=endpoint;
-    // _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "https://localhost:7181/"); //ZA LOKAL
-    //  _baseUrl=const String.fromEnvironment("baseUrl",defaultValue: "http://localhost:7181/"); //ZA DOCKER
-    // _baseUrl=const String.fromEnvironment('ADRESA_DOCKER', defaultValue: "http://localhost:7181/");
-    // _baseUrl=const String.fromEnvironment('ADRESA_DOCKER');
     _baseUrl=envValue;
 
 

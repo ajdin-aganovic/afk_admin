@@ -41,12 +41,21 @@ class _ClanarinaListScreen extends State<ClanarinaListScreen> {
       korisnikResult=await _korisnikProvider.get();
   }
 
-   String getKorisnikDetails(int id)
+   String? getKorisnikDetails(int? id)
   {
     var pronadjeniRacun=korisnikResult?.result.firstWhere((element) => element.korisnikId==id);
     String? pronadjeniBrojRacuna="${pronadjeniRacun?.ime} ${pronadjeniRacun?.prezime}"??"Nije pronađen";
     return pronadjeniBrojRacuna;
   }
+
+  String? vratiBoolVrijednost(bool? vrijednost)
+  {
+    if(vrijednost==true)
+      return 'Placena';
+    else
+      return 'Nije placena';
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -124,19 +133,31 @@ Widget _buildDataListView() {
                         // ),
         
                         DataColumn(label: Expanded(
-                        child: Text("KorisnikId",
+                        child: Text("Ime i prezime",
                         style: TextStyle(fontStyle: FontStyle.italic),),
                         ),
                         ),
         
                         DataColumn(label: Expanded(
-                        child: Text("Iznos članarine",
+                        child: Text("Iznos clanarine",
                         style: TextStyle(fontStyle: FontStyle.italic),),
                         ),
                         ),
         
                         DataColumn(label: Expanded(
                         child: Text("Dug",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
+
+                        DataColumn(label: Expanded(
+                        child: Text("Placena",
+                        style: TextStyle(fontStyle: FontStyle.italic),),
+                        ),
+                        ),
+
+                        DataColumn(label: Expanded(
+                        child: Text("Datum placanja",
                         style: TextStyle(fontStyle: FontStyle.italic),),
                         ),
                         ),
@@ -158,7 +179,7 @@ Widget _buildDataListView() {
                           showDialog(context: context, builder: (BuildContext context) => 
                             AlertDialog(
                               title: Text("Odabrali ste članarinu ${e.clanarinaId}"),
-                              content: Text("KorisnikID: ${e.korisnikId}\nIznos članarine: ${e.iznosClanarine}\nDug: ${e.dug}"),
+                              content: Text("Ime i prezime: ${getKorisnikDetails(e.korisnikId!)}\nIznos članarine: ${e.iznosClanarine}\nDug: ${e.dug}"),
                               actions: [
                                 TextButton(onPressed: ()=>{
                                   Navigator.pop(context),
@@ -173,6 +194,8 @@ Widget _buildDataListView() {
                       DataCell(Text(getKorisnikDetails(e.korisnikId!)??"2")),
                       DataCell(Text(e.iznosClanarine.toString()??"0")),
                       DataCell(Text(e.dug.toString()??"0")),
+                      DataCell(Text(e.datumPlacanja?.toIso8601String()??"nije unijeto")),
+                      DataCell(Text(vratiBoolVrijednost(e.placena)??"Nije definisano")),
                       // DataCell(Text(e.datumClanarinaa.toString()??DateTime.now().toString())),
         
                       ]
